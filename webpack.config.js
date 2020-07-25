@@ -54,7 +54,7 @@ module.exports = (opts) => {
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
-          use: [{ loader: 'url-loader' }, { options: { limit: 8192 } }],
+          use: [{ loader: 'file-loader' }],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -66,7 +66,7 @@ module.exports = (opts) => {
       extensions: ['.js', '.jsx'],
     },
     devServer: {
-      contentBase: './dist',
+      contentBase: path.join(__dirname, 'dist'),
     },
     plugins: ((plugins) => {
       if (!isDev) {
