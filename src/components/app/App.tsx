@@ -1,5 +1,13 @@
 import React from 'react';
 
-const App: React.FC = () => <h1>Hello world</h1>;
+import ErrorIndicator from '../error-indicator';
+import Spinner from '../spinner';
+
+const App: React.FC = () => (
+  <>
+    <Spinner />
+    <ErrorIndicator />
+  </>
+);
 
 export default App;
