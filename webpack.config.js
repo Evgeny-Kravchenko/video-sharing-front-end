@@ -55,7 +55,7 @@ module.exports = (opts) => {
           ],
         },
         {
-          test: /\.(png|svg|jpg|gif)$/,
+          test: /\.(png|svg|jpg|gif|ico)$/,
           use: [{ loader: 'file-loader' }],
         },
         {
@@ -69,7 +69,7 @@ module.exports = (opts) => {
     },
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
-      historyApiFallback: true
+      historyApiFallback: true,
     },
     plugins: ((plugins) => {
       if (!isDev) {
@@ -84,6 +84,11 @@ module.exports = (opts) => {
         plugins.push(
           new HtmlWebpackPlugin({
             template: './public/index.html',
+          })
+        );
+        plugins.push(
+          new HtmlWebpackPlugin({
+            favicon: './public/favicon.ico',
           })
         );
       }
