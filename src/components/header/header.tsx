@@ -8,7 +8,9 @@ import { Pages } from '../../enums';
 
 import { changeCurrentPage } from '../../actions';
 
-import { HeaderStyled, Logo } from './styled-components';
+import { HeaderStyled, Logo, LogoIcon } from './styled-components';
+
+import logoIcon from './images/video.png';
 
 const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   const {
@@ -19,7 +21,10 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   return (
     <HeaderStyled>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark px-2 py-md-3 py-2">
-        <Logo to={isAuth ? 'videos' : 'auth'}>Video sharing</Logo>
+        <Logo to={isAuth ? 'videos' : 'auth'}>
+          <LogoIcon src={logoIcon} alt="Video sharing" />
+          Video sharing
+        </Logo>
         <ul className="navbar-nav d-flex justify-content-end ml-auto">
           <li
             className={`nav-item ${currentPage === Pages.Videos && isAuth ? 'active' : null}`}

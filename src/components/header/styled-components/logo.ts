@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Logo = styled(Link)`
+  display: flex;
+  align-items: center;
   font-size: 2rem;
   transition: 0.2s;
   color: #ffffff;
