@@ -84,10 +84,6 @@ module.exports = (opts) => {
         plugins.push(
           new HtmlWebpackPlugin({
             template: './public/index.html',
-          })
-        );
-        plugins.push(
-          new HtmlWebpackPlugin({
             favicon: './public/favicon.ico',
           })
         );
