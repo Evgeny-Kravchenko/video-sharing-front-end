@@ -1,13 +1,5 @@
 import React from 'react';
 
-import ErrorIndicator from '../error-indicator';
-import Spinner from '../spinner';
-
-const App: React.FC = () => (
-  <>
-    <Spinner />
-    <ErrorIndicator />
-  </>
-);
+const App: React.FC = () => <h1>Video sharing</h1>;
 
 export default App;
