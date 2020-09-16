@@ -7,7 +7,6 @@ const initialState = {
 };
 
 const reducer = (state: IState = initialState, action: IAction): IState => {
-  console.log(state);
   switch (action.type) {
     case 'MOVE_TO_ANOTHER_PAGE': {
       const { isAuth }: { isAuth: boolean } = state;

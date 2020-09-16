@@ -18,7 +18,7 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   }: { currentPage: Pages; onChangeCurrentPage: Dispatch<Pages>; isAuth: boolean } = props;
   return (
     <HeaderStyled>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark px-2 py-md-3 py-2">
         <Logo to={isAuth ? 'videos' : 'auth'}>Video sharing</Logo>
         <ul className="navbar-nav d-flex justify-content-end ml-auto">
           <li
