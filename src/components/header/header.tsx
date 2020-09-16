@@ -12,12 +12,7 @@ const Header: FC = (): ReactElement => {
         <ul className="navbar-nav d-flex justify-content-end ml-auto">
           <li className="nav-item active">
             <Link className="nav-link" to="#">
-              Home <span className="sr-only">(current)</span>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#">
-              Video
+              Videos
             </Link>
           </li>
           <li className="nav-item">
