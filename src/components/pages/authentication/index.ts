@@ -1,3 +1,3 @@
-import AuthenticationPage from "./authentication.page";
+import AuthenticationPage from './authentication.page';
 
 export default AuthenticationPage;

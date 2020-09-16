@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import styled from 'styled-components';
+
 import { createGlobalStyle } from 'styled-components';
 
 import Header from '../header';
@@ -10,10 +12,17 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Wrapper = styled.div`
+  max-width: 1140px;
+  margin: 0 auto;
+`;
+
 const App: FC = () => (
   <>
     <GlobalStyle />
-    <Header />
+    <Wrapper>
+      <Header />
+    </Wrapper>
   </>
 );
 
