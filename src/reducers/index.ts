@@ -2,14 +2,18 @@ import IState from '../interfaces/state.interface';
 import IAction from '../interfaces/action.interface';
 
 const initialState = {
-  currentPage: 'authentication',
+  currentPage: 'auth',
+  isAuth: false,
 };
 
 const reducer = (state: IState = initialState, action: IAction): IState => {
+  console.log(state);
   switch (action.type) {
     case 'MOVE_TO_ANOTHER_PAGE': {
+      const { isAuth }: { isAuth: boolean } = state;
       return {
-        currentPage: action.payload,
+        ...state,
+        currentPage: !isAuth ? 'auth' : action.payload,
       };
     }
     default: {

@@ -1,4 +1,4 @@
 export enum Pages {
-  Authentication = 'authentication',
+  Authentication = 'auth',
   Videos = 'videos',
 }

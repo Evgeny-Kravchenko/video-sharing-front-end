@@ -13,15 +13,16 @@ import { HeaderStyled, Logo } from './styled-components';
 const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   const {
     currentPage,
+    isAuth,
     onChangeCurrentPage,
-  }: { currentPage: Pages; onChangeCurrentPage: Dispatch<Pages> } = props;
+  }: { currentPage: Pages; onChangeCurrentPage: Dispatch<Pages>; isAuth: boolean } = props;
   return (
     <HeaderStyled>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-        <Logo to="/">Video sharing</Logo>
+        <Logo to={isAuth ? 'videos' : 'auth'}>Video sharing</Logo>
         <ul className="navbar-nav d-flex justify-content-end ml-auto">
           <li
-            className={`nav-item ${currentPage === Pages.Videos ? 'active' : null}`}
+            className={`nav-item ${currentPage === Pages.Videos && isAuth ? 'active' : null}`}
             onClick={() => onChangeCurrentPage(Pages.Videos)}
           >
             <Link className="nav-link" to="/videos">
@@ -42,9 +43,10 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   );
 };
 
-const mapStateToProps = ({ currentPage }: { currentPage: Pages }) => {
+const mapStateToProps = ({ currentPage, isAuth }: { currentPage: Pages; isAuth: boolean }) => {
   return {
     currentPage,
+    isAuth,
   };
 };
 
