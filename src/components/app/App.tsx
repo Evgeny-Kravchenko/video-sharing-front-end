@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import styled, { createGlobalStyle } from 'styled-components';
 
@@ -7,6 +7,8 @@ import Header from '../header';
 import VideoPage from '../pages/video';
 import AuthenticationPage from '../pages/authentication';
 import RegistrationPage from '../pages/registration';
+import PrivateRoute from '../../hoc/private-route';
+import { Route } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,7 +29,7 @@ const App: FC = () => (
       <main>
         <Switch>
           <Route path="/auth" component={AuthenticationPage} exact />
-          <Route path="/videos" component={VideoPage} exact />
+          <PrivateRoute path="/videos" component={VideoPage} exact />
           <Route path="/registration" component={RegistrationPage} exact />
         </Switch>
       </main>
