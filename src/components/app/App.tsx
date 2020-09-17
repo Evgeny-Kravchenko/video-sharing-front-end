@@ -6,6 +6,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import Header from '../header';
 import VideoPage from '../pages/video';
 import AuthenticationPage from '../pages/authentication';
+import RegistrationPage from '../pages/registration';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,6 +28,7 @@ const App: FC = () => (
         <Switch>
           <Route path="/auth" component={AuthenticationPage} exact />
           <Route path="/videos" component={VideoPage} exact />
+          <Route path="/registration" component={RegistrationPage} exact />
         </Switch>
       </main>
     </Wrapper>

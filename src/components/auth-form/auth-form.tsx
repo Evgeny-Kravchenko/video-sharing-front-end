@@ -1,14 +1,13 @@
 import React, { FC, ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-const Form = styled.form`
-  max-width: 500px;
-  margin: 0 auto;
-`;
+import { Form, Label } from '../../styles/global-styled-components';
 
-const Label = styled.label`
-  cursor: pointer;
+const RegistrationLink = styled(Link)`
+  display: block;
+  padding: 0.5rem 0;
 `;
 
 const AuthForm: FC = (): ReactElement => {
@@ -43,6 +42,9 @@ const AuthForm: FC = (): ReactElement => {
       <button type="submit" className="btn btn-primary">
         Log In
       </button>
+      <RegistrationLink to="registration">
+        If you aren&apos;t our user, you should register and authenticate to use the application
+      </RegistrationLink>
     </Form>
   );
 };
