@@ -2,17 +2,18 @@ import { Redirect, Route } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { IStateAuthUser } from '../interfaces/state.interface';
+import { IStateAuthUser } from '../interfaces';
 import React, { ComponentType } from 'react';
 
-const PrivateRoute = ({
-  component: Component,
-  isAuth,
-  ...rest
-}: {
+interface IPrivateRoute {
   component: ComponentType;
   isAuth: boolean;
-}) => {
+  path: string;
+  exact: boolean;
+}
+
+const PrivateRoute = (props: IPrivateRoute) => {
+  const { component: Component, isAuth, ...rest } = props;
   return <Route {...rest} render={() => (isAuth ? <Component /> : <Redirect to="/auth" />)} />;
 };
 

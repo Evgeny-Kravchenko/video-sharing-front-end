@@ -2,8 +2,8 @@ import { all } from 'redux-saga/effects';
 
 import authUserSaga from './auth-user-saga';
 
-const rootSaga = function* () {
+function* rootSaga() {
   yield all([authUserSaga()]);
-};
+}
 
 export default rootSaga;

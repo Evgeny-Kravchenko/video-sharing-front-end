@@ -1,20 +1,17 @@
 import React, { FC, ReactElement } from 'react';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 
 import { Form, Label } from '../../styles/global-styled-components';
-import styled from 'styled-components';
+import RegistrationLink from './styled-components';
 
-import IAuth from '../../interfaces/auth.interface';
 import { authorizeUserRequest } from '../../actions';
 
-const RegistrationLink = styled(Link)`
-  display: block;
-  padding: 0.5rem 0;
-`;
+import IAuthFormProps from '../../interfaces/auth-form-props.interface';
+import IAuth from '../../interfaces/auth.interface';
 
-const AuthForm: FC = ({ onAuth }): ReactElement => {
+const AuthForm: FC<IAuthFormProps> = (props: IAuthFormProps): ReactElement => {
+  const { onAuth } = props;
   const { handleSubmit, register } = useForm<IAuth>();
   const onSubmit = (data: IAuth) => {
     onAuth(data);

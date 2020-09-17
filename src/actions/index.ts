@@ -19,16 +19,26 @@ const registerUserRequest = (registerUserData: IRegistration): IAction => {
 
 const authorizeUserRequest = (authData: IAuth): IAction => {
   return {
-    type: 'AUTHORIZE_USER_REQUEST',
+    type: 'AUTH_USER_REQUEST',
     payload: authData,
   };
 };
 
+const authorizeUserSuccsess = (user: string | null): IAction => {
+  return { type: 'AUTH_USER_SUCCSESS', payload: { user } };
+};
+
 const authorizeUserFailure = (error: Error): IAction => {
   return {
-    type: 'AUTHORIZE_USER_FAILURE',
+    type: 'AUTH_USER_FAILURE',
     payload: error,
   };
 };
 
-export { changeCurrentPage, registerUserRequest, authorizeUserRequest, authorizeUserFailure };
+export {
+  changeCurrentPage,
+  registerUserRequest,
+  authorizeUserRequest,
+  authorizeUserFailure,
+  authorizeUserSuccsess,
+};

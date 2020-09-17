@@ -1,15 +1,15 @@
-import { IState, IStateAuthUser } from '../interfaces/state.interface';
+import { IState, IStateAuthUser } from '../interfaces';
 import IAction from '../interfaces/action.interface';
 
 const updateAuthUser = (state: IState, action: IAction): IStateAuthUser => {
   switch (action.type) {
-    case 'AUTH_REQUEST': {
+    case 'AUTH_USER_REQUEST': {
       return {
         ...state.authUser,
         loading: true,
       };
     }
-    case 'AUTH_SUCCSESS': {
+    case 'AUTH_USER_SUCCSESS': {
       return {
         loading: false,
         name: action.payload.name,
@@ -18,7 +18,7 @@ const updateAuthUser = (state: IState, action: IAction): IStateAuthUser => {
         isAuth: true,
       };
     }
-    case 'AUTH_FAILURE': {
+    case 'AUTH_USER_FAILURE': {
       return {
         ...state.authUser,
         loading: false,
