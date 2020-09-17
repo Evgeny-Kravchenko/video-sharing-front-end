@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { Form, Label } from '../../styles/global-styled-components';
 import RegistrationLink from './styled-components';
@@ -9,6 +10,8 @@ import { authorizeUserRequest } from '../../actions';
 
 import IAuthFormProps from '../../interfaces/auth-form-props.interface';
 import IAuth from '../../interfaces/auth.interface';
+
+import { withUserService } from '../../hoc';
 
 const AuthForm: FC<IAuthFormProps> = (props: IAuthFormProps): ReactElement => {
   const { onAuth } = props;
@@ -63,4 +66,4 @@ const mapDispatchToProps = {
   onAuth: authorizeUserRequest,
 };
 
-export default connect(null, mapDispatchToProps)(AuthForm);
+export default compose(connect(null, mapDispatchToProps), withUserService())(AuthForm);

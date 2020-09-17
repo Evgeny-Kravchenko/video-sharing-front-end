@@ -5,7 +5,7 @@ import Header from './components/header';
 import VideoPage from './components/pages/video';
 import AuthenticationPage from './components/pages/authentication';
 import RegistrationPage from './components/pages/registration';
-import PrivateRoute from './hoc/private-route';
+import { PrivateRoute } from './hoc';
 import { Route } from 'react-router-dom';
 import { GlobalStyle, Wrapper } from './styles/global-styled-components';
 
