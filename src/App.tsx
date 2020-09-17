@@ -1,25 +1,13 @@
 import React, { FC } from 'react';
 import { Switch } from 'react-router-dom';
 
-import styled, { createGlobalStyle } from 'styled-components';
-
-import Header from '../header';
-import VideoPage from '../pages/video';
-import AuthenticationPage from '../pages/authentication';
-import RegistrationPage from '../pages/registration';
-import PrivateRoute from '../../hoc/private-route';
+import Header from './components/header';
+import VideoPage from './components/pages/video';
+import AuthenticationPage from './components/pages/authentication';
+import RegistrationPage from './components/pages/registration';
+import PrivateRoute from './hoc/private-route';
 import { Route } from 'react-router-dom';
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-  }
-`;
-
-const Wrapper = styled.div`
-  max-width: 1140px;
-  margin: 0 auto;
-`;
+import { GlobalStyle, Wrapper } from './styles/global-styled-components';
 
 const App: FC = () => (
   <>

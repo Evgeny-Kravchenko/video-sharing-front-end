@@ -1,27 +1,37 @@
-import React, { FC, ReactElement, SyntheticEvent } from 'react';
+import React, { FC, ReactElement } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Form, Label } from '../../styles/global-styled-components';
 
+type Inputs = {
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+};
+
 const RegistrationForm: FC = (): ReactElement => {
+  const { handleSubmit, register } = useForm<Inputs>();
+
+  const onSubmit = (value: any) => {
+    localStorage.setItem('name', value.name)
+  };
+
   return (
-    <Form
-      onSubmit={(event: SyntheticEvent) => {
-        event.preventDefault();
-        const target: HTMLFormElement = { ...event.target } as HTMLFormElement;
-        localStorage.setItem('name', target['1'].value);
-        localStorage.setItem('password', target['4'].value);
-      }}
-    >
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <fieldset>
         <legend className="text-center">Registration</legend>
         <div className="form-group">
           <Label htmlFor="name">First name</Label>
           <input
             type="text"
+            name="name"
             className="form-control"
             placeholder="Enter you first name"
             id="name"
             maxLength={30}
+            ref={register}
             required
           />
         </div>
@@ -29,15 +39,25 @@ const RegistrationForm: FC = (): ReactElement => {
           <Label htmlFor="lastname">Last name</Label>
           <input
             type="text"
+            name="lastName"
             className="form-control"
             placeholder="Enter your last name"
             id="lastName"
+            ref={register}
             required
           />
         </div>
         <div className="form-group">
           <Label htmlFor="email">Email address</Label>
-          <input type="email" className="form-control" placeholder="Enter email" id="email" />
+          <input
+            type="email"
+            name="email"
+            className="form-control"
+            placeholder="Enter email"
+            id="email"
+            ref={register}
+            required
+          />
           <small id="emailHelp" className="form-text text-muted">
             We`&apos;ll never share your email with anyone else.
           </small>
@@ -50,6 +70,8 @@ const RegistrationForm: FC = (): ReactElement => {
             placeholder="Password"
             maxLength={30}
             id="password"
+            name="password"
+            ref={register}
             required
           />
         </div>
@@ -61,6 +83,8 @@ const RegistrationForm: FC = (): ReactElement => {
             placeholder="Repeat your password"
             maxLength={30}
             id="repeatPassword"
+            name="repeatPassword"
+            ref={register}
             required
           />
         </div>

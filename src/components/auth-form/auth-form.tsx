@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
-import styled from 'styled-components';
-
 import { Form, Label } from '../../styles/global-styled-components';
+
+import styled from 'styled-components';
 
 const RegistrationLink = styled(Link)`
   display: block;

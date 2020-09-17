@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const Form = styled.form`
   max-width: 500px;
@@ -9,4 +9,15 @@ const Label = styled.label`
   cursor: pointer;
 `;
 
-export { Form, Label };
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+`;
+
+const Wrapper = styled.div`
+  max-width: 1140px;
+  margin: 0 auto;
+`;
+
+export { Form, Label, GlobalStyle, Wrapper };
