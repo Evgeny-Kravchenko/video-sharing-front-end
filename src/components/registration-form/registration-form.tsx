@@ -22,6 +22,7 @@ const RegistrationForm: FC = (): ReactElement => {
             placeholder="Enter you first name"
             id="name"
             maxLength={30}
+            required
           />
         </div>
         <div className="form-group">
@@ -31,6 +32,7 @@ const RegistrationForm: FC = (): ReactElement => {
             className="form-control"
             placeholder="Enter your last name"
             id="lastName"
+            required
           />
         </div>
         <div className="form-group">
@@ -48,6 +50,7 @@ const RegistrationForm: FC = (): ReactElement => {
             placeholder="Password"
             maxLength={30}
             id="password"
+            required
           />
         </div>
         <div className="form-group">
@@ -58,6 +61,7 @@ const RegistrationForm: FC = (): ReactElement => {
             placeholder="Repeat your password"
             maxLength={30}
             id="repeatPassword"
+            required
           />
         </div>
       </fieldset>
