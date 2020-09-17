@@ -1,27 +1,44 @@
-import React, { FC, ReactElement } from 'react';
-
+import React, { Dispatch, FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-import { HeaderStyled, Logo } from './styled-components';
+import IHeaderProps from '../../interfaces/header-props.interface';
+import { Pages } from '../../enums';
 
-const Header: FC = (): ReactElement => {
+import { changeCurrentPage } from '../../actions';
+
+import { HeaderStyled, Logo, LogoIcon } from './styled-components';
+
+import logoIcon from './images/video.png';
+
+const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
+  const {
+    currentPage,
+    isAuth,
+    onChangeCurrentPage,
+  }: { currentPage: Pages; onChangeCurrentPage: Dispatch<Pages>; isAuth: boolean } = props;
   return (
     <HeaderStyled>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-        <Logo to="/">Video sharing</Logo>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark px-2 py-md-3 py-2">
+        <Logo to={isAuth ? 'videos' : 'auth'}>
+          <LogoIcon src={logoIcon} alt="Video sharing" />
+          Video sharing
+        </Logo>
         <ul className="navbar-nav d-flex justify-content-end ml-auto">
-          <li className="nav-item active">
-            <Link className="nav-link" to="#">
-              Home <span className="sr-only">(current)</span>
+          <li
+            className={`nav-item ${currentPage === Pages.Videos && isAuth ? 'active' : null}`}
+            onClick={() => onChangeCurrentPage(Pages.Videos)}
+          >
+            <Link className="nav-link" to="/videos">
+              Videos
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#">
-              Video
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#">
+          <li
+            className={`nav-item ${currentPage === Pages.Authentication ? 'active' : null}`}
+            onClick={() => onChangeCurrentPage(Pages.Authentication)}
+          >
+            <Link className="nav-link" to="/auth">
               Authentication
             </Link>
           </li>
@@ -31,4 +48,15 @@ const Header: FC = (): ReactElement => {
   );
 };
 
-export default Header;
+const mapStateToProps = ({ currentPage, isAuth }: { currentPage: Pages; isAuth: boolean }) => {
+  return {
+    currentPage,
+    isAuth,
+  };
+};
+
+const mapDispatchToProps = {
+  onChangeCurrentPage: changeCurrentPage,
+};
+
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Header);

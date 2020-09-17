@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import styled from 'styled-components';
-
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import Header from '../header';
+import VideoPage from '../pages/video';
+import AuthenticationPage from '../pages/authentication';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,6 +23,12 @@ const App: FC = () => (
     <GlobalStyle />
     <Wrapper>
       <Header />
+      <main>
+        <Switch>
+          <Route path="/auth" component={AuthenticationPage} exact />
+          <Route path="/videos" component={VideoPage} exact />
+        </Switch>
+      </main>
     </Wrapper>
   </>
 );
