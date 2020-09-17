@@ -1,19 +1,24 @@
 import React, { FC, ReactElement } from 'react';
+import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 
-import styled from 'styled-components';
+import { Form, Label } from '../../styles/global-styled-components';
+import RegistrationLink from './styled-components';
 
-const Form = styled.form`
-  max-width: 500px;
-  margin: 0 auto;
-`;
+import { authorizeUserRequest } from '../../actions';
 
-const Label = styled.label`
-  cursor: pointer;
-`;
+import IAuthFormProps from '../../interfaces/auth-form-props.interface';
+import IAuth from '../../interfaces/auth.interface';
 
-const AuthForm: FC = (): ReactElement => {
+const AuthForm: FC<IAuthFormProps> = (props: IAuthFormProps): ReactElement => {
+  const { onAuth } = props;
+  const { handleSubmit, register } = useForm<IAuth>();
+  const onSubmit = (data: IAuth) => {
+    onAuth(data);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <fieldset>
         <legend className="text-center">Authentication</legend>
         <div className="form-group">
@@ -24,6 +29,8 @@ const AuthForm: FC = (): ReactElement => {
             aria-describedby="emailHelp"
             placeholder="Enter email"
             id="email"
+            ref={register}
+            required
           />
           <small id="emailHelp" className="form-text text-muted">
             We`&apos;ll never share your email with anyone else.
@@ -37,14 +44,23 @@ const AuthForm: FC = (): ReactElement => {
             placeholder="Password"
             maxLength={30}
             id="password"
+            ref={register}
+            required
           />
         </div>
       </fieldset>
       <button type="submit" className="btn btn-primary">
         Log In
       </button>
+      <RegistrationLink to="registration">
+        If you aren&apos;t our user, you should register and authenticate to use the application
+      </RegistrationLink>
     </Form>
   );
 };
 
-export default AuthForm;
+const mapDispatchToProps = {
+  onAuth: authorizeUserRequest,
+};
+
+export default connect(null, mapDispatchToProps)(AuthForm);

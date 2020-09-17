@@ -1,24 +1,22 @@
-import IState from '../interfaces/state.interface';
+import { IState } from '../interfaces';
 import IAction from '../interfaces/action.interface';
 
-const initialState = {
+import updateCurrentPage from './update-current-page';
+import updateRegisterUser from './update-register-user';
+import updateAuthUser from './update-auth-user';
+
+const initialState: IState = {
   currentPage: 'auth',
-  isAuth: false,
+  registerUser: { loading: false, error: null, isSuccess: null },
+  authUser: { name: '', email: '', isAuth: false, loading: false, error: false },
 };
 
 const reducer = (state: IState = initialState, action: IAction): IState => {
-  switch (action.type) {
-    case 'MOVE_TO_ANOTHER_PAGE': {
-      const { isAuth }: { isAuth: boolean } = state;
-      return {
-        ...state,
-        currentPage: !isAuth ? 'auth' : action.payload,
-      };
-    }
-    default: {
-      return state;
-    }
-  }
+  return {
+    currentPage: updateCurrentPage(state, action),
+    registerUser: updateRegisterUser(state, action),
+    authUser: updateAuthUser(state, action),
+  };
 };
 
 export default reducer;
