@@ -1,18 +1,27 @@
 import React, { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 
 import { Form, Label } from '../../styles/global-styled-components';
-
 import styled from 'styled-components';
+
+import IAuth from '../../interfaces/auth.interface';
+import { authorizeUserRequest } from '../../actions';
 
 const RegistrationLink = styled(Link)`
   display: block;
   padding: 0.5rem 0;
 `;
 
-const AuthForm: FC = (): ReactElement => {
+const AuthForm: FC = ({ onAuth }): ReactElement => {
+  const { handleSubmit, register } = useForm<IAuth>();
+  const onSubmit = (data: IAuth) => {
+    onAuth(data);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <fieldset>
         <legend className="text-center">Authentication</legend>
         <div className="form-group">
@@ -23,6 +32,8 @@ const AuthForm: FC = (): ReactElement => {
             aria-describedby="emailHelp"
             placeholder="Enter email"
             id="email"
+            ref={register}
+            required
           />
           <small id="emailHelp" className="form-text text-muted">
             We`&apos;ll never share your email with anyone else.
@@ -36,6 +47,8 @@ const AuthForm: FC = (): ReactElement => {
             placeholder="Password"
             maxLength={30}
             id="password"
+            ref={register}
+            required
           />
         </div>
       </fieldset>
@@ -49,4 +62,8 @@ const AuthForm: FC = (): ReactElement => {
   );
 };
 
-export default AuthForm;
+const mapDispatchToProps = {
+  onAuth: authorizeUserRequest,
+};
+
+export default connect(null, mapDispatchToProps)(AuthForm);
