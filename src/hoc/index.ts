@@ -1,3 +1,4 @@
-import withAuthRoute from './private-route';
+import PrivateRoute from './private-route';
+import withUserService from './with-user-service';
 
-export default withAuthRoute;
+export { PrivateRoute, withUserService };
