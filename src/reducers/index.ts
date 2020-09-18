@@ -8,7 +8,7 @@ import updateAuthUser from './update-auth-user';
 const initialState: IState = {
   currentPage: 'auth',
   registerUser: { loading: false, error: null, isSuccess: null, errorMessage: null },
-  authUser: { name: '', email: '', isAuth: false, loading: false, error: false },
+  authUser: { name: '', email: '', isAuth: true, loading: false, error: false },
 };
 
 const reducer = (state: IState = initialState, action: IAction): IState => {
