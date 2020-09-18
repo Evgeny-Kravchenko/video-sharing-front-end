@@ -11,6 +11,7 @@ import { changeCurrentPage } from '../../actions';
 import { HeaderStyled, Logo, LogoIcon } from './styled-components';
 
 import logoIcon from './images/video.png';
+import { IStateAuthUser } from '../../interfaces';
 
 const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   const {
@@ -18,6 +19,7 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
     isAuth,
     onChangeCurrentPage,
   }: { currentPage: Pages; onChangeCurrentPage: Dispatch<Pages>; isAuth: boolean } = props;
+  console.log(isAuth);
   return (
     <HeaderStyled>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark px-2 py-md-3 py-2">
@@ -48,10 +50,16 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   );
 };
 
-const mapStateToProps = ({ currentPage, isAuth }: { currentPage: Pages; isAuth: boolean }) => {
+const mapStateToProps = ({
+  currentPage,
+  authUser,
+}: {
+  currentPage: Pages;
+  authUser: IStateAuthUser;
+}) => {
   return {
     currentPage,
-    isAuth,
+    isAuth: authUser.isAuth,
   };
 };
 
