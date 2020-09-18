@@ -2,6 +2,7 @@ import { Pages } from '../enums';
 import IAction from '../interfaces/action.interface';
 import IRegistration from '../interfaces/registration.interface';
 import IAuth from '../interfaces/auth.interface';
+import IUser from '../interfaces/user.interface';
 
 const changeCurrentPage = (currentPage: Pages): IAction => {
   return {
@@ -24,7 +25,7 @@ const authorizeUserRequest = (authData: IAuth): IAction => {
   };
 };
 
-const authorizeUserSuccsess = (user: string | null): IAction => {
+const authorizeUserSuccsess = (user: IUser | string): IAction => {
   return { type: 'AUTH_USER_SUCCSESS', payload: { user } };
 };
 
@@ -35,10 +36,17 @@ const authorizeUserFailure = (error: Error): IAction => {
   };
 };
 
+const unauthorize = (): IAction => {
+  return {
+    type: 'UNAUTHORIZE',
+  };
+};
+
 export {
   changeCurrentPage,
   registerUserRequest,
   authorizeUserRequest,
   authorizeUserFailure,
   authorizeUserSuccsess,
+  unauthorize,
 };

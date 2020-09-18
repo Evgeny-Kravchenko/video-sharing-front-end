@@ -10,7 +10,8 @@ const Logo = styled(Link)`
 
   &:hover {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.5);
+    opacity: 0.5;
+    color: #ffffff;
   }
 
   @media screen and (max-width: 700px) {

@@ -1,9 +1,14 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import { authorizeUserSuccsess, authorizeUserFailure } from '../actions';
 
-function* fetchAuthUserHandler() {
+import userService from '../index';
+
+import { IAction } from '../interfaces';
+
+function* fetchAuthUserHandler(action: IAction) {
+  const { email, password } = action.payload;
   try {
-    const user: string | null = localStorage.getItem('name');
+    const user = yield userService.getUser(email, password);
     yield put(authorizeUserSuccsess(user));
   } catch (error) {
     yield put(authorizeUserFailure(error));

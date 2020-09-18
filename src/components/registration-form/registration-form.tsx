@@ -14,8 +14,8 @@ type Inputs = {
 const RegistrationForm: FC = (): ReactElement => {
   const { handleSubmit, register } = useForm<Inputs>();
 
-  const onSubmit = (value: Inputs) => {
-    localStorage.setItem('name', value.name);
+  const onSubmit = (data: Inputs) => {
+    console.log(data);
   };
 
   return (

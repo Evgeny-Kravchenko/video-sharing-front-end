@@ -12,8 +12,8 @@ const updateAuthUser = (state: IState, action: IAction): IStateAuthUser => {
     case 'AUTH_USER_SUCCSESS': {
       return {
         loading: false,
-        name: action.payload.name,
-        email: action.payload.email,
+        name: action.payload.user.name,
+        email: action.payload.user.email,
         error: false,
         isAuth: true,
       };
@@ -23,6 +23,16 @@ const updateAuthUser = (state: IState, action: IAction): IStateAuthUser => {
         ...state.authUser,
         loading: false,
         error: true,
+      };
+    }
+    case 'UNAUTHORIZE': {
+      return {
+        ...state.authUser,
+        loading: false,
+        error: false,
+        name: '',
+        email: '',
+        isAuth: false,
       };
     }
     default: {

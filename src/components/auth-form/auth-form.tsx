@@ -28,6 +28,7 @@ const AuthForm: FC<IAuthFormProps> = (props: IAuthFormProps): ReactElement => {
           <Label htmlFor="email">Email address</Label>
           <input
             type="email"
+            name="email"
             className="form-control"
             aria-describedby="emailHelp"
             placeholder="Enter email"
@@ -43,6 +44,7 @@ const AuthForm: FC<IAuthFormProps> = (props: IAuthFormProps): ReactElement => {
           <Label htmlFor="password">Password</Label>
           <input
             type="password"
+            name="password"
             className="form-control"
             placeholder="Password"
             maxLength={30}
