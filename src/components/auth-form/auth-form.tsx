@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ComponentType, FC, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -66,4 +66,7 @@ const mapDispatchToProps = {
   onAuth: authorizeUserRequest,
 };
 
-export default compose(connect(null, mapDispatchToProps), withUserService())(AuthForm);
+export default compose<ComponentType>(
+  connect(null, mapDispatchToProps),
+  withUserService()
+)(AuthForm);
