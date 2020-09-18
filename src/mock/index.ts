@@ -1,4 +1,5 @@
 import { IUser } from '../interfaces';
+import IVideo from '../interfaces/video';
 
 const users: Array<IUser> = [
   {
@@ -21,4 +22,27 @@ const users: Array<IUser> = [
   },
 ];
 
-export default users;
+const videos: Array<IVideo> = [
+  {
+    title: 'Cats are good',
+    description: 'Cats are good and they can calm you down.',
+    owner: 'evgen.kravchenko.vladimirovich@mail.ru',
+    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'valera.zhevlakov@mail.ru'],
+  },
+  {
+    title: 'Favourite car',
+    description:
+      'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
+    owner: 'valera.zhevlakov@mail.ru',
+    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+  },
+  {
+    title: 'Favourite car',
+    description:
+      'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
+    owner: 'stas.sharendo.ivanovich@mail.ru',
+    whoSharedWith: ['valera.zhevlakov@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+  },
+];
+
+export { users, videos };
