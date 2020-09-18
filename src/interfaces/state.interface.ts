@@ -2,6 +2,7 @@ export interface IStateRegisterUser {
   loading: boolean;
   error: boolean | null;
   isSuccess: boolean | null;
+  errorMessage: string | null;
 }
 
 export interface IStateAuthUser {

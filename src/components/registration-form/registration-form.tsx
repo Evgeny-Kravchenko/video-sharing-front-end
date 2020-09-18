@@ -1,21 +1,33 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useRef } from 'react';
 import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 
 import { Form, Label } from '../../styles/global-styled-components';
 
-type Inputs = {
-  name: string;
-  lastName: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-};
+import { IRegistration, IUser } from '../../interfaces';
+import { registerUserRequest } from '../../actions';
 
-const RegistrationForm: FC = (): ReactElement => {
-  const { handleSubmit, register } = useForm<Inputs>();
+import styled from 'styled-components';
 
-  const onSubmit = (data: Inputs) => {
-    console.log(data);
+interface IRegistrationFormProps {
+  onRegister: (data: IUser) => void;
+}
+
+const ValidationError = styled.p`
+  color: #ff0000;
+`;
+
+const RegistrationForm: FC<IRegistrationFormProps> = (
+  props: IRegistrationFormProps
+): ReactElement => {
+  const { handleSubmit, register, errors, watch } = useForm<IRegistration>();
+  const password = useRef<string>();
+  password.current = watch('password', '');
+  const { onRegister } = props;
+
+  const onSubmit = (data: IRegistration) => {
+    const { name, lastName, password, email } = data;
+    onRegister({ name, lastName, password, email });
   };
 
   return (
@@ -31,9 +43,9 @@ const RegistrationForm: FC = (): ReactElement => {
             placeholder="Enter you first name"
             id="name"
             maxLength={30}
-            ref={register}
-            required
+            ref={register()}
           />
+          {errors.password && <p>{errors.password.message}</p>}
         </div>
         <div className="form-group">
           <Label htmlFor="lastname">Last name</Label>
@@ -71,9 +83,15 @@ const RegistrationForm: FC = (): ReactElement => {
             maxLength={30}
             id="password"
             name="password"
-            ref={register}
-            required
+            ref={register({
+              required: 'You must specify a password',
+              minLength: {
+                value: 8,
+                message: 'Password must have at least 8 characters',
+              },
+            })}
           />
+          {errors.password && <ValidationError>{errors.password.message}</ValidationError>}
         </div>
         <div className="form-group">
           <Label htmlFor="repeat-password">Repeat your password</Label>
@@ -84,9 +102,14 @@ const RegistrationForm: FC = (): ReactElement => {
             maxLength={30}
             id="repeatPassword"
             name="repeatPassword"
-            ref={register}
+            ref={register({
+              validate: (value) => value === password.current || 'The passwords do not match',
+            })}
             required
           />
+          {errors.repeatPassword && (
+            <ValidationError>{errors.repeatPassword.message}</ValidationError>
+          )}
         </div>
       </fieldset>
       <button type="submit" className="btn btn-primary">
@@ -96,4 +119,8 @@ const RegistrationForm: FC = (): ReactElement => {
   );
 };
 
-export default RegistrationForm;
+const mapDispatchToProps = {
+  onRegister: registerUserRequest,
+};
+
+export default connect(null, mapDispatchToProps)(RegistrationForm);

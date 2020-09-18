@@ -1,6 +1,5 @@
 import { Pages } from '../enums';
 import IAction from '../interfaces/action.interface';
-import IRegistration from '../interfaces/registration.interface';
 import IAuth from '../interfaces/auth.interface';
 import IUser from '../interfaces/user.interface';
 
@@ -11,10 +10,23 @@ const changeCurrentPage = (currentPage: Pages): IAction => {
   };
 };
 
-const registerUserRequest = (registerUserData: IRegistration): IAction => {
+const registerUserRequest = (registerUserData: IUser): IAction => {
   return {
     type: 'REGISTER_USER_REQUEST',
     payload: registerUserData,
+  };
+};
+
+const registerUserSuccess = (): IAction => {
+  return {
+    type: 'REGISTER_USER_SUCCESS',
+  };
+};
+
+const registerUserFailure = (err: Error): IAction => {
+  return {
+    type: 'REGISTER_USER_FAILURE',
+    payload: err,
   };
 };
 
@@ -44,9 +56,11 @@ const unauthorize = (): IAction => {
 
 export {
   changeCurrentPage,
-  registerUserRequest,
   authorizeUserRequest,
   authorizeUserFailure,
   authorizeUserSuccsess,
   unauthorize,
+  registerUserRequest,
+  registerUserSuccess,
+  registerUserFailure,
 };
