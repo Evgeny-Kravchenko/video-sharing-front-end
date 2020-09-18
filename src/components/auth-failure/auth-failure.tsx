@@ -1,10 +1,6 @@
 import React, { FC, ReactElement } from 'react';
-import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  max-width: ${(props: { width: string }) => props.width};
-  margin: 0 auto;
-`;
+import { Wrapper } from '../../styles/global-styled-components';
 
 const AuthFailure: FC = (): ReactElement => {
   return (

@@ -1,15 +1,10 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 
-import styled from 'styled-components';
+import { Wrapper } from '../../styles/global-styled-components';
 
 import { IState } from '../../interfaces';
 import { unauthorize } from '../../actions';
-
-const Wrapper = styled.div`
-  max-width: 500px;
-  margin: 0 auto;
-`;
 
 interface IAuthSuccessedProps {
   email: string;
@@ -19,7 +14,7 @@ interface IAuthSuccessedProps {
 const AuthSuccessed: FC<IAuthSuccessedProps> = (props: IAuthSuccessedProps) => {
   const { email, onUnauth } = props;
   return (
-    <Wrapper>
+    <Wrapper width="500px">
       <div className="card border-success mb-3 p-2">
         <div className="card-header">You are authorized</div>
         <div className="card-body">
