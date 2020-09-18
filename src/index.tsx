@@ -13,10 +13,12 @@ import './styles/index.scss';
 
 import store from './store';
 import UserService from './services/user-service';
+import VideoService from './services/video-service';
 
 const AppWithHot = hot(App);
 
 const userService = new UserService();
+const videoService = new VideoService();
 
 ReactDOM.render(
   <Provider store={store}>
