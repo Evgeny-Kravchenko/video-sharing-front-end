@@ -30,6 +30,12 @@ const registerUserFailure = (err: Error): IAction => {
   };
 };
 
+const registerClearMessage = (): IAction => {
+  return {
+    type: 'REGISTER_CLEAR_MESSAGE',
+  };
+};
+
 const authorizeUserRequest = (authData: IAuth): IAction => {
   return {
     type: 'AUTH_USER_REQUEST',
@@ -63,4 +69,5 @@ export {
   registerUserRequest,
   registerUserSuccess,
   registerUserFailure,
+  registerClearMessage,
 };

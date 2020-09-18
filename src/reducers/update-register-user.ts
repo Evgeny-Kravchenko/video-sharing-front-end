@@ -14,6 +14,8 @@ const updateRegisterUser = (state: IState, action: IAction): IStateRegisterUser 
         ...state.registerUser,
         loading: false,
         isSuccess: true,
+        error: false,
+        errorMessage: '',
       };
     }
     case 'REGISTER_USER_FAILURE': {
@@ -23,6 +25,12 @@ const updateRegisterUser = (state: IState, action: IAction): IStateRegisterUser 
         isSuccess: false,
         error: true,
         errorMessage: action.payload,
+      };
+    }
+    case 'REGISTER_CLEAR_MESSAGE': {
+      return {
+        ...state.registerUser,
+        isSuccess: null,
       };
     }
     default: {
