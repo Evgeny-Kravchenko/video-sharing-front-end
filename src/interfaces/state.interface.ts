@@ -1,3 +1,5 @@
+import IVideo from './video';
+
 export interface IStateRegisterUser {
   loading: boolean;
   error: boolean | null;
@@ -13,8 +15,20 @@ export interface IStateAuthUser {
   loading: boolean;
 }
 
+export interface IStateVideos {
+  loading: boolean;
+  videos: Array<IVideo>;
+  error: string | null;
+}
+
+export interface IStateUserVideo {
+  ownVideos: IStateVideos;
+  sharedVideos: IStateVideos;
+}
+
 export interface IState {
   currentPage: string;
   registerUser: IStateRegisterUser;
   authUser: IStateAuthUser;
+  videosOfUser: IStateUserVideo;
 }

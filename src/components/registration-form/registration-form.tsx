@@ -4,18 +4,10 @@ import { connect } from 'react-redux';
 
 import { Form, Label } from '../../styles/global-styled-components';
 
-import { IRegistration, IUser } from '../../interfaces';
+import { IRegistration, IRegistrationFormProps } from '../../interfaces';
 import { registerUserRequest } from '../../actions';
 
-import styled from 'styled-components';
-
-interface IRegistrationFormProps {
-  onRegister: (data: IUser) => void;
-}
-
-const ValidationError = styled.p`
-  color: #ff0000;
-`;
+import ValidationError from './styled-components';
 
 const RegistrationForm: FC<IRegistrationFormProps> = (
   props: IRegistrationFormProps

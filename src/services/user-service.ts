@@ -1,5 +1,5 @@
-import users from '../mock/index';
-import IUser from '../interfaces/user.interface';
+import { users } from '../mock';
+import { IUser } from '../interfaces';
 
 export default class UserService {
   private users: Array<IUser>;

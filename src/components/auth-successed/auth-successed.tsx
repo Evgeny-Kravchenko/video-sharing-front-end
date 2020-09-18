@@ -3,13 +3,8 @@ import { connect } from 'react-redux';
 
 import { Wrapper } from '../../styles/global-styled-components';
 
-import { IState } from '../../interfaces';
+import { IAuthSuccessedProps, IState } from '../../interfaces';
 import { unauthorize } from '../../actions';
-
-interface IAuthSuccessedProps {
-  email: string;
-  onUnauth: () => void;
-}
 
 const AuthSuccessed: FC<IAuthSuccessedProps> = (props: IAuthSuccessedProps) => {
   const { email, onUnauth } = props;

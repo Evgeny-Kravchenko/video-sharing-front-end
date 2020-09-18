@@ -11,6 +11,7 @@ import { changeCurrentPage } from '../../actions';
 import { HeaderStyled, Logo, LogoIcon } from './styled-components';
 
 import logoIcon from './images/video.png';
+import { IStateAuthUser } from '../../interfaces';
 
 const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   const {
@@ -48,10 +49,16 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
   );
 };
 
-const mapStateToProps = ({ currentPage, isAuth }: { currentPage: Pages; isAuth: boolean }) => {
+const mapStateToProps = ({
+  currentPage,
+  authUser,
+}: {
+  currentPage: Pages;
+  authUser: IStateAuthUser;
+}) => {
   return {
     currentPage,
-    isAuth,
+    isAuth: authUser.isAuth,
   };
 };
 
