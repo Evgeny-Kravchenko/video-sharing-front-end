@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import { authorizeUserSuccsess, authorizeUserFailure } from '../actions';
 
-import userService from '../index';
+import { userService } from '../index';
 
 import { IAction } from '../interfaces';
 

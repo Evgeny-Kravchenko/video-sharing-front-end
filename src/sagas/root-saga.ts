@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects';
 
-import { authUserSaga, registerUserSaga } from './index';
+import { authUserSaga, registerUserSaga, userOwnVideosSaga } from './index';
 
 function* rootSaga() {
-  yield all([authUserSaga(), registerUserSaga()]);
+  yield all([authUserSaga(), registerUserSaga(), userOwnVideosSaga()]);
 }
 
 export default rootSaga;

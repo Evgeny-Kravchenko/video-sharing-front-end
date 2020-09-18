@@ -1,7 +1,7 @@
 import { put, takeLatest, delay } from 'redux-saga/effects';
 import { registerUserSuccess, registerUserFailure, registerClearMessage } from '../actions';
 
-import userService from '../index';
+import { userService } from '../index';
 
 import { IAction } from '../interfaces';
 
