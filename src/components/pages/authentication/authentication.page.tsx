@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AuthForm from '../../auth-form';
 import AuthSuccessed from '../../auth-successed';
 import { IState, IStateAuthUser } from '../../../interfaces';
-import AuthFailure from '../../auth-failure';
+import MessageFailure from '../../message-failure';
 
 interface IAuthenticationPageProps {
   authUser: IStateAuthUser;
@@ -17,7 +17,12 @@ const AuthenticationPage: FC<IAuthenticationPageProps> = (
   const { isAuth, error } = authUser;
   return (
     <div className="p-lg-5 p-md-3 p-2">
-      {error && <AuthFailure />}
+      {error && (
+        <MessageFailure
+          header="There is no such user."
+          title="You are logged in wrong an email or a password. Try again."
+        />
+      )}
       {!isAuth && <AuthForm />}
       {isAuth && !error && <AuthSuccessed />}
     </div>
