@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  max-width: 1140px;
+  max-width: ${(props: { width: string }) => props.width};
   margin: 0 auto;
 `;
 

@@ -12,7 +12,7 @@ import { GlobalStyle, Wrapper } from './styles/global-styled-components';
 const App: FC = () => (
   <>
     <GlobalStyle />
-    <Wrapper>
+    <Wrapper width="1140px">
       <Header />
       <main>
         <Switch>
