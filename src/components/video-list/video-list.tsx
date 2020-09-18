@@ -1,14 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import VideoItem from '../video-item';
-import styled from 'styled-components';
+import VideoListStyled from './styled-components';
+import IVideoList from '../../interfaces/video-list-props.interface';
 
-const VideoListStyled = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
-const VideoList = () => {
+const VideoList: FC<IVideoList> = () => {
   return (
     <VideoListStyled>
       <VideoItem />

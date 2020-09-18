@@ -19,7 +19,6 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
     isAuth,
     onChangeCurrentPage,
   }: { currentPage: Pages; onChangeCurrentPage: Dispatch<Pages>; isAuth: boolean } = props;
-  console.log(isAuth);
   return (
     <HeaderStyled>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark px-2 py-md-3 py-2">

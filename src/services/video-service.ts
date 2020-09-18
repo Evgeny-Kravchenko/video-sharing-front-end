@@ -8,8 +8,8 @@ export default class VideoService {
     this.videos = videos;
   }
 
-  public async getOwnVideos(email: string): Promise<Array<IVideo>> {
-    return this.videos.filter((video: IVideo): boolean => video.owner === email);
+  public async getOwnVideos(userEmail: string): Promise<Array<IVideo>> {
+    return this.videos.filter((video: IVideo): boolean => video.owner === userEmail);
   }
 
   public async getWhoSharedVideosWith(email: string): Promise<Array<IVideo>> {

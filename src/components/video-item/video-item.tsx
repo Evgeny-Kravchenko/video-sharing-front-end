@@ -1,11 +1,7 @@
 import React, { FC } from 'react';
-import { Wrapper } from '../../styles/global-styled-components';
-import styled from 'styled-components';
 
-const Video = styled.video`
-  width: 100%;
-  height: 200px;
-`;
+import Video from './styled-components';
+import { Wrapper } from '../../styles/global-styled-components';
 
 const VideoItem: FC = () => {
   return (

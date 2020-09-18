@@ -6,9 +6,9 @@ import { videoService } from '../index';
 import IAction from '../interfaces/action.interface';
 
 function* fetchUserOwnVideo(action: IAction) {
-  const { user } = action.payload;
+  const userEmail = action.payload;
   try {
-    const videos = yield videoService.getOwnVideos(user);
+    const videos = yield videoService.getOwnVideos(userEmail);
     yield put(userOwnVideosSuccess(videos));
   } catch (err) {
     yield put(userOwnVideosFailure(err));

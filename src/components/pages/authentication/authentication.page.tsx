@@ -3,12 +3,8 @@ import { connect } from 'react-redux';
 
 import AuthForm from '../../auth-form';
 import AuthSuccessed from '../../auth-successed';
-import { IState, IStateAuthUser } from '../../../interfaces';
+import { IAuthenticationPageProps, IState, IStateAuthUser } from '../../../interfaces';
 import MessageFailure from '../../message-failure';
-
-interface IAuthenticationPageProps {
-  authUser: IStateAuthUser;
-}
 
 const AuthenticationPage: FC<IAuthenticationPageProps> = (
   props: IAuthenticationPageProps

@@ -9,7 +9,7 @@ import updateUserVideos from './update-user-videos';
 const initialState: IState = {
   currentPage: 'auth',
   registerUser: { loading: false, error: null, isSuccess: null, errorMessage: null },
-  authUser: { name: '', email: '', isAuth: true, loading: false, error: false },
+  authUser: { name: '', email: '', isAuth: false, loading: false, error: false },
   videosOfUser: {
     ownVideos: { error: null, loading: false, videos: [] },
     sharedVideos: { error: null, loading: false, videos: [] },
