@@ -2,6 +2,7 @@ import { Pages } from '../enums';
 import IAction from '../interfaces/action.interface';
 import IAuth from '../interfaces/auth.interface';
 import IUser from '../interfaces/user.interface';
+import { IStateVideos } from '../interfaces/state.interface';
 
 const changeCurrentPage = (currentPage: Pages): IAction => {
   return {
@@ -60,6 +61,48 @@ const unauthorize = (): IAction => {
   };
 };
 
+const userOwnVideosRequest = (email: string): IAction => {
+  return {
+    type: 'USER_OWN_VIDEOS_REQUEST',
+    payload: email,
+  };
+};
+
+const userOwnVideosSuccess = (videos: Array<IStateVideos>): IAction => {
+  return {
+    type: 'USER_OWN_VIDEOS_SUCCESS',
+    payload: videos,
+  };
+};
+
+const userOwnVideosFailure = (error: Error): IAction => {
+  return {
+    type: 'USER_OWN_VIDEOS_SUCCESS',
+    payload: error,
+  };
+};
+
+const userSharedVideosRequest = (email: string): IAction => {
+  return {
+    type: 'USER_SHARED_VIDEOS_REQUEST',
+    payload: email,
+  };
+};
+
+const userSharedVideosSuccess = (videos: Array<IStateVideos>): IAction => {
+  return {
+    type: 'USER_SHARED_VIDEOS_SUCCESS',
+    payload: videos,
+  };
+};
+
+const userSharedVideosFailure = (error: Error): IAction => {
+  return {
+    type: 'USER_Shared_VIDEOS_SUCCESS',
+    payload: error,
+  };
+};
+
 export {
   changeCurrentPage,
   authorizeUserRequest,
@@ -70,4 +113,10 @@ export {
   registerUserSuccess,
   registerUserFailure,
   registerClearMessage,
+  userOwnVideosRequest,
+  userOwnVideosSuccess,
+  userOwnVideosFailure,
+  userSharedVideosRequest,
+  userSharedVideosSuccess,
+  userSharedVideosFailure,
 };
