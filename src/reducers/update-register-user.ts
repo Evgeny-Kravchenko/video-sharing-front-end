@@ -22,6 +22,7 @@ const updateRegisterUser = (state: IState, action: IAction): IStateRegisterUser 
         loading: false,
         isSuccess: false,
         error: true,
+        errorMessage: action.payload,
       };
     }
     default: {

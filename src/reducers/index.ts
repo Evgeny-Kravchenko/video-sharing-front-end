@@ -7,7 +7,7 @@ import updateAuthUser from './update-auth-user';
 
 const initialState: IState = {
   currentPage: 'auth',
-  registerUser: { loading: false, error: null, isSuccess: null },
+  registerUser: { loading: false, error: null, isSuccess: null, errorMessage: null },
   authUser: { name: '', email: '', isAuth: false, loading: false, error: false },
 };
 
