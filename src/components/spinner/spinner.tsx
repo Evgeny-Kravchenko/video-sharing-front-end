@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 
-import Spin from 'antd/es/spin';
-import 'antd/es/spin/style/css';
-
 const Spinner: FC = () => {
-  return <Spin />;
+  return (
+    <div className="spinner-border d-block my-0 mx-auto" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+  );
 };
 
 export default Spinner;

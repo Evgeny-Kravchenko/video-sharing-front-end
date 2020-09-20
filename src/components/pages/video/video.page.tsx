@@ -5,14 +5,23 @@ import VideoList from '../../video-list';
 import { IState, IVideoPageProps } from '../../../interfaces';
 import { userOwnVideosRequest, userSharedVideosRequest } from '../../../actions';
 import TabItem from './styled-components';
+import Spinner from '../../spinner';
 
 const VideoPage: FC<IVideoPageProps> = (props: IVideoPageProps): ReactElement => {
-  const { ownVideos, sharedVideos, onOwnVideo, onSharedVideo, userEmail } = props;
+  const {
+    ownVideos,
+    ownVideosLoading,
+    sharedVideos,
+    sharedVideosLoading,
+    onOwnVideo,
+    onSharedVideo,
+    userEmail,
+  } = props;
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const videos = activeVideoPage === 'own' ? ownVideos : sharedVideos;
   return (
     <div className="py-lg-4 py-md-3 p-2">
-      <ul className="nav nav-tabs">
+      <ul className="nav nav-tabs mb-4">
         <li className="nav-item" onClick={() => setActiveVideoPage('own')}>
           <TabItem
             className={`nav-link ${activeVideoPage === 'own' ? 'active' : null}`}
@@ -30,7 +39,8 @@ const VideoPage: FC<IVideoPageProps> = (props: IVideoPageProps): ReactElement =>
           </TabItem>
         </li>
       </ul>
-      <VideoList videos={videos} />
+      {ownVideosLoading || sharedVideosLoading ? <Spinner /> : null}
+      {!ownVideosLoading && !sharedVideosLoading ? <VideoList videos={videos} /> : null}
     </div>
   );
 };
@@ -38,7 +48,9 @@ const VideoPage: FC<IVideoPageProps> = (props: IVideoPageProps): ReactElement =>
 const mapStateToProps = (state: IState) => {
   return {
     ownVideos: state.videosOfUser.ownVideos.videos,
+    ownVideosLoading: state.videosOfUser.ownVideos.loading,
     sharedVideos: state.videosOfUser.sharedVideos.videos,
+    sharedVideosLoading: state.videosOfUser.sharedVideos.loading,
     userEmail: state.authUser.email,
   };
 };

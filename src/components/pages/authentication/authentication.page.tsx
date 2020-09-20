@@ -5,12 +5,13 @@ import AuthForm from '../../auth-form';
 import AuthSuccessed from '../../auth-successed';
 import { IAuthenticationPageProps, IState, IStateAuthUser } from '../../../interfaces';
 import MessageFailure from '../../message-failure';
+import Spinner from '../../spinner';
 
 const AuthenticationPage: FC<IAuthenticationPageProps> = (
   props: IAuthenticationPageProps
 ): ReactElement => {
   const { authUser }: { authUser: IStateAuthUser } = props;
-  const { isAuth, error } = authUser;
+  const { isAuth, error, loading } = authUser;
   return (
     <div className="p-lg-5 p-md-3 p-2">
       {error && (
@@ -19,8 +20,9 @@ const AuthenticationPage: FC<IAuthenticationPageProps> = (
           title="You are logged in wrong an email or a password. Try again."
         />
       )}
-      {!isAuth && <AuthForm />}
-      {isAuth && !error && <AuthSuccessed />}
+      {loading && <Spinner />}
+      {!isAuth && !loading && <AuthForm />}
+      {isAuth && !error && !loading && <AuthSuccessed />}
     </div>
   );
 };
