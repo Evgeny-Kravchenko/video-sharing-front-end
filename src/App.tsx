@@ -16,6 +16,7 @@ const App: FC = () => (
       <Header />
       <main>
         <Switch>
+          <PrivateRoute path="/" component={VideoPage} exact />
           <Route path="/auth" component={AuthenticationPage} exact />
           <PrivateRoute path="/videos" component={VideoPage} exact />
           <Route path="/registration" component={RegistrationPage} exact />
