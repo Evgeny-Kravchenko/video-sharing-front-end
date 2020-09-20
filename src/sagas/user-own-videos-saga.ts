@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, delay } from 'redux-saga/effects';
 import { userOwnVideosSuccess, userOwnVideosFailure } from '../actions';
 
 import { videoService } from '../index';
@@ -6,8 +6,9 @@ import { videoService } from '../index';
 import IAction from '../interfaces/action.interface';
 
 function* fetchUserOwnVideo(action: IAction) {
-  const userEmail = action.payload;
   try {
+    const userEmail = action.payload;
+    yield delay(1000);
     const videos = yield videoService.getOwnVideos(userEmail);
     yield put(userOwnVideosSuccess(videos));
   } catch (err) {

@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, delay } from 'redux-saga/effects';
 import { authorizeUserSuccsess, authorizeUserFailure, userOwnVideosRequest } from '../actions';
 
 import { userService } from '../index';
@@ -6,8 +6,9 @@ import { userService } from '../index';
 import { IAction } from '../interfaces';
 
 function* fetchAuthUserHandler(action: IAction) {
-  const { email, password } = action.payload;
   try {
+    const { email, password } = action.payload;
+    yield delay(1000);
     const user = yield userService.getUser(email, password);
     yield put(authorizeUserSuccsess(user));
     yield put(userOwnVideosRequest(email));

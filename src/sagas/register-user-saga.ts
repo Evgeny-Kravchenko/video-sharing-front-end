@@ -7,6 +7,7 @@ import { IAction } from '../interfaces';
 
 function* fetchRegisterUserHandler(action: IAction) {
   try {
+    yield delay(1000);
     yield userService.registerUser(action.payload);
     yield put(registerUserSuccess());
     yield delay(2000);

@@ -33,7 +33,7 @@ const updateSharedVideos = (state: IState, action: IAction): IStateVideos => {
   switch (action.type) {
     case 'USER_SHARED_VIDEOS_REQUEST': {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videosOfUser.sharedVideos,
         loading: true,
       };
     }
@@ -52,7 +52,7 @@ const updateSharedVideos = (state: IState, action: IAction): IStateVideos => {
       };
     }
     default: {
-      return state.videosOfUser.ownVideos;
+      return state.videosOfUser.sharedVideos;
     }
   }
 };
