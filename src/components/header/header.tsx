@@ -18,10 +18,11 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
     isAuth,
     onChangeCurrentPage,
   }: { currentPage: Pages; onChangeCurrentPage: Dispatch<Pages>; isAuth: boolean } = props;
+  const pathForLogo = isAuth ? Pages.Videos : Pages.Authentication;
   return (
     <HeaderStyled>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark px-2 py-md-3 py-2">
-        <Logo to={isAuth ? 'videos' : 'auth'}>
+        <Logo to={pathForLogo} onClick={() => changeCurrentPage(pathForLogo)}>
           <LogoIcon src={logoIcon} alt="Video sharing" />
           Video sharing
         </Logo>
