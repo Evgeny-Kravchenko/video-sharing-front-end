@@ -3,6 +3,7 @@ import { userOwnVideosSuccess, userOwnVideosFailure } from '../actions';
 
 import { videoService } from '../index';
 
+import { Actions } from '../enums';
 import IAction from '../interfaces/action.interface';
 
 function* fetchUserOwnVideo(action: IAction) {
@@ -17,7 +18,7 @@ function* fetchUserOwnVideo(action: IAction) {
 }
 
 function* userOwnVideosSaga() {
-  yield takeLatest('USER_OWN_VIDEOS_REQUEST', fetchUserOwnVideo);
+  yield takeLatest(Actions.USER_OWN_VIDEOS_REQUEST, fetchUserOwnVideo);
 }
 
 export default userOwnVideosSaga;

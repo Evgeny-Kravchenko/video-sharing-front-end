@@ -2,6 +2,8 @@ import { put, takeLatest, delay } from 'redux-saga/effects';
 import { userSharedVideosSuccess, userSharedVideosFailure } from '../actions';
 
 import { videoService } from '../index';
+
+import { Actions } from '../enums';
 import IAction from '../interfaces/action.interface';
 
 function* fetchUserSharedVideo(action: IAction) {
@@ -16,7 +18,7 @@ function* fetchUserSharedVideo(action: IAction) {
 }
 
 function* userSharedVideosSaga() {
-  yield takeLatest('USER_SHARED_VIDEOS_REQUEST', fetchUserSharedVideo);
+  yield takeLatest(Actions.USER_SHARED_VIDEOS_REQUEST, fetchUserSharedVideo);
 }
 
 export default userSharedVideosSaga;
