@@ -13,6 +13,8 @@ export default class VideoService {
   }
 
   public async getWhoSharedVideosWith(email: string): Promise<Array<IVideo>> {
-    return this.videos.filter((video: IVideo): boolean => video.whoSharedWith.include(email));
+    return this.videos.filter((video: IVideo): boolean => {
+      return video.whoSharedWith.includes(email);
+    });
   }
 }
