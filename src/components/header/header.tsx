@@ -1,6 +1,5 @@
 import React, { Dispatch, FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import IHeaderProps from '../../interfaces/header-props.interface';
@@ -66,4 +65,4 @@ const mapDispatchToProps = {
   onChangeCurrentPage: changeCurrentPage,
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

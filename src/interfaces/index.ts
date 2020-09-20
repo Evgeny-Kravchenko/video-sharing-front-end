@@ -11,6 +11,8 @@ import IAuthSuccessedProps from './auth-successed-props.interface';
 import IMessageFailureProps from './message-failure-props.interface';
 import IAuthenticationPageProps from './auth-page-props.interface';
 import IRegistrationFormProps from './register-form-props.interface';
+import IVideo from './video';
+import IVideoList from './video-list-props.interface';
 
 export {
   IRegistration,
@@ -26,4 +28,6 @@ export {
   IMessageFailureProps,
   IAuthenticationPageProps,
   IRegistrationFormProps,
+  IVideo,
+  IVideoList,
 };
