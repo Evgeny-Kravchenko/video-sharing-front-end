@@ -33,7 +33,9 @@ const VideoPage: FC<IVideoPageProps> = (props: IVideoPageProps): ReactElement =>
         <li className="nav-item" onClick={() => setActiveVideoPage('shared')}>
           <TabItem
             className={`nav-link ${activeVideoPage === 'shared' ? 'active' : null}`}
-            onClick={() => onSharedVideo(userEmail)}
+            onClick={() => {
+              onSharedVideo(userEmail);
+            }}
           >
             Video shared to me
           </TabItem>
