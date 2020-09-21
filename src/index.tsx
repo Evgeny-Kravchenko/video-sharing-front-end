@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
-import ErrorBoundry from './components/error-boundry';
+import ErrorBoundry from './components/local/error-boundry';
 import { UserServiceProvider } from './components/user-service-context';
 
 import './styles/index.scss';

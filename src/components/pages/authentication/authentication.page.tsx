@@ -1,10 +1,10 @@
 import React, { FC, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 
-import AuthForm from '../../auth-form';
-import AuthSuccessed from '../../auth-successed';
-import MessageFailure from '../../message-failure';
-import Spinner from '../../spinner';
+import AuthForm from '../../local/auth-form';
+import AuthSuccessed from '../../local/auth-successed';
+import MessageFailure from '../../local/message-failure';
+import Spinner from '../../local/spinner';
 import { State, StateAuthUser } from '../../../reducers/types';
 
 const AuthenticationPage: FC = (): ReactElement => {

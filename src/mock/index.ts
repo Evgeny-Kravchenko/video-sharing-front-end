@@ -1,5 +1,5 @@
 import { User } from '../types';
-import { Video } from '../components/video-item/types';
+import { Video } from '../components/local/video-item/types';
 
 const users: Array<User> = [
   {

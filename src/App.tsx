@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Switch } from 'react-router-dom';
 
-import Header from './components/header';
+import Header from './components/local/header';
 import VideoPage from './components/pages/video';
 import AuthenticationPage from './components/pages/authentication';
 import RegistrationPage from './components/pages/registration';

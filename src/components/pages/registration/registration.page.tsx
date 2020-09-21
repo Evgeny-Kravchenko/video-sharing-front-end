@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 
-import RegistrationForm from '../../registration-form';
-import MessageFailure from '../../message-failure';
-import Spinner from '../../spinner';
+import RegistrationForm from '../../local/registration-form';
+import MessageFailure from '../../local/message-failure';
+import Spinner from '../../local/spinner';
 import { State, StateRegisterUser } from '../../../reducers/types';
 
 const RegistrationPage: FC = (): ReactElement => {
