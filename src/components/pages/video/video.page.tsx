@@ -20,23 +20,33 @@ const VideoPage: FC<VideoPageProps> = (props: VideoPageProps): ReactElement => {
   } = props;
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const videos = activeVideoPage === 'own' ? ownVideos : sharedVideos;
+  const handleSetActiveVideoPage = (path: string) => () => {
+    setActiveVideoPage(path);
+  };
+  const handleLoadingVideos = (
+    cb: (userEmail: string) => void,
+    userEmail: string,
+    path: string
+  ) => () => {
+    if (path !== activeVideoPage) {
+      cb(userEmail);
+    }
+  };
   return (
     <div className="py-lg-4 py-md-3 p-2">
       <ul className="nav nav-tabs mb-4">
-        <li className="nav-item" onClick={() => setActiveVideoPage('own')}>
+        <li className="nav-item" onClick={handleSetActiveVideoPage('own')}>
           <TabItem
             className={`nav-link ${activeVideoPage === 'own' ? 'active' : null}`}
-            onClick={() => onOwnVideo(userEmail)}
+            onClick={handleLoadingVideos(onOwnVideo, userEmail, 'own')}
           >
             My videos
           </TabItem>
         </li>
-        <li className="nav-item" onClick={() => setActiveVideoPage('shared')}>
+        <li className="nav-item" onClick={handleSetActiveVideoPage('shared')}>
           <TabItem
             className={`nav-link ${activeVideoPage === 'shared' ? 'active' : null}`}
-            onClick={() => {
-              onSharedVideo(userEmail);
-            }}
+            onClick={handleLoadingVideos(onSharedVideo, userEmail, 'shared')}
           >
             Video shared to me
           </TabItem>

@@ -1,4 +1,4 @@
-import React, { ComponentType, FC, ReactElement } from 'react';
+import React, { ComponentType, FC, ReactElement, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -15,9 +15,9 @@ import { withUserService } from '../../hoc';
 const AuthForm: FC<AuthFormProps> = (props: AuthFormProps): ReactElement => {
   const { onAuth } = props;
   const { handleSubmit, register } = useForm<Auth>();
-  const onSubmit = (data: Auth) => {
+  const onSubmit = useCallback((data: Auth) => {
     onAuth(data);
-  };
+  }, []);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
