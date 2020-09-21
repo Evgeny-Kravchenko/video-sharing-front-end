@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import IHeaderProps from '../../interfaces/header-props.interface';
-import { Pages } from '../../enums';
+import { PagesList } from '../../actions';
 
 import { changeCurrentPage } from '../../actions';
 
@@ -17,8 +17,8 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
     currentPage,
     isAuth,
     onChangeCurrentPage,
-  }: { currentPage: Pages; onChangeCurrentPage: Dispatch<Pages>; isAuth: boolean } = props;
-  const pathForLogo = isAuth ? Pages.Videos : Pages.Authentication;
+  }: { currentPage: PagesList; onChangeCurrentPage: Dispatch<PagesList>; isAuth: boolean } = props;
+  const pathForLogo = isAuth ? PagesList.Videos : PagesList.Authentication;
   return (
     <HeaderStyled>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark px-2 py-md-3 py-2">
@@ -28,16 +28,16 @@ const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
         </Logo>
         <ul className="navbar-nav d-flex justify-content-end ml-auto">
           <li
-            className={`nav-item ${currentPage === Pages.Videos && isAuth ? 'active' : null}`}
-            onClick={() => onChangeCurrentPage(Pages.Videos)}
+            className={`nav-item ${currentPage === PagesList.Videos && isAuth ? 'active' : null}`}
+            onClick={() => onChangeCurrentPage(PagesList.Videos)}
           >
             <Link className="nav-link" to="/videos">
               Videos
             </Link>
           </li>
           <li
-            className={`nav-item ${currentPage === Pages.Authentication ? 'active' : null}`}
-            onClick={() => onChangeCurrentPage(Pages.Authentication)}
+            className={`nav-item ${currentPage === PagesList.Authentication ? 'active' : null}`}
+            onClick={() => onChangeCurrentPage(PagesList.Authentication)}
           >
             <Link className="nav-link" to="/auth">
               Authentication
@@ -53,7 +53,7 @@ const mapStateToProps = ({
   currentPage,
   authUser,
 }: {
-  currentPage: Pages;
+  currentPage: PagesList;
   authUser: IStateAuthUser;
 }) => {
   return {

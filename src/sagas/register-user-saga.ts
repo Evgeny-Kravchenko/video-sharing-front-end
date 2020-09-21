@@ -3,7 +3,7 @@ import { registerUserSuccess, registerUserFailure, registerClearMessage } from '
 
 import { userService } from '../index';
 
-import { Actions } from "../enums";
+import { UserActionTypes } from '../actions';
 import { IAction } from '../interfaces';
 
 function* fetchRegisterUserHandler(action: IAction) {
@@ -19,7 +19,7 @@ function* fetchRegisterUserHandler(action: IAction) {
 }
 
 function* registerUserSaga() {
-  yield takeLatest(Actions.REGISTER_USER_REQUEST, fetchRegisterUserHandler);
+  yield takeLatest(UserActionTypes.REGISTER_USER_REQUEST, fetchRegisterUserHandler);
 }
 
 export default registerUserSaga;

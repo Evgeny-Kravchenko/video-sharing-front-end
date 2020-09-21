@@ -3,7 +3,7 @@ import { authorizeUserSuccsess, authorizeUserFailure, userOwnVideosRequest } fro
 
 import { userService } from '../index';
 
-import { Actions } from "../enums";
+import { UserActionTypes } from '../actions';
 import { IAction } from '../interfaces';
 
 function* fetchAuthUserHandler(action: IAction) {
@@ -18,7 +18,7 @@ function* fetchAuthUserHandler(action: IAction) {
   }
 }
 function* authUserSaga() {
-  yield takeLatest(Actions.AUTH_USER_REQUEST, fetchAuthUserHandler);
+  yield takeLatest(UserActionTypes.AUTH_USER_REQUEST, fetchAuthUserHandler);
 }
 
 export default authUserSaga;

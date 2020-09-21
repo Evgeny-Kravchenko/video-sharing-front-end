@@ -1,8 +1,8 @@
-import { Pages } from '../enums';
+import { PagesList } from '../actions';
 import { Dispatch } from 'react';
 
 export default interface IHeaderProps {
-  currentPage: Pages;
+  currentPage: PagesList;
   isAuth: boolean;
-  onChangeCurrentPage: Dispatch<Pages>;
+  onChangeCurrentPage: Dispatch<PagesList>;
 }
