@@ -1,8 +1,8 @@
 import React, { FC, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 
-import AuthForm from '../../local/auth-form';
-import AuthSuccessed from '../../local/auth-successed';
+import AuthForm from '../../pages/authentication/components/auth-form';
+import AuthSuccessed from '../../pages/authentication/components/auth-successed';
 import MessageFailure from '../../local/message-failure';
 import Spinner from '../../local/spinner';
 import { State, StateAuthUser } from '../../../reducers/types';

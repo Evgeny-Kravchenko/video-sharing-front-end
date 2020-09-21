@@ -1,6 +1,6 @@
 import IUser from '../types/user.interface';
 import Action from './types';
-import { Auth } from '../components/local/auth-form/types';
+import { Auth } from '../components/pages/authentication/components/auth-form/types';
 
 enum UserActionTypes {
   REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST',

@@ -1,12 +1,12 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import VideoList from '../../local/video-list';
+import VideoList from '../video/components/video-list';
 import { userOwnVideosRequest, userSharedVideosRequest } from '../../../actions';
 import TabItem from './styled-components';
 import Spinner from '../../local/spinner';
 import { State } from '../../../reducers/types';
-import { Video } from '../../local/video-item/types';
+import { Video } from './components/video-item/types';
 
 const VideoPage: FC = (): ReactElement => {
   const dispatch = useDispatch();

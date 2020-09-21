@@ -1,5 +1,5 @@
 import { videos } from '../mock';
-import { Video } from '../components/local/video-item/types';
+import { Video } from '../components/pages/video/components/video-item/types';
 
 export default class VideoService {
   private videos: Array<Video>;

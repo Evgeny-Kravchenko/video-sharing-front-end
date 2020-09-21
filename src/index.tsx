@@ -7,7 +7,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
 import ErrorBoundry from './components/local/error-boundry';
-import { UserServiceProvider } from './components/user-service-context';
 
 import './styles/index.scss';
 
@@ -23,11 +22,9 @@ const videoService = new VideoService();
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundry>
-      <UserServiceProvider value={userService}>
-        <Router>
-          <AppWithHot />
-        </Router>
-      </UserServiceProvider>
+      <Router>
+        <AppWithHot />
+      </Router>
     </ErrorBoundry>
   </Provider>,
   document.getElementById('root')
