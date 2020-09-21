@@ -16,8 +16,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  max-width: ${(props: { width: string }) => props.width};
-  margin: 0 auto;
+  max-width: ${(props: { width: string; margin: string }) => props.width};
+  margin: ${(props: { width: string; margin: string }) => (props.margin ? props.margin : '0 auto')};
 `;
 
 export { Form, Label, GlobalStyle, Wrapper };
