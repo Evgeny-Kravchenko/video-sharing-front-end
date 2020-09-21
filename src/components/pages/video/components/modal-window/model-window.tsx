@@ -1,13 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import ModalWindowProps from './types';
+import { ModalWindowProps, ModalWindowForm } from './types';
 import ValidationError from '../../../registration/components/registration-form/styled-components';
-
-interface ModalWindowForm {
-  title: string;
-  description: string;
-  file: FileList;
-}
 
 const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElement => {
   const { onSetModalWindow } = props;
