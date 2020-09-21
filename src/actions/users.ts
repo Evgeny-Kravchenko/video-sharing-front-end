@@ -1,6 +1,6 @@
-import IAuth from '../interfaces/auth.interface';
-import IUser from '../interfaces/user.interface';
-import IAction from '../interfaces/action.interface';
+import IUser from '../types/user.interface';
+import Action from './types';
+import { Auth } from '../components/auth-form/types';
 
 enum UserActionTypes {
   REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST',
@@ -13,51 +13,51 @@ enum UserActionTypes {
   UNAUTHORIZE = 'UNAUTHORIZE',
 }
 
-const registerUserRequest = (registerUserData: IUser): IAction => {
+const registerUserRequest = (registerUserData: IUser): Action => {
   return {
     type: UserActionTypes.REGISTER_USER_REQUEST,
     payload: registerUserData,
   };
 };
 
-const registerUserSuccess = (): IAction => {
+const registerUserSuccess = (): Action => {
   return {
     type: UserActionTypes.REGISTER_USER_SUCCESS,
   };
 };
 
-const registerUserFailure = (err: Error): IAction => {
+const registerUserFailure = (err: Error): Action => {
   return {
     type: UserActionTypes.REGISTER_USER_FAILURE,
     payload: err,
   };
 };
 
-const registerClearMessage = (): IAction => {
+const registerClearMessage = (): Action => {
   return {
     type: UserActionTypes.REGISTER_CLEAR_MESSAGE,
   };
 };
 
-const authorizeUserRequest = (authData: IAuth): IAction => {
+const authorizeUserRequest = (authData: Auth): Action => {
   return {
     type: UserActionTypes.AUTH_USER_REQUEST,
     payload: authData,
   };
 };
 
-const authorizeUserSuccsess = (user: IUser | string): IAction => {
+const authorizeUserSuccsess = (user: IUser | string): Action => {
   return { type: UserActionTypes.AUTH_USER_SUCCSESS, payload: { user } };
 };
 
-const authorizeUserFailure = (error: Error): IAction => {
+const authorizeUserFailure = (error: Error): Action => {
   return {
     type: UserActionTypes.AUTH_USER_FAILURE,
     payload: error,
   };
 };
 
-const unauthorize = (): IAction => {
+const unauthorize = (): Action => {
   return {
     type: UserActionTypes.UNAUTHORIZE,
   };

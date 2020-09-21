@@ -1,7 +1,7 @@
-import { IState, IAction } from '../interfaces';
-import { IStateUserVideo, IStateVideos } from '../interfaces/state.interface';
+import Action from '../actions/types';
+import { State, StateUserVideo, StateVideos } from './types';
 
-const updateOwnVideos = (state: IState, action: IAction): IStateVideos => {
+const updateOwnVideos = (state: State, action: Action): StateVideos => {
   switch (action.type) {
     case 'USER_OWN_VIDEOS_REQUEST': {
       return {
@@ -29,7 +29,7 @@ const updateOwnVideos = (state: IState, action: IAction): IStateVideos => {
   }
 };
 
-const updateSharedVideos = (state: IState, action: IAction): IStateVideos => {
+const updateSharedVideos = (state: State, action: Action): StateVideos => {
   switch (action.type) {
     case 'USER_SHARED_VIDEOS_REQUEST': {
       return {
@@ -57,7 +57,7 @@ const updateSharedVideos = (state: IState, action: IAction): IStateVideos => {
   }
 };
 
-const updateUserVideos = (state: IState, action: IAction): IStateUserVideo => {
+const updateUserVideos = (state: State, action: Action): StateUserVideo => {
   return {
     ownVideos: updateOwnVideos(state, action),
     sharedVideos: updateSharedVideos(state, action),

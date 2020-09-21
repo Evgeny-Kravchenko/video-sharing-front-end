@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-import Video from './styled-components';
+import VideoStyled from './styled-components';
 import { Wrapper } from '../../styles/global-styled-components';
-import { IVideo } from '../../interfaces';
+import Video from './types';
 
 interface IVideoItemProps {
-  video: IVideo;
+  video: Video;
 }
 
 const VideoItem: FC<IVideoItemProps> = (props: IVideoItemProps) => {
@@ -17,9 +17,9 @@ const VideoItem: FC<IVideoItemProps> = (props: IVideoItemProps) => {
       <div className="card my-2">
         <div className="card-body">
           <h4 className="card-title">{title}</h4>
-          <Video src="#" controls>
+          <VideoStyled src="#" controls>
             Your browser does not support the video tag.
-          </Video>
+          </VideoStyled>
           <p className="card-text">{description}</p>
           <button className="btn btn-outline-success">Watch video</button>
         </div>

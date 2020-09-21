@@ -1,12 +1,11 @@
-import { IState } from '../interfaces';
-import IAction from '../interfaces/action.interface';
-
 import updateCurrentPage from './update-current-page';
 import updateRegisterUser from './update-register-user';
 import updateAuthUser from './update-auth-user';
 import updateUserVideos from './update-user-videos';
+import Action from '../actions/types';
+import { State } from './types';
 
-const initialState: IState = {
+const initialState: State = {
   currentPage: 'auth',
   registerUser: { loading: false, error: null, isSuccess: null, errorMessage: null },
   authUser: { name: '', email: '', isAuth: false, loading: false, error: false },
@@ -16,7 +15,7 @@ const initialState: IState = {
   },
 };
 
-const reducer = (state: IState = initialState, action: IAction): IState => {
+const reducer = (state: State = initialState, action: Action): State => {
   return {
     currentPage: updateCurrentPage(state, action),
     registerUser: updateRegisterUser(state, action),

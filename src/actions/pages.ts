@@ -1,4 +1,4 @@
-import IAction from '../interfaces/action.interface';
+import Action from './types';
 
 enum PagesList {
   Authentication = 'auth',
@@ -9,7 +9,7 @@ enum PagesTypesActions {
   MOVE_TO_ANOTHER_PAGE = 'MOVE_TO_ANOTHER_PAGE',
 }
 
-const changeCurrentPage = (currentPage: PagesList): IAction => {
+const changeCurrentPage = (currentPage: PagesList): Action => {
   return {
     type: PagesTypesActions.MOVE_TO_ANOTHER_PAGE,
     payload: currentPage,

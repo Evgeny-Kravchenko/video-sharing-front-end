@@ -1,7 +1,7 @@
-import { PagesList } from '../actions';
 import { Dispatch } from 'react';
+import { PagesList } from '../../actions';
 
-export default interface IHeaderProps {
+export default interface HeaderProps {
   currentPage: PagesList;
   isAuth: boolean;
   onChangeCurrentPage: Dispatch<PagesList>;

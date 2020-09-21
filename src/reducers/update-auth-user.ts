@@ -1,7 +1,7 @@
-import { IState, IStateAuthUser } from '../interfaces';
-import IAction from '../interfaces/action.interface';
+import Action from '../actions/types';
+import { State, StateAuthUser } from './types';
 
-const updateAuthUser = (state: IState, action: IAction): IStateAuthUser => {
+const updateAuthUser = (state: State, action: Action): StateAuthUser => {
   switch (action.type) {
     case 'AUTH_USER_REQUEST': {
       return {

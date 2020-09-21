@@ -1,7 +1,7 @@
-import { IUser } from '../interfaces';
-import IVideo from '../interfaces/video';
+import { User } from '../types';
+import Video from '../components/video-item/types';
 
-const users: Array<IUser> = [
+const users: Array<User> = [
   {
     name: 'Yauhen',
     lastName: 'Krauchanka',
@@ -22,7 +22,7 @@ const users: Array<IUser> = [
   },
 ];
 
-const videos: Array<IVideo> = [
+const videos: Array<Video> = [
   {
     title: 'Cats are good',
     description: 'Cats are good and they can calm you down.',

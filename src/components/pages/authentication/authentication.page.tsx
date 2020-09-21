@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 
 import AuthForm from '../../auth-form';
 import AuthSuccessed from '../../auth-successed';
-import { IAuthenticationPageProps, IState, IStateAuthUser } from '../../../interfaces';
+import IAuthenticationPageProps from './types';
 import MessageFailure from '../../message-failure';
 import Spinner from '../../spinner';
+import { State, StateAuthUser } from '../../../reducers/types';
 
 const AuthenticationPage: FC<IAuthenticationPageProps> = (
   props: IAuthenticationPageProps
 ): ReactElement => {
-  const { authUser }: { authUser: IStateAuthUser } = props;
+  const { authUser }: { authUser: StateAuthUser } = props;
   const { isAuth, error, loading } = authUser;
   return (
     <div className="p-lg-5 p-md-3 p-2">
@@ -27,7 +28,7 @@ const AuthenticationPage: FC<IAuthenticationPageProps> = (
   );
 };
 
-const mapStateToProps = (state: IState) => {
+const mapStateToProps = (state: State) => {
   return {
     authUser: state.authUser,
   };

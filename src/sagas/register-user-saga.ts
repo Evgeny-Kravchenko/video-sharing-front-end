@@ -4,9 +4,9 @@ import { registerUserSuccess, registerUserFailure, registerClearMessage } from '
 import { userService } from '../index';
 
 import { UserActionTypes } from '../actions';
-import { IAction } from '../interfaces';
+import Action from '../actions/types';
 
-function* fetchRegisterUserHandler(action: IAction) {
+function* fetchRegisterUserHandler(action: Action) {
   try {
     yield delay(1000);
     yield userService.registerUser(action.payload);

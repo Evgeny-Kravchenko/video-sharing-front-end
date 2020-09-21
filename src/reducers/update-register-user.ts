@@ -1,7 +1,7 @@
-import { IState, IStateRegisterUser } from '../interfaces/state.interface';
-import IAction from '../interfaces/action.interface';
+import Action from '../actions/types';
+import { State, StateRegisterUser } from './types';
 
-const updateRegisterUser = (state: IState, action: IAction): IStateRegisterUser => {
+const updateRegisterUser = (state: State, action: Action): StateRegisterUser => {
   switch (action.type) {
     case 'REGISTER_USER_REQUEST': {
       return {

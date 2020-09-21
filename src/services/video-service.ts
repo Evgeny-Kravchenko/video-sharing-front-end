@@ -1,19 +1,19 @@
 import { videos } from '../mock';
-import IVideo from '../interfaces/video';
+import Video from '../components/video-item/types';
 
 export default class VideoService {
-  private videos: Array<IVideo>;
+  private videos: Array<Video>;
 
   constructor() {
     this.videos = videos;
   }
 
-  public async getOwnVideos(userEmail: string): Promise<Array<IVideo>> {
-    return this.videos.filter((video: IVideo): boolean => video.owner === userEmail);
+  public async getOwnVideos(userEmail: string): Promise<Array<Video>> {
+    return this.videos.filter((video: Video): boolean => video.owner === userEmail);
   }
 
-  public async getWhoSharedVideosWith(email: string): Promise<Array<IVideo>> {
-    return this.videos.filter((video: IVideo): boolean => {
+  public async getWhoSharedVideosWith(email: string): Promise<Array<Video>> {
+    return this.videos.filter((video: Video): boolean => {
       return video.whoSharedWith.includes(email);
     });
   }

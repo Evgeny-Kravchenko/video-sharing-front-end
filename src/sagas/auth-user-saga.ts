@@ -4,9 +4,9 @@ import { authorizeUserSuccsess, authorizeUserFailure, userOwnVideosRequest } fro
 import { userService } from '../index';
 
 import { UserActionTypes } from '../actions';
-import { IAction } from '../interfaces';
+import Action from '../actions/types';
 
-function* fetchAuthUserHandler(action: IAction) {
+function* fetchAuthUserHandler(action: Action) {
   try {
     const { email, password } = action.payload;
     yield delay(1000);

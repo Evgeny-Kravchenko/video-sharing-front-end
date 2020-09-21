@@ -1,4 +1,4 @@
-export default interface IVideo {
+export default interface Video {
   title: string;
   description: string;
   [key: string]: any;

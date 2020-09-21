@@ -1,15 +1,15 @@
 import { users } from '../mock';
-import { IUser } from '../interfaces';
+import { User } from '../types';
 
 export default class UserService {
-  private users: Array<IUser>;
+  private users: Array<User>;
 
   constructor() {
     this.users = users;
   }
-  public async getUser(email: string, password: string): Promise<IUser | string> {
+  public async getUser(email: string, password: string): Promise<User | string> {
     const user = this.users.find(
-      (user: IUser) => email === user.email && password === user.password
+      (user: User) => email === user.email && password === user.password
     );
     if (!user) {
       return Promise.reject('There is no such user!');
@@ -17,7 +17,7 @@ export default class UserService {
     return user;
   }
 
-  public async registerUser(user: IUser) {
+  public async registerUser(user: User) {
     const isSuchUserIn = this.users.some((item) => item.email === user.email);
     if (isSuchUserIn) {
       return Promise.reject('Email is already in use');

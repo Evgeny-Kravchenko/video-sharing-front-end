@@ -2,12 +2,13 @@ import React, { FC, ReactElement, useState } from 'react';
 import { connect } from 'react-redux';
 
 import VideoList from '../../video-list';
-import { IState, IVideoPageProps } from '../../../interfaces';
 import { userOwnVideosRequest, userSharedVideosRequest } from '../../../actions';
 import TabItem from './styled-components';
 import Spinner from '../../spinner';
+import { State } from '../../../reducers/types';
+import VideoPageProps from './types';
 
-const VideoPage: FC<IVideoPageProps> = (props: IVideoPageProps): ReactElement => {
+const VideoPage: FC<VideoPageProps> = (props: VideoPageProps): ReactElement => {
   const {
     ownVideos,
     ownVideosLoading,
@@ -47,7 +48,7 @@ const VideoPage: FC<IVideoPageProps> = (props: IVideoPageProps): ReactElement =>
   );
 };
 
-const mapStateToProps = (state: IState) => {
+const mapStateToProps = (state: State) => {
   return {
     ownVideos: state.videosOfUser.ownVideos.videos,
     ownVideosLoading: state.videosOfUser.ownVideos.loading,

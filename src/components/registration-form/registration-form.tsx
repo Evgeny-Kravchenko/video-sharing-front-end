@@ -4,20 +4,20 @@ import { connect } from 'react-redux';
 
 import { Form, Label } from '../../styles/global-styled-components';
 
-import { IRegistration, IRegistrationFormProps } from '../../interfaces';
 import { registerUserRequest } from '../../actions';
 
 import ValidationError from './styled-components';
+import { Registration, RegistrationFormProps } from './types';
 
-const RegistrationForm: FC<IRegistrationFormProps> = (
-  props: IRegistrationFormProps
+const RegistrationForm: FC<RegistrationFormProps> = (
+  props: RegistrationFormProps
 ): ReactElement => {
-  const { handleSubmit, register, errors, watch } = useForm<IRegistration>();
+  const { handleSubmit, register, errors, watch } = useForm<Registration>();
   const password = useRef<string>();
   password.current = watch('password', '');
   const { onRegister } = props;
 
-  const onSubmit = (data: IRegistration) => {
+  const onSubmit = (data: Registration) => {
     const { name, lastName, password, email } = data;
     onRegister({ name, lastName, password, email });
   };

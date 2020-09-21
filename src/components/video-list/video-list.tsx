@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import VideoItem from '../video-item';
 import VideoListStyled from './styled-components';
-import { IVideoList, IVideo } from '../../interfaces';
+import Video from '../video-item/types';
+import VideoListType from './types';
 
-const VideoList: FC<IVideoList> = (props: IVideoList) => {
+const VideoList: FC<VideoListType> = (props: VideoListType) => {
   return (
     <VideoListStyled>
-      {props.videos.map((video: IVideo, index: number) => {
+      {props.videos.map((video: Video, index: number) => {
         return <VideoItem key={index} video={video} />;
       })}
     </VideoListStyled>

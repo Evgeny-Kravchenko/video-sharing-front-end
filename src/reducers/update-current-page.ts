@@ -1,7 +1,7 @@
-import { IState } from '../interfaces';
-import IAction from '../interfaces/action.interface';
+import Action from '../actions/types';
+import { State } from './types';
 
-const updateCurrentPage = (state: IState, action: IAction): string => {
+const updateCurrentPage = (state: State, action: Action): string => {
   switch (action.type) {
     case 'MOVE_TO_ANOTHER_PAGE': {
       const { isAuth }: { isAuth: boolean } = state.authUser;

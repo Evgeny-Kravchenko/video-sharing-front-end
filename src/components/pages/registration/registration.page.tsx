@@ -2,13 +2,12 @@ import React, { FC, ReactElement } from 'react';
 import { connect } from 'react-redux';
 
 import RegistrationForm from '../../registration-form';
-import { IState } from '../../../interfaces';
-import { IStateRegisterUser } from '../../../interfaces/state.interface';
 import MessageFailure from '../../message-failure';
 import Spinner from '../../spinner';
+import { State, StateRegisterUser } from '../../../reducers/types';
 
 interface IRegistrationPageProps {
-  registerUser: IStateRegisterUser;
+  registerUser: StateRegisterUser;
 }
 
 const RegistrationPage: FC<IRegistrationPageProps> = (
@@ -28,7 +27,7 @@ const RegistrationPage: FC<IRegistrationPageProps> = (
   );
 };
 
-const mapStateToProps = (state: IState) => {
+const mapStateToProps = (state: State) => {
   return {
     registerUser: state.registerUser,
   };

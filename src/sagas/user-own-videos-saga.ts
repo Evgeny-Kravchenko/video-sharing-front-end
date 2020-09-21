@@ -4,9 +4,9 @@ import { userOwnVideosSuccess, userOwnVideosFailure } from '../actions';
 import { videoService } from '../index';
 
 import { ActionVideosTypes } from '../actions';
-import IAction from '../interfaces/action.interface';
+import Action from '../actions/types';
 
-function* fetchUserOwnVideo(action: IAction) {
+function* fetchUserOwnVideo(action: Action) {
   try {
     const userEmail = action.payload;
     yield delay(1000);

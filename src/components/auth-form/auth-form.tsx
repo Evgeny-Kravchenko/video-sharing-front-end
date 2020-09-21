@@ -8,15 +8,14 @@ import RegistrationLink from './styled-components';
 
 import { authorizeUserRequest } from '../../actions';
 
-import IAuthFormProps from '../../interfaces/auth-form-props.interface';
-import IAuth from '../../interfaces/auth.interface';
+import { AuthFormProps, Auth } from './types';
 
 import { withUserService } from '../../hoc';
 
-const AuthForm: FC<IAuthFormProps> = (props: IAuthFormProps): ReactElement => {
+const AuthForm: FC<AuthFormProps> = (props: AuthFormProps): ReactElement => {
   const { onAuth } = props;
-  const { handleSubmit, register } = useForm<IAuth>();
-  const onSubmit = (data: IAuth) => {
+  const { handleSubmit, register } = useForm<Auth>();
+  const onSubmit = (data: Auth) => {
     onAuth(data);
   };
 

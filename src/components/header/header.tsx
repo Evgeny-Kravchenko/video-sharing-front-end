@@ -2,7 +2,6 @@ import React, { Dispatch, FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import IHeaderProps from '../../interfaces/header-props.interface';
 import { PagesList } from '../../actions';
 
 import { changeCurrentPage } from '../../actions';
@@ -10,9 +9,10 @@ import { changeCurrentPage } from '../../actions';
 import { HeaderStyled, Logo, LogoIcon } from './styled-components';
 
 import logoIcon from './images/video.png';
-import { IStateAuthUser } from '../../interfaces';
+import HeaderProps from './types';
+import { StateAuthUser } from '../../reducers/types';
 
-const Header: FC<IHeaderProps> = (props: IHeaderProps): ReactElement => {
+const Header: FC<HeaderProps> = (props: HeaderProps): ReactElement => {
   const {
     currentPage,
     isAuth,
@@ -54,7 +54,7 @@ const mapStateToProps = ({
   authUser,
 }: {
   currentPage: PagesList;
-  authUser: IStateAuthUser;
+  authUser: StateAuthUser;
 }) => {
   return {
     currentPage,

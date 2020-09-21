@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from 'react';
 
 import { Wrapper } from '../../styles/global-styled-components';
-import { IMessageFailureProps } from '../../interfaces';
+import MessageFailureProps from './types';
 
-const MessageFailure: FC<IMessageFailureProps> = (props: IMessageFailureProps): ReactElement => {
+const MessageFailure: FC<MessageFailureProps> = (props: MessageFailureProps): ReactElement => {
   const { header, title } = props;
   return (
     <Wrapper width="500px">

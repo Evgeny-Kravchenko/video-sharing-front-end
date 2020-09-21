@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import { Wrapper } from '../../styles/global-styled-components';
 
-import { IAuthSuccessedProps, IState } from '../../interfaces';
 import { unauthorize } from '../../actions';
+import AuthSuccessedProps from './types';
+import { State } from '../../reducers/types';
 
-const AuthSuccessed: FC<IAuthSuccessedProps> = (props: IAuthSuccessedProps) => {
+const AuthSuccessed: FC<AuthSuccessedProps> = (props: AuthSuccessedProps) => {
   const { email, onUnauth } = props;
   return (
     <Wrapper width="500px">
@@ -27,7 +28,7 @@ const AuthSuccessed: FC<IAuthSuccessedProps> = (props: IAuthSuccessedProps) => {
   );
 };
 
-const mapStateToProps = (state: IState) => {
+const mapStateToProps = (state: State) => {
   return {
     email: state.authUser.email,
   };

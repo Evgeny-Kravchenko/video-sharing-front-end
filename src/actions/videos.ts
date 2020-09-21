@@ -1,5 +1,5 @@
-import IAction from '../interfaces/action.interface';
-import { IStateVideos } from '../interfaces/state.interface';
+import Action from './types';
+import { StateVideos } from '../reducers/types';
 
 enum ActionVideosTypes {
   USER_OWN_VIDEOS_REQUEST = 'USER_OWN_VIDEOS_REQUEST',
@@ -10,42 +10,42 @@ enum ActionVideosTypes {
   USER_SHARED_VIDEOS_FAILURE = 'USER_SHARED_VIDEOS_FAILURE',
 }
 
-const userOwnVideosRequest = (email: string): IAction => {
+const userOwnVideosRequest = (email: string): Action => {
   return {
     type: ActionVideosTypes.USER_OWN_VIDEOS_REQUEST,
     payload: email,
   };
 };
 
-const userOwnVideosSuccess = (videos: Array<IStateVideos>): IAction => {
+const userOwnVideosSuccess = (videos: Array<StateVideos>): Action => {
   return {
     type: ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS,
     payload: videos,
   };
 };
 
-const userOwnVideosFailure = (error: Error): IAction => {
+const userOwnVideosFailure = (error: Error): Action => {
   return {
     type: ActionVideosTypes.USER_OWN_VIDEOS_FAILURE,
     payload: error,
   };
 };
 
-const userSharedVideosRequest = (email: string): IAction => {
+const userSharedVideosRequest = (email: string): Action => {
   return {
     type: ActionVideosTypes.USER_SHARED_VIDEOS_REQUEST,
     payload: email,
   };
 };
 
-const userSharedVideosSuccess = (videos: Array<IStateVideos>): IAction => {
+const userSharedVideosSuccess = (videos: Array<StateVideos>): Action => {
   return {
     type: ActionVideosTypes.USER_SHARED_VIDEOS_SUCCESS,
     payload: videos,
   };
 };
 
-const userSharedVideosFailure = (error: Error): IAction => {
+const userSharedVideosFailure = (error: Error): Action => {
   return {
     type: ActionVideosTypes.USER_SHARED_VIDEOS_FAILURE,
     payload: error,

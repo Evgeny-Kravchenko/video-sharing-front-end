@@ -1,13 +1,13 @@
 import React, { Component, ReactNode } from 'react';
 
 import ErrorIndicator from '../error-indicator';
-import IErrorBoundryProps from '../../interfaces/error-boundry-props.interface';
+import ErrorBoundryProps from './types';
 
 interface IState {
   isError: boolean;
 }
 
-export default class ErrorBoundry extends Component<IErrorBoundryProps> {
+export default class ErrorBoundry extends Component<ErrorBoundryProps> {
   public state: IState = {
     isError: false,
   };
