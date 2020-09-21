@@ -1,5 +1,6 @@
 import Action from './types';
 import { StateVideos } from '../reducers/types';
+import { Video } from '../components/pages/video/components/video-item/types';
 
 enum ActionVideosTypes {
   USER_OWN_VIDEOS_REQUEST = 'USER_OWN_VIDEOS_REQUEST',
@@ -8,6 +9,7 @@ enum ActionVideosTypes {
   USER_SHARED_VIDEOS_REQUEST = 'USER_SHARED_VIDEOS_REQUEST',
   USER_SHARED_VIDEOS_SUCCESS = 'USER_SHARED_VIDEOS_SUCCESS',
   USER_SHARED_VIDEOS_FAILURE = 'USER_SHARED_VIDEOS_FAILURE',
+  ADD_NEW_VIDEO = 'ADD_NEW_VIDEO',
 }
 
 const userOwnVideosRequest = (email: string): Action => {
@@ -52,6 +54,13 @@ const userSharedVideosFailure = (error: Error): Action => {
   };
 };
 
+const addNewVideo = (video: Video): Action => {
+  return {
+    type: ActionVideosTypes.ADD_NEW_VIDEO,
+    payload: video,
+  };
+};
+
 export {
   ActionVideosTypes,
   userOwnVideosRequest,
@@ -60,4 +69,5 @@ export {
   userSharedVideosRequest,
   userSharedVideosSuccess,
   userSharedVideosFailure,
+  addNewVideo,
 };

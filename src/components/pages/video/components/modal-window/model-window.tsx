@@ -1,16 +1,27 @@
 import React, { FC, ReactElement } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { ModalWindowProps, ModalWindowForm } from './types';
+
+import { ModalWindowProps } from './types';
+import { Video } from '../video-item/types';
+
+import { addNewVideo } from '../../../../../actions';
+
 import ValidationError from '../../../registration/components/registration-form/styled-components';
 
 const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElement => {
   const { onSetModalWindow } = props;
-  const { handleSubmit, register, errors } = useForm<ModalWindowForm>();
+  const dispatch = useDispatch();
+  const { handleSubmit, register, errors } = useForm<Video>();
   const errorTitle = errors.title && <ValidationError>{errors.title.message}</ValidationError>;
   const errorDescription = errors.description && (
     <ValidationError>{errors.description.message}</ValidationError>
   );
   const errorFile = errors.file && <ValidationError>{errors.file.message}</ValidationError>;
+  const onSubmit = (data: Video) => {
+    dispatch(addNewVideo(data));
+    onSetModalWindow(false);
+  };
   return (
     <div className="modal d-block">
       <div className="modal-dialog" role="document">
@@ -21,10 +32,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
               <span>&times;</span>
             </button>
           </div>
-          <form
-            className="modal-body"
-            onSubmit={handleSubmit((data: ModalWindowForm) => console.log(data))}
-          >
+          <form className="modal-body" onSubmit={handleSubmit(onSubmit)}>
             <fieldset>
               <legend>Enter video information</legend>
               <div className="form-group">
@@ -46,7 +54,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
               </div>
               <div className="form-group">
                 <div className="col-sm-12">
-                  <label htmlFor="exampleTextarea">Example textarea</label>
+                  <label htmlFor="exampleTextarea">Enter video description</label>
                   <textarea
                     className="form-control"
                     id="description"
@@ -60,7 +68,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
               </div>
               <div className="form-group">
                 <div className="col-12">
-                  <label htmlFor="exampleInputFile">File input</label>
+                  <label htmlFor="exampleInputFile">Choose file</label>
                   <input
                     type="file"
                     className="form-control-file"

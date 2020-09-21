@@ -23,6 +23,12 @@ const updateOwnVideos = (state: State, action: Action): StateVideos => {
         videos: [],
       };
     }
+    case 'ADD_NEW_VIDEO': {
+      return {
+        ...state.videosOfUser.ownVideos,
+        videos: [...state.videosOfUser.ownVideos.videos, action.payload],
+      };
+    }
     default: {
       return state.videosOfUser.ownVideos;
     }
