@@ -1,25 +1,23 @@
 import React, { FC, ReactElement, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Form, Label } from '../../styles/global-styled-components';
 
 import { registerUserRequest } from '../../actions';
 
 import ValidationError from './styled-components';
-import { Registration, RegistrationFormProps } from './types';
+import { Registration } from './types';
 
-const RegistrationForm: FC<RegistrationFormProps> = (
-  props: RegistrationFormProps
-): ReactElement => {
+const RegistrationForm: FC = (): ReactElement => {
+  const dispatch = useDispatch();
   const { handleSubmit, register, errors, watch } = useForm<Registration>();
   const password = useRef<string>();
   password.current = watch('password', '');
-  const { onRegister } = props;
 
   const onSubmit = (data: Registration) => {
     const { name, lastName, password, email } = data;
-    onRegister({ name, lastName, password, email });
+    dispatch(registerUserRequest({ name, lastName, password, email }));
   };
 
   return (
@@ -111,8 +109,4 @@ const RegistrationForm: FC<RegistrationFormProps> = (
   );
 };
 
-const mapDispatchToProps = {
-  onRegister: registerUserRequest,
-};
-
-export default connect(null, mapDispatchToProps)(RegistrationForm);
+export default RegistrationForm;

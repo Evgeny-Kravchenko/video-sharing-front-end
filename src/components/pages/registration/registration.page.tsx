@@ -1,19 +1,13 @@
 import React, { FC, ReactElement } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import RegistrationForm from '../../registration-form';
 import MessageFailure from '../../message-failure';
 import Spinner from '../../spinner';
 import { State, StateRegisterUser } from '../../../reducers/types';
 
-interface IRegistrationPageProps {
-  registerUser: StateRegisterUser;
-}
-
-const RegistrationPage: FC<IRegistrationPageProps> = (
-  props: IRegistrationPageProps
-): ReactElement => {
-  const { registerUser } = props;
+const RegistrationPage: FC = (): ReactElement => {
+  const registerUser: StateRegisterUser = useSelector((state: State) => state.registerUser);
   const { errorMessage, error, isSuccess, loading } = registerUser;
   return (
     <div className="p-lg-5 p-md-3 p-2">
@@ -27,10 +21,4 @@ const RegistrationPage: FC<IRegistrationPageProps> = (
   );
 };
 
-const mapStateToProps = (state: State) => {
-  return {
-    registerUser: state.registerUser,
-  };
-};
-
-export default connect(mapStateToProps)(RegistrationPage);
+export default RegistrationPage;

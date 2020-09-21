@@ -1,24 +1,21 @@
-import React, { ComponentType, FC, ReactElement, useCallback } from 'react';
+import React, { FC, ReactElement, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch } from 'react-redux';
 
 import { Form, Label } from '../../styles/global-styled-components';
 import RegistrationLink from './styled-components';
 
 import { authorizeUserRequest } from '../../actions';
 
-import { AuthFormProps, Auth } from './types';
+import { Auth } from './types';
+import { Dispatch } from 'redux';
 
-import { withUserService } from '../../hoc';
-
-const AuthForm: FC<AuthFormProps> = (props: AuthFormProps): ReactElement => {
-  const { onAuth } = props;
+const AuthForm: FC = (): ReactElement => {
   const { handleSubmit, register } = useForm<Auth>();
+  const dispatch: Dispatch = useDispatch();
   const onSubmit = useCallback((data: Auth) => {
-    onAuth(data);
+    dispatch(authorizeUserRequest(data));
   }, []);
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <fieldset>
@@ -63,11 +60,4 @@ const AuthForm: FC<AuthFormProps> = (props: AuthFormProps): ReactElement => {
   );
 };
 
-const mapDispatchToProps = {
-  onAuth: authorizeUserRequest,
-};
-
-export default compose<ComponentType>(
-  connect(null, mapDispatchToProps),
-  withUserService()
-)(AuthForm);
+export default AuthForm;

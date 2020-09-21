@@ -1,53 +1,56 @@
 import React, { FC, ReactElement, useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import VideoList from '../../video-list';
 import { userOwnVideosRequest, userSharedVideosRequest } from '../../../actions';
 import TabItem from './styled-components';
 import Spinner from '../../spinner';
 import { State } from '../../../reducers/types';
-import VideoPageProps from './types';
+import { Video } from '../../video-item/types';
 
-const VideoPage: FC<VideoPageProps> = (props: VideoPageProps): ReactElement => {
-  const {
-    ownVideos,
-    ownVideosLoading,
-    sharedVideos,
-    sharedVideosLoading,
-    onOwnVideo,
-    onSharedVideo,
-    userEmail,
-  } = props;
+const VideoPage: FC = (): ReactElement => {
+  const dispatch = useDispatch();
+  const ownVideos: Array<Video> = useSelector(
+    (state: State) => state.videosOfUser.ownVideos.videos
+  );
+  const ownVideosLoading: boolean = useSelector(
+    (state: State) => state.videosOfUser.ownVideos.loading
+  );
+  const sharedVideos: Array<Video> = useSelector(
+    (state: State) => state.videosOfUser.sharedVideos.videos
+  );
+  const sharedVideosLoading: boolean = useSelector(
+    (state: State) => state.videosOfUser.sharedVideos.loading
+  );
+  const userEmail: string = useSelector((state: State) => state.authUser.email);
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const videos = activeVideoPage === 'own' ? ownVideos : sharedVideos;
-  const handleSetActiveVideoPage = (path: string) => () => {
-    setActiveVideoPage(path);
-  };
-  const handleLoadingVideos = (
+  const handleSetActiveVideoPage = (
     cb: (userEmail: string) => void,
     userEmail: string,
     path: string
   ) => () => {
     if (path !== activeVideoPage) {
-      cb(userEmail);
+      setActiveVideoPage(path);
+      dispatch(cb(userEmail));
     }
   };
   return (
     <div className="py-lg-4 py-md-3 p-2">
       <ul className="nav nav-tabs mb-4">
-        <li className="nav-item" onClick={handleSetActiveVideoPage('own')}>
-          <TabItem
-            className={`nav-link ${activeVideoPage === 'own' ? 'active' : null}`}
-            onClick={handleLoadingVideos(onOwnVideo, userEmail, 'own')}
-          >
+        <li
+          className="nav-item"
+          onClick={handleSetActiveVideoPage(userOwnVideosRequest, userEmail, 'own')}
+        >
+          <TabItem className={`nav-link ${activeVideoPage === 'own' ? 'active' : null}`}>
             My videos
           </TabItem>
         </li>
-        <li className="nav-item" onClick={handleSetActiveVideoPage('shared')}>
-          <TabItem
-            className={`nav-link ${activeVideoPage === 'shared' ? 'active' : null}`}
-            onClick={handleLoadingVideos(onSharedVideo, userEmail, 'shared')}
-          >
+        <li
+          className="nav-item"
+          onClick={handleSetActiveVideoPage(userSharedVideosRequest, userEmail, 'shared')}
+        >
+          <TabItem className={`nav-link ${activeVideoPage === 'shared' ? 'active' : null}`}>
             Video shared to me
           </TabItem>
         </li>
@@ -58,19 +61,4 @@ const VideoPage: FC<VideoPageProps> = (props: VideoPageProps): ReactElement => {
   );
 };
 
-const mapStateToProps = (state: State) => {
-  return {
-    ownVideos: state.videosOfUser.ownVideos.videos,
-    ownVideosLoading: state.videosOfUser.ownVideos.loading,
-    sharedVideos: state.videosOfUser.sharedVideos.videos,
-    sharedVideosLoading: state.videosOfUser.sharedVideos.loading,
-    userEmail: state.authUser.email,
-  };
-};
-
-const mapDispatchToProps = {
-  onOwnVideo: userOwnVideosRequest,
-  onSharedVideo: userSharedVideosRequest,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(VideoPage);
+export default VideoPage;

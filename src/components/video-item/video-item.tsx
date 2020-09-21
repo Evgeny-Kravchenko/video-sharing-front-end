@@ -2,13 +2,9 @@ import React, { FC } from 'react';
 
 import VideoStyled from './styled-components';
 import { Wrapper } from '../../styles/global-styled-components';
-import Video from './types';
+import { VideoItemProps } from './types';
 
-interface IVideoItemProps {
-  video: Video;
-}
-
-const VideoItem: FC<IVideoItemProps> = (props: IVideoItemProps) => {
+const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const {
     video: { title, description },
   } = props;

@@ -1,17 +1,14 @@
 import React, { FC, ReactElement } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import AuthForm from '../../auth-form';
 import AuthSuccessed from '../../auth-successed';
-import IAuthenticationPageProps from './types';
 import MessageFailure from '../../message-failure';
 import Spinner from '../../spinner';
 import { State, StateAuthUser } from '../../../reducers/types';
 
-const AuthenticationPage: FC<IAuthenticationPageProps> = (
-  props: IAuthenticationPageProps
-): ReactElement => {
-  const { authUser }: { authUser: StateAuthUser } = props;
+const AuthenticationPage: FC = (): ReactElement => {
+  const authUser: StateAuthUser = useSelector((state: State) => state.authUser);
   const { isAuth, error, loading } = authUser;
   return (
     <div className="p-lg-5 p-md-3 p-2">
@@ -28,10 +25,4 @@ const AuthenticationPage: FC<IAuthenticationPageProps> = (
   );
 };
 
-const mapStateToProps = (state: State) => {
-  return {
-    authUser: state.authUser,
-  };
-};
-
-export default connect(mapStateToProps)(AuthenticationPage);
+export default AuthenticationPage;

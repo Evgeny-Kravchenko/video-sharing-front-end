@@ -1,23 +1,19 @@
-import React, { Dispatch, FC, ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { PagesList } from '../../actions';
-
-import { changeCurrentPage } from '../../actions';
+import { changeCurrentPage, PagesList } from '../../actions';
 
 import { HeaderStyled, Logo, LogoIcon } from './styled-components';
 
 import logoIcon from './images/video.png';
-import HeaderProps from './types';
-import { StateAuthUser } from '../../reducers/types';
+import { State } from '../../reducers/types';
 
-const Header: FC<HeaderProps> = (props: HeaderProps): ReactElement => {
-  const {
-    currentPage,
-    isAuth,
-    onChangeCurrentPage,
-  }: { currentPage: PagesList; onChangeCurrentPage: Dispatch<PagesList>; isAuth: boolean } = props;
+const Header: FC = (): ReactElement => {
+  const dispatch = useDispatch();
+  const currentPage = useSelector((state: State) => state.currentPage);
+  const isAuth = useSelector((state: State) => state.authUser.isAuth);
+  const handleOnClickItemMenu = (path: PagesList) => () => dispatch(changeCurrentPage(path));
   const pathForLogo = isAuth ? PagesList.Videos : PagesList.Authentication;
   return (
     <HeaderStyled>
@@ -29,7 +25,7 @@ const Header: FC<HeaderProps> = (props: HeaderProps): ReactElement => {
         <ul className="navbar-nav d-flex justify-content-end ml-auto">
           <li
             className={`nav-item ${currentPage === PagesList.Videos && isAuth ? 'active' : null}`}
-            onClick={() => onChangeCurrentPage(PagesList.Videos)}
+            onClick={handleOnClickItemMenu(PagesList.Videos)}
           >
             <Link className="nav-link" to="/videos">
               Videos
@@ -37,7 +33,7 @@ const Header: FC<HeaderProps> = (props: HeaderProps): ReactElement => {
           </li>
           <li
             className={`nav-item ${currentPage === PagesList.Authentication ? 'active' : null}`}
-            onClick={() => onChangeCurrentPage(PagesList.Authentication)}
+            onClick={handleOnClickItemMenu(PagesList.Authentication)}
           >
             <Link className="nav-link" to="/auth">
               Authentication
@@ -49,21 +45,4 @@ const Header: FC<HeaderProps> = (props: HeaderProps): ReactElement => {
   );
 };
 
-const mapStateToProps = ({
-  currentPage,
-  authUser,
-}: {
-  currentPage: PagesList;
-  authUser: StateAuthUser;
-}) => {
-  return {
-    currentPage,
-    isAuth: authUser.isAuth,
-  };
-};
-
-const mapDispatchToProps = {
-  onChangeCurrentPage: changeCurrentPage,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

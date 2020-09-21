@@ -1,9 +1,4 @@
 import { Auth } from '../auth-form/types';
-import { User } from '../../types';
-
-interface RegistrationFormProps {
-  onRegister: (data: User) => void;
-}
 
 interface Registration extends Auth {
   name: string;
@@ -11,4 +6,4 @@ interface Registration extends Auth {
   repeatPassword: string;
 }
 
-export { RegistrationFormProps, Registration };
+export { Registration };

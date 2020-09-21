@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Wrapper } from '../../styles/global-styled-components';
 
 import { unauthorize } from '../../actions';
-import AuthSuccessedProps from './types';
 import { State } from '../../reducers/types';
 
-const AuthSuccessed: FC<AuthSuccessedProps> = (props: AuthSuccessedProps) => {
-  const { email, onUnauth } = props;
+const AuthSuccessed: FC = () => {
+  const email: string = useSelector((state: State) => state.authUser.email);
+  const dispatch = useDispatch();
+  const handleOnClick: () => void = () => dispatch(unauthorize());
   return (
     <Wrapper width="500px">
       <div className="card border-success mb-3 p-2">
@@ -20,7 +21,7 @@ const AuthSuccessed: FC<AuthSuccessedProps> = (props: AuthSuccessedProps) => {
             card`&apos;s content.
           </p>
         </div>
-        <button type="submit" className="btn btn-primary align-self-center" onClick={onUnauth}>
+        <button type="submit" className="btn btn-primary align-self-center" onClick={handleOnClick}>
           Log Out
         </button>
       </div>
@@ -28,14 +29,4 @@ const AuthSuccessed: FC<AuthSuccessedProps> = (props: AuthSuccessedProps) => {
   );
 };
 
-const mapStateToProps = (state: State) => {
-  return {
-    email: state.authUser.email,
-  };
-};
-
-const mapDispatchToProps = {
-  onUnauth: unauthorize,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthSuccessed);
+export default AuthSuccessed;
