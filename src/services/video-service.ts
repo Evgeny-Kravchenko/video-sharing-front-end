@@ -27,4 +27,19 @@ export default class VideoService {
     this.videos = this.videos.filter((video: Video) => video.id !== id);
     return true;
   }
+
+  public async shareVideo({
+    email,
+    videoId,
+  }: {
+    email: string;
+    videoId: string;
+  }): Promise<boolean> {
+    this.videos.forEach((video: Video) => {
+      if (video.id === videoId) {
+        video.whoSharedWith.push(email);
+      }
+    });
+    return true;
+  }
 }

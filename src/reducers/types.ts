@@ -32,9 +32,13 @@ export interface StateOwnVideos extends StateVideos {
   statusOfRemovingVideo: Status;
 }
 
+export interface StateSharedVideos extends StateVideos {
+  statusOfSharingVideo: Status;
+}
+
 export interface StateUserVideo {
   ownVideos: StateOwnVideos;
-  sharedVideos: StateVideos;
+  sharedVideos: StateSharedVideos;
 }
 
 export interface State {

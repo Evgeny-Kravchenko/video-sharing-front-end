@@ -13,7 +13,7 @@ const users: Array<User> = [
     name: 'Valera',
     lastName: 'Zhevlakov',
     email: 'valera.zhevlakov@mail.ru',
-    password: '1123121113',
+    password: '11111111',
   },
   {
     id: '3',
@@ -30,7 +30,7 @@ const videos: Array<Video> = [
     title: 'Cats are good',
     description: 'Cats are good and they can calm you down.',
     owner: 'evgen.kravchenko.vladimirovich@mail.ru',
-    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'valera.zhevlakov@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '2',
@@ -38,7 +38,7 @@ const videos: Array<Video> = [
     description:
       'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
     owner: 'valera.zhevlakov@mail.ru',
-    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '3',
@@ -46,14 +46,14 @@ const videos: Array<Video> = [
     description:
       'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
     owner: 'stas.sharendo.ivanovich@mail.ru',
-    whoSharedWith: ['valera.zhevlakov@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '4',
     title: 'Cats are good',
     description: 'Cats are good and they can calm you down.',
     owner: 'evgen.kravchenko.vladimirovich@mail.ru',
-    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'valera.zhevlakov@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '5',
@@ -61,7 +61,7 @@ const videos: Array<Video> = [
     description:
       'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
     owner: 'valera.zhevlakov@mail.ru',
-    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '6',
@@ -69,14 +69,14 @@ const videos: Array<Video> = [
     description:
       'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
     owner: 'stas.sharendo.ivanovich@mail.ru',
-    whoSharedWith: ['valera.zhevlakov@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '7',
     title: 'Cats are good',
     description: 'Cats are good and they can calm you down.',
     owner: 'evgen.kravchenko.vladimirovich@mail.ru',
-    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'valera.zhevlakov@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '8',
@@ -84,7 +84,7 @@ const videos: Array<Video> = [
     description:
       'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
     owner: 'valera.zhevlakov@mail.ru',
-    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '9',
@@ -92,14 +92,14 @@ const videos: Array<Video> = [
     description:
       'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
     owner: 'stas.sharendo.ivanovich@mail.ru',
-    whoSharedWith: ['valera.zhevlakov@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '10',
     title: 'Cats are good',
     description: 'Cats are good and they can calm you down.',
     owner: 'evgen.kravchenko.vladimirovich@mail.ru',
-    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'valera.zhevlakov@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '11',
@@ -107,7 +107,7 @@ const videos: Array<Video> = [
     description:
       'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
     owner: 'valera.zhevlakov@mail.ru',
-    whoSharedWith: ['stas.sharendo.ivanovich@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+    whoSharedWith: [],
   },
   {
     id: '12',
@@ -115,7 +115,7 @@ const videos: Array<Video> = [
     description:
       'It is a video about BMW E46. This car is really cool. Watch it and you will understand what I am talking about',
     owner: 'stas.sharendo.ivanovich@mail.ru',
-    whoSharedWith: ['valera.zhevlakov@mail.ru', 'evgen.kravchenko.vladimirovich@mail.ru'],
+    whoSharedWith: [],
   },
 ];
 

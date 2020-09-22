@@ -26,4 +26,13 @@ export default class UserService {
     this.users.push(user);
     return true;
   }
+
+  public async checkUser(email: string): Promise<boolean | string> {
+    const isUser = this.users.some((user: User) => {
+      return user.email === email;
+    });
+    return isUser
+      ? Promise.resolve<boolean>(true)
+      : Promise.reject<string>('There is no such user.');
+  }
 }

@@ -1,11 +1,7 @@
 import { Component, ReactNode } from 'react';
-import ErrorBoundryProps from './types';
-interface IState {
-    isError: boolean;
-}
+import { ErrorBoundryProps, ErrorBoundryState } from './types';
 export default class ErrorBoundry extends Component<ErrorBoundryProps> {
-    state: IState;
-    componentDidCatch(): void;
-    render(): ReactNode;
+  state: ErrorBoundryState;
+  componentDidCatch(): void;
+  render(): ReactNode;
 }
-export {};

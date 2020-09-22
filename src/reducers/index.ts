@@ -17,7 +17,12 @@ const initialState: State = {
       statusOfAddingNewVideo: { isSuccess: null, loading: false, error: null },
       statusOfRemovingVideo: { isSuccess: null, loading: false, error: null },
     },
-    sharedVideos: { error: null, loading: false, videos: [] },
+    sharedVideos: {
+      error: null,
+      loading: false,
+      videos: [],
+      statusOfSharingVideo: { isSuccess: null, loading: false, error: null },
+    },
   },
 };
 

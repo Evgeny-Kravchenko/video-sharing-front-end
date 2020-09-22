@@ -17,6 +17,10 @@ enum ActionVideosTypes {
   DELETE_VIDEO_FAILURE = 'DELETE_VIDEO_FAILURE',
   CLEAR_STATUS_OF_REMOVING_VIDEO = 'CLEAR_STATUS_OF_REMOVING_VIDEO',
   CLEAR_STATUS_OF_ADDING_VIDEO = 'CLEAR_STATUS_OF_ADDING_VIDEO',
+  SHARE_VIDEO_REQUEST = 'SHARE_VIDEO_REQUEST',
+  SHARE_VIDEO_SUCCESS = 'SHARE_VIDEO_SUCCESS',
+  SHARE_VIDEO_FAILURE = 'SHARE_VIDEO_FAILURE',
+  CLEAR_STATUS_OF_SHARING_VIDEO = 'CLEAR_STATUS_OF_SHARING_VIDEO',
 }
 
 const userOwnVideosRequest = (email: string): Action => {
@@ -115,6 +119,33 @@ const clearStatusOfRemovingVideo = (): Action => {
   };
 };
 
+const shareVideoRequest = (email: string, videoId: string): Action => {
+  return {
+    type: ActionVideosTypes.SHARE_VIDEO_REQUEST,
+    payload: { email, videoId },
+  };
+};
+
+const shareVideoSuccess = ({ email, videoId }: { email: string; videoId: string }): Action => {
+  return {
+    type: ActionVideosTypes.SHARE_VIDEO_SUCCESS,
+    payload: { email, videoId },
+  };
+};
+
+const shareVideoFailure = (err: string): Action => {
+  return {
+    type: ActionVideosTypes.SHARE_VIDEO_FAILURE,
+    payload: err,
+  };
+};
+
+const clearStatusSharingVideo = (): Action => {
+  return {
+    type: ActionVideosTypes.CLEAR_STATUS_OF_SHARING_VIDEO,
+  };
+};
+
 export {
   ActionVideosTypes,
   userOwnVideosRequest,
@@ -131,4 +162,8 @@ export {
   deleteVideoFailure,
   clearStatusOfRemovingVideo,
   clearStatusOfAddingVideo,
+  shareVideoRequest,
+  shareVideoSuccess,
+  shareVideoFailure,
+  clearStatusSharingVideo,
 };

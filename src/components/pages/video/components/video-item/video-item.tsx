@@ -48,7 +48,9 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
           </ButtonsWrapper>
         </div>
       </div>
-      {isShareWindowShown && <ShareVideoForm onSetIsShareWindowShown={setIsShareWindowShown} />}
+      {isShareWindowShown && (
+        <ShareVideoForm onSetIsShareWindowShown={setIsShareWindowShown} title={title} id={id} />
+      )}
     </Wrapper>
   );
 };
