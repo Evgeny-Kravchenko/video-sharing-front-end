@@ -1,7 +1,7 @@
 import Action from '../actions/types';
-import { State, StateUserVideo, StateVideos } from './types';
+import { State, StateOwnVideos, StateUserVideo, StateVideos } from './types';
 
-const updateOwnVideos = (state: State, action: Action): StateVideos => {
+const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
   switch (action.type) {
     case 'USER_OWN_VIDEOS_REQUEST': {
       return {
@@ -11,6 +11,7 @@ const updateOwnVideos = (state: State, action: Action): StateVideos => {
     }
     case 'USER_OWN_VIDEOS_SUCCESS': {
       return {
+        ...state.videosOfUser.ownVideos,
         loading: false,
         error: null,
         videos: action.payload,
@@ -18,9 +19,41 @@ const updateOwnVideos = (state: State, action: Action): StateVideos => {
     }
     case 'USER_OWN_VIDEOS_FAILURE': {
       return {
+        ...state.videosOfUser.ownVideos,
         loading: false,
         error: action.payload,
         videos: [],
+      };
+    }
+    case 'ADD_NEW_VIDEO_REQUEST': {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfAddingNewVideo: {
+          isSuccess: null,
+          error: null,
+          loading: true,
+        },
+      };
+    }
+    case 'ADD_NEW_VIDEO_SUCCESS': {
+      return {
+        ...state.videosOfUser.ownVideos,
+        videos: [...state.videosOfUser.ownVideos.videos, action.payload],
+        statusOfAddingNewVideo: {
+          isSuccess: true,
+          loading: false,
+          error: null,
+        },
+      };
+    }
+    case 'ADD_NEW_VIDEO_FAILURE': {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfAddingNewVideo: {
+          isSuccess: false,
+          loading: false,
+          error: action.payload,
+        },
       };
     }
     default: {

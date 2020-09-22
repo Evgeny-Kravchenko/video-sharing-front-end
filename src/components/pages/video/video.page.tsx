@@ -5,6 +5,8 @@ import VideoList from '../video/components/video-list';
 import { userOwnVideosRequest, userSharedVideosRequest } from '../../../actions';
 import TabItem from './styled-components';
 import Spinner from '../../local/spinner';
+import ModalWindow from './components/modal-window';
+
 import { State } from '../../../reducers/types';
 import { Video } from './components/video-item/types';
 
@@ -24,6 +26,7 @@ const VideoPage: FC = (): ReactElement => {
   );
   const userEmail: string = useSelector((state: State) => state.authUser.email);
   const [activeVideoPage, setActiveVideoPage] = useState('own');
+  const [isModal, setIsModal] = useState(false);
   const videos = activeVideoPage === 'own' ? ownVideos : sharedVideos;
   const handleSetActiveVideoPage = (
     cb: (userEmail: string) => void,
@@ -35,8 +38,18 @@ const VideoPage: FC = (): ReactElement => {
       dispatch(cb(userEmail));
     }
   };
+  const isLoading = !ownVideosLoading && !sharedVideosLoading;
+  const downloadVideoButton =
+    isLoading && activeVideoPage === 'own' ? (
+      <button className="btn btn-primary" onClick={() => setIsModal(true)}>
+        Add new video
+      </button>
+    ) : null;
+  const spinner = ownVideosLoading || sharedVideosLoading ? <Spinner /> : null;
+  const modal = isModal ? <ModalWindow onSetModalWindow={setIsModal} /> : null;
+  const videoList = isLoading ? <VideoList videos={videos} /> : null;
   return (
-    <div className="py-lg-4 py-md-3 p-2">
+    <div className="py-lg-4 py-md-3 px-sm-0 p-2">
       <ul className="nav nav-tabs mb-4">
         <li
           className="nav-item"
@@ -55,8 +68,10 @@ const VideoPage: FC = (): ReactElement => {
           </TabItem>
         </li>
       </ul>
-      {ownVideosLoading || sharedVideosLoading ? <Spinner /> : null}
-      {!ownVideosLoading && !sharedVideosLoading ? <VideoList videos={videos} /> : null}
+      {downloadVideoButton}
+      {spinner}
+      {videoList}
+      {modal}
     </div>
   );
 };

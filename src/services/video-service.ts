@@ -17,4 +17,9 @@ export default class VideoService {
       return video.whoSharedWith.includes(email);
     });
   }
+
+  public async addNewVideo(data: Video): Promise<boolean> {
+    this.videos.push(data);
+    return true;
+  }
 }
