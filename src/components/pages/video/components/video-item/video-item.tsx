@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { VideoStyled, ButtonsWrapper } from './styled-components';
@@ -9,8 +9,11 @@ import { State } from '../../../../../reducers/types';
 
 import { deleteVideoRequest } from '../../../../../actions';
 
+import ShareVideoForm from '../share-video-form';
+
 const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const dispatch = useDispatch();
+  const [isShareWindowShown, setIsShareWindowShown] = useState(false);
   const {
     video: { title, description, owner, id },
   } = props;
@@ -28,7 +31,10 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
             <button className="btn btn-outline-success">Watch video</button>
             {isOwner && (
               <>
-                <button className="btn btn-outline-info ml-auto mr-1">
+                <button
+                  className="btn btn-outline-info ml-auto mr-1"
+                  onClick={() => setIsShareWindowShown(true)}
+                >
                   <i className="fa fa-share-square-o"></i>
                 </button>
                 <button
@@ -42,6 +48,7 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
           </ButtonsWrapper>
         </div>
       </div>
+      {isShareWindowShown && <ShareVideoForm onSetIsShareWindowShown={setIsShareWindowShown} />}
     </Wrapper>
   );
 };

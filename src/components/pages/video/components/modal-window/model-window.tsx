@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
 import { ModalWindowProps } from './types';
-import { Video } from '../video-item/types';
+import { Video } from '../../../../../types';
+import { State } from '../../../../../reducers/types';
 
 import { addNewVideoRequest } from '../../../../../actions';
 
 import ValidationError from '../../../registration/components/registration-form/styled-components';
-import { State } from '../../../../../reducers/types';
 import Spinner from '../../../../local/spinner';
 
 const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElement => {

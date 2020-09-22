@@ -1,9 +1,5 @@
-export interface Video {
-  id: string;
-  title: string;
-  description: string;
-  [key: string]: any;
-}
+import { Video } from '../../../../../types';
+
 export interface VideoItemProps {
   video: Video;
 }

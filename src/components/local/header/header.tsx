@@ -11,8 +11,10 @@ import { State } from '../../../reducers/types';
 
 const Header: FC = (): ReactElement => {
   const dispatch = useDispatch();
-  const currentPage = useSelector((state: State) => state.currentPage);
-  const isAuth = useSelector((state: State) => state.authUser.isAuth);
+  const { currentPage, isAuth } = useSelector((state: State) => ({
+    currentPage: state.currentPage,
+    isAuth: state.authUser.isAuth,
+  }));
   const handleOnClickItemMenu = (path: PagesList) => () => dispatch(changeCurrentPage(path));
   const pathForLogo = isAuth ? PagesList.Videos : PagesList.Authentication;
   return (

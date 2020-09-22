@@ -7,6 +7,7 @@ export default class UserService {
   constructor() {
     this.users = users;
   }
+
   public async getUser(email: string, password: string): Promise<User | string> {
     const user = this.users.find(
       (user: User) => email === user.email && password === user.password

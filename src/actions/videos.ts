@@ -1,6 +1,6 @@
 import Action from './types';
 import { StateVideos } from '../reducers/types';
-import { Video } from '../components/pages/video/components/video-item/types';
+import { Video } from '../types';
 
 enum ActionVideosTypes {
   USER_OWN_VIDEOS_REQUEST = 'USER_OWN_VIDEOS_REQUEST',
