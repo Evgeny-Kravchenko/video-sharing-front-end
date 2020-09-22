@@ -18,7 +18,9 @@ import {
   userSharedVideosRequest,
   userSharedVideosSuccess,
   userSharedVideosFailure,
-  addNewVideo,
+  addNewVideoRequest,
+  addNewVideoSuccess,
+  addNewVideoFailure,
 } from './videos';
 
 import { changeCurrentPage, PagesTypesActions, PagesList } from './pages';
@@ -43,5 +45,7 @@ export {
   userSharedVideosFailure,
   PagesTypesActions,
   PagesList,
-  addNewVideo,
+  addNewVideoRequest,
+  addNewVideoSuccess,
+  addNewVideoFailure,
 };

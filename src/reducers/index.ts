@@ -10,7 +10,12 @@ const initialState: State = {
   registerUser: { loading: false, error: null, isSuccess: null, errorMessage: null },
   authUser: { name: '', email: '', isAuth: false, loading: false, error: false },
   videosOfUser: {
-    ownVideos: { error: null, loading: false, videos: [] },
+    ownVideos: {
+      error: null,
+      loading: false,
+      videos: [],
+      statusOfAddingNewVideo: { isSuccess: null, loading: false, error: null },
+    },
     sharedVideos: { error: null, loading: false, videos: [] },
   },
 };

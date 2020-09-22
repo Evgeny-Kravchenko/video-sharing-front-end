@@ -21,8 +21,18 @@ export interface StateVideos {
   error: string | null;
 }
 
+export interface Status {
+  loading: boolean;
+  error: string | null;
+  isSuccess: boolean | null;
+}
+
+export interface StateOwnVideos extends StateVideos {
+  statusOfAddingNewVideo: Status;
+}
+
 export interface StateUserVideo {
-  ownVideos: StateVideos;
+  ownVideos: StateOwnVideos;
   sharedVideos: StateVideos;
 }
 

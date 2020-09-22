@@ -9,7 +9,9 @@ enum ActionVideosTypes {
   USER_SHARED_VIDEOS_REQUEST = 'USER_SHARED_VIDEOS_REQUEST',
   USER_SHARED_VIDEOS_SUCCESS = 'USER_SHARED_VIDEOS_SUCCESS',
   USER_SHARED_VIDEOS_FAILURE = 'USER_SHARED_VIDEOS_FAILURE',
-  ADD_NEW_VIDEO = 'ADD_NEW_VIDEO',
+  ADD_NEW_VIDEO_REQUEST = 'ADD_NEW_VIDEO_REQUEST',
+  ADD_NEW_VIDEO_SUCCESS = 'ADD_NEW_VIDEO_SUCCESS',
+  ADD_NEW_VIDEO_FAILURE = 'ADD_NEW_VIDEO_FAILURE',
 }
 
 const userOwnVideosRequest = (email: string): Action => {
@@ -54,10 +56,24 @@ const userSharedVideosFailure = (error: Error): Action => {
   };
 };
 
-const addNewVideo = (video: Video): Action => {
+const addNewVideoRequest = (video: Video): Action => {
   return {
-    type: ActionVideosTypes.ADD_NEW_VIDEO,
+    type: ActionVideosTypes.ADD_NEW_VIDEO_REQUEST,
     payload: video,
+  };
+};
+
+const addNewVideoSuccess = (video: Video): Action => {
+  return {
+    type: ActionVideosTypes.ADD_NEW_VIDEO_SUCCESS,
+    payload: video,
+  };
+};
+
+const addNewVideoFailure = (err: Error): Action => {
+  return {
+    type: ActionVideosTypes.ADD_NEW_VIDEO_FAILURE,
+    payload: err,
   };
 };
 
@@ -69,5 +85,7 @@ export {
   userSharedVideosRequest,
   userSharedVideosSuccess,
   userSharedVideosFailure,
-  addNewVideo,
+  addNewVideoRequest,
+  addNewVideoSuccess,
+  addNewVideoFailure,
 };

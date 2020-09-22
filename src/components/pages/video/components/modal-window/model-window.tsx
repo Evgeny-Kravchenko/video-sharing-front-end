@@ -1,16 +1,28 @@
 import React, { FC, ReactElement } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
 import { ModalWindowProps } from './types';
 import { Video } from '../video-item/types';
 
-import { addNewVideo } from '../../../../../actions';
+import { addNewVideoRequest } from '../../../../../actions';
 
 import ValidationError from '../../../registration/components/registration-form/styled-components';
+import { State } from '../../../../../reducers/types';
+import Spinner from '../../../../local/spinner';
 
 const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElement => {
   const { onSetModalWindow } = props;
+  const userEmail: string = useSelector((state: State) => state.authUser.email);
+  const loading: boolean = useSelector(
+    (state: State) => state.videosOfUser.ownVideos.statusOfAddingNewVideo.loading
+  );
+  const isSuccess: boolean | null = useSelector(
+    (state: State) => state.videosOfUser.ownVideos.statusOfAddingNewVideo.isSuccess
+  );
+  const error: string | null = useSelector(
+    (state: State) => state.videosOfUser.ownVideos.statusOfAddingNewVideo.error
+  );
   const dispatch = useDispatch();
   const { handleSubmit, register, errors } = useForm<Video>();
   const errorTitle = errors.title && <ValidationError>{errors.title.message}</ValidationError>;
@@ -19,15 +31,19 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
   );
   const errorFile = errors.file && <ValidationError>{errors.file.message}</ValidationError>;
   const onSubmit = (data: Video) => {
-    dispatch(addNewVideo(data));
-    onSetModalWindow(false);
+    dispatch(addNewVideoRequest({ ...data, owner: userEmail, whoSharedWith: [] }));
   };
   return (
     <div className="modal d-block">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Add new video</h5>
+          <div className="modal-header d-flex justify-content-between align-items-center">
+            <h5 className="modal-title m-0">Add new video</h5>
+            {loading && <Spinner />}
+            {isSuccess && (
+              <p className="text-success my-0 mx-auto">The video is downloaded successfully.</p>
+            )}
+            {error && <p className="text-danger my-0 mx-auto">{error}</p>}
             <button type="button" className="close" onClick={() => onSetModalWindow(false)}>
               <span>&times;</span>
             </button>
