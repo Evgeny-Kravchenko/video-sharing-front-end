@@ -18,7 +18,7 @@ const users: Array<User> = [
     name: 'Stas',
     lastName: 'Sharendo',
     email: 'stas.sharendo.ivanovich@mail.ru',
-    password: '1123111123',
+    password: '11111111',
   },
 ];
 

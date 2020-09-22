@@ -1,5 +1,9 @@
 import { ReactNode } from 'react';
 
-export default interface ErrorBoundryProps {
+export interface ErrorBoundryProps {
   children: ReactNode;
+}
+
+export interface ErrorBoundryState {
+  isError: boolean;
 }
