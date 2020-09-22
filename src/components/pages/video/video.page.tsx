@@ -8,23 +8,26 @@ import Spinner from '../../local/spinner';
 import ModalWindow from './components/modal-window';
 
 import { State } from '../../../reducers/types';
-import { Video } from './components/video-item/types';
 
 const VideoPage: FC = (): ReactElement => {
   const dispatch = useDispatch();
-  const ownVideos: Array<Video> = useSelector(
-    (state: State) => state.videosOfUser.ownVideos.videos
-  );
-  const ownVideosLoading: boolean = useSelector(
-    (state: State) => state.videosOfUser.ownVideos.loading
-  );
-  const sharedVideos: Array<Video> = useSelector(
-    (state: State) => state.videosOfUser.sharedVideos.videos
-  );
-  const sharedVideosLoading: boolean = useSelector(
-    (state: State) => state.videosOfUser.sharedVideos.loading
-  );
-  const userEmail: string = useSelector((state: State) => state.authUser.email);
+  const {
+    ownVideos,
+    ownVideosLoading,
+    sharedVideos,
+    sharedVideosLoading,
+    userEmail,
+    isSuccessDelete,
+    loadingRemovingVideo,
+  } = useSelector((state: State) => ({
+    ownVideos: state.videosOfUser.ownVideos.videos,
+    ownVideosLoading: state.videosOfUser.ownVideos.loading,
+    sharedVideos: state.videosOfUser.sharedVideos.videos,
+    sharedVideosLoading: state.videosOfUser.sharedVideos.loading,
+    userEmail: state.authUser.email,
+    isSuccessDelete: state.videosOfUser.ownVideos.statusOfRemovingVideo.isSuccess,
+    loadingRemovingVideo: state.videosOfUser.ownVideos.statusOfRemovingVideo.loading,
+  }));
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
   const videos = activeVideoPage === 'own' ? ownVideos : sharedVideos;
@@ -48,6 +51,10 @@ const VideoPage: FC = (): ReactElement => {
   const spinner = ownVideosLoading || sharedVideosLoading ? <Spinner /> : null;
   const modal = isModal ? <ModalWindow onSetModalWindow={setIsModal} /> : null;
   const videoList = isLoading ? <VideoList videos={videos} /> : null;
+  const successMessage =
+    isSuccessDelete && activeVideoPage === 'own' ? (
+      <p className="text-success pt-2 m-0">The video was removed successfully.</p>
+    ) : null;
   return (
     <div className="py-lg-4 py-md-3 px-sm-0 p-2">
       <ul className="nav nav-tabs mb-4">
@@ -69,6 +76,8 @@ const VideoPage: FC = (): ReactElement => {
         </li>
       </ul>
       {downloadVideoButton}
+      {loadingRemovingVideo && activeVideoPage === 'own' && <Spinner />}
+      {successMessage}
       {spinner}
       {videoList}
       {modal}

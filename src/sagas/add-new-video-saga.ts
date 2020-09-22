@@ -1,5 +1,10 @@
 import Action from '../actions/types';
-import { ActionVideosTypes, addNewVideoSuccess, addNewVideoFailure } from '../actions';
+import {
+  ActionVideosTypes,
+  addNewVideoSuccess,
+  addNewVideoFailure,
+  clearStatusOfAddingVideo,
+} from '../actions';
 import { put, takeLatest, delay } from 'redux-saga/effects';
 
 import { videoService } from '../index';
@@ -12,6 +17,8 @@ function* fetchAddNewVideo(action: Action) {
   } catch (err) {
     yield put(addNewVideoFailure(err));
   }
+  yield delay(2000);
+  yield put(clearStatusOfAddingVideo());
 }
 
 function* addNewVideoSaga() {

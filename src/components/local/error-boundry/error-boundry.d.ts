@@ -1,9 +1,9 @@
 import { Component, ReactNode } from 'react';
-import IErrorBoundryProps from '../../interfaces/error-boundry-props.interface';
+import ErrorBoundryProps from './types';
 interface IState {
     isError: boolean;
 }
-export default class ErrorBoundry extends Component<IErrorBoundryProps> {
+export default class ErrorBoundry extends Component<ErrorBoundryProps> {
     state: IState;
     componentDidCatch(): void;
     render(): ReactNode;

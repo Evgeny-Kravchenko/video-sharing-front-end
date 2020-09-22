@@ -1,15 +1,17 @@
 import Action from '../actions/types';
 import { State, StateOwnVideos, StateUserVideo, StateVideos } from './types';
+import { ActionVideosTypes } from '../actions';
+import { Video } from '../components/pages/video/components/video-item/types';
 
 const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
   switch (action.type) {
-    case 'USER_OWN_VIDEOS_REQUEST': {
+    case ActionVideosTypes.USER_OWN_VIDEOS_REQUEST: {
       return {
         ...state.videosOfUser.ownVideos,
         loading: true,
       };
     }
-    case 'USER_OWN_VIDEOS_SUCCESS': {
+    case ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS: {
       return {
         ...state.videosOfUser.ownVideos,
         loading: false,
@@ -17,7 +19,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
         videos: action.payload,
       };
     }
-    case 'USER_OWN_VIDEOS_FAILURE': {
+    case ActionVideosTypes.USER_OWN_VIDEOS_FAILURE: {
       return {
         ...state.videosOfUser.ownVideos,
         loading: false,
@@ -25,7 +27,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
         videos: [],
       };
     }
-    case 'ADD_NEW_VIDEO_REQUEST': {
+    case ActionVideosTypes.ADD_NEW_VIDEO_REQUEST: {
       return {
         ...state.videosOfUser.ownVideos,
         statusOfAddingNewVideo: {
@@ -35,7 +37,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
         },
       };
     }
-    case 'ADD_NEW_VIDEO_SUCCESS': {
+    case ActionVideosTypes.ADD_NEW_VIDEO_SUCCESS: {
       return {
         ...state.videosOfUser.ownVideos,
         videos: [...state.videosOfUser.ownVideos.videos, action.payload],
@@ -46,13 +48,66 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
         },
       };
     }
-    case 'ADD_NEW_VIDEO_FAILURE': {
+    case ActionVideosTypes.ADD_NEW_VIDEO_FAILURE: {
       return {
         ...state.videosOfUser.ownVideos,
         statusOfAddingNewVideo: {
           isSuccess: false,
           loading: false,
           error: action.payload,
+        },
+      };
+    }
+    case ActionVideosTypes.DELETE_VIDEO_REQUEST: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfRemovingVideo: {
+          isSuccess: null,
+          loading: true,
+          error: null,
+        },
+      };
+    }
+    case ActionVideosTypes.DELETE_VIDEO_SUCCESS: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        videos: state.videosOfUser.ownVideos.videos.filter(
+          (video: Video) => video.id !== action.payload
+        ),
+        statusOfRemovingVideo: {
+          isSuccess: true,
+          loading: false,
+          error: null,
+        },
+      };
+    }
+    case ActionVideosTypes.DELETE_VIDEO_FAILURE: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfRemovingVideo: {
+          isSuccess: false,
+          loading: false,
+          error: action.payload,
+        },
+      };
+    }
+    case ActionVideosTypes.CLEAR_STATUS_OF_REMOVING_VIDEO: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfRemovingVideo: {
+          isSuccess: null,
+          loading: false,
+          error: null,
+        },
+      };
+    }
+    case ActionVideosTypes.CLEAR_STATUS_OF_ADDING_VIDEO: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfAddingNewVideo: {
+          isSuccess: null,
+          loading: false,
+          error: null,
         },
       };
     }
@@ -64,20 +119,20 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
 
 const updateSharedVideos = (state: State, action: Action): StateVideos => {
   switch (action.type) {
-    case 'USER_SHARED_VIDEOS_REQUEST': {
+    case ActionVideosTypes.USER_SHARED_VIDEOS_REQUEST: {
       return {
         ...state.videosOfUser.sharedVideos,
         loading: true,
       };
     }
-    case 'USER_SHARED_VIDEOS_SUCCESS': {
+    case ActionVideosTypes.USER_SHARED_VIDEOS_SUCCESS: {
       return {
         loading: false,
         error: null,
         videos: action.payload,
       };
     }
-    case 'USER_SHARED_VIDEOS_FAILURE': {
+    case ActionVideosTypes.USER_SHARED_VIDEOS_FAILURE: {
       return {
         loading: false,
         error: action.payload,

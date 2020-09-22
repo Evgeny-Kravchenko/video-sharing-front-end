@@ -17,12 +17,12 @@ export default class UserService {
     return user;
   }
 
-  public async registerUser(user: User) {
+  public async registerUser(user: User): Promise<boolean> {
     const isSuchUserIn = this.users.some((item) => item.email === user.email);
     if (isSuchUserIn) {
       return Promise.reject('Email is already in use');
     }
     this.users.push(user);
-    return Promise.resolve();
+    return true;
   }
 }

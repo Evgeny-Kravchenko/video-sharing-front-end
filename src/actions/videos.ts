@@ -12,6 +12,11 @@ enum ActionVideosTypes {
   ADD_NEW_VIDEO_REQUEST = 'ADD_NEW_VIDEO_REQUEST',
   ADD_NEW_VIDEO_SUCCESS = 'ADD_NEW_VIDEO_SUCCESS',
   ADD_NEW_VIDEO_FAILURE = 'ADD_NEW_VIDEO_FAILURE',
+  DELETE_VIDEO_REQUEST = 'DELETE_VIDEO_REQUEST',
+  DELETE_VIDEO_SUCCESS = 'DELETE_VIDEO_SUCCESS',
+  DELETE_VIDEO_FAILURE = 'DELETE_VIDEO_FAILURE',
+  CLEAR_STATUS_OF_REMOVING_VIDEO = 'CLEAR_STATUS_OF_REMOVING_VIDEO',
+  CLEAR_STATUS_OF_ADDING_VIDEO = 'CLEAR_STATUS_OF_ADDING_VIDEO',
 }
 
 const userOwnVideosRequest = (email: string): Action => {
@@ -77,6 +82,39 @@ const addNewVideoFailure = (err: Error): Action => {
   };
 };
 
+const deleteVideoRequest = (id: string): Action => {
+  return {
+    type: ActionVideosTypes.DELETE_VIDEO_REQUEST,
+    payload: id,
+  };
+};
+
+const deleteVideoSuccess = (id: string): Action => {
+  return {
+    type: ActionVideosTypes.DELETE_VIDEO_SUCCESS,
+    payload: id,
+  };
+};
+
+const deleteVideoFailure = (err: string): Action => {
+  return {
+    type: ActionVideosTypes.DELETE_VIDEO_FAILURE,
+    payload: err,
+  };
+};
+
+const clearStatusOfAddingVideo = (): Action => {
+  return {
+    type: ActionVideosTypes.CLEAR_STATUS_OF_ADDING_VIDEO,
+  };
+};
+
+const clearStatusOfRemovingVideo = (): Action => {
+  return {
+    type: ActionVideosTypes.CLEAR_STATUS_OF_REMOVING_VIDEO,
+  };
+};
+
 export {
   ActionVideosTypes,
   userOwnVideosRequest,
@@ -88,4 +126,9 @@ export {
   addNewVideoRequest,
   addNewVideoSuccess,
   addNewVideoFailure,
+  deleteVideoRequest,
+  deleteVideoSuccess,
+  deleteVideoFailure,
+  clearStatusOfRemovingVideo,
+  clearStatusOfAddingVideo,
 };
