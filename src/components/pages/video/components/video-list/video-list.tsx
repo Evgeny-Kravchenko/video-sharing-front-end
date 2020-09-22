@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
-import VideoItem from '../video-item';
+
 import VideoListStyled from './styled-components';
-import { Video } from '../video-item/types';
+
 import VideoListType from './types';
+import { Video } from '../../../../../types';
+
+import VideoItem from '../video-item';
 
 const VideoList: FC<VideoListType> = (props: VideoListType) => {
   return (

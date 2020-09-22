@@ -1,4 +1,4 @@
-import { Video } from '../components/pages/video/components/video-item/types';
+import { Video } from '../types';
 
 export interface StateRegisterUser {
   loading: boolean;

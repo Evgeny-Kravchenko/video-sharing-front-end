@@ -1,7 +1,7 @@
 import { State, StateOwnVideos } from './types';
+import { Video } from '../types';
 import Action from '../actions/types';
 import { ActionVideosTypes } from '../actions';
-import { Video } from '../components/pages/video/components/video-item/types';
 
 const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
   switch (action.type) {

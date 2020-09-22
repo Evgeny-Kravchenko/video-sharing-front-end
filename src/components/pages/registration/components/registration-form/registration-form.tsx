@@ -17,7 +17,8 @@ const RegistrationForm: FC = (): ReactElement => {
 
   const onSubmit = (data: Registration) => {
     const { name, lastName, password, email } = data;
-    dispatch(registerUserRequest({ name, lastName, password, email }));
+    const id = String(Math.round(Math.random() * 100000));
+    dispatch(registerUserRequest({ id, name, lastName, password, email }));
   };
 
   return (
