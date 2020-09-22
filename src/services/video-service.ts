@@ -22,4 +22,9 @@ export default class VideoService {
     this.videos.push(data);
     return true;
   }
+
+  public async deleteVideo(id: string): Promise<boolean> {
+    this.videos = this.videos.filter((video: Video) => video.id !== id);
+    return true;
+  }
 }

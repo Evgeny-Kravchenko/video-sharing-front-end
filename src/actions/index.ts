@@ -21,6 +21,11 @@ import {
   addNewVideoRequest,
   addNewVideoSuccess,
   addNewVideoFailure,
+  deleteVideoRequest,
+  deleteVideoSuccess,
+  deleteVideoFailure,
+  clearStatusOfRemovingVideo,
+  clearStatusOfAddingVideo,
 } from './videos';
 
 import { changeCurrentPage, PagesTypesActions, PagesList } from './pages';
@@ -48,4 +53,9 @@ export {
   addNewVideoRequest,
   addNewVideoSuccess,
   addNewVideoFailure,
+  deleteVideoRequest,
+  deleteVideoSuccess,
+  deleteVideoFailure,
+  clearStatusOfRemovingVideo,
+  clearStatusOfAddingVideo,
 };
