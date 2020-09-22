@@ -53,7 +53,7 @@ const VideoPage: FC = (): ReactElement => {
   const videoList = isLoading ? <VideoList videos={videos} /> : null;
   const successMessage =
     isSuccessDelete && activeVideoPage === 'own' ? (
-      <p className="text-success pt-2 m-0">The video was removed successfully.</p>
+      <p className="text-success pt-2 my-0 mx-auto">The video was removed successfully.</p>
     ) : null;
   return (
     <div className="py-lg-4 py-md-3 px-sm-0 p-2">
@@ -75,9 +75,13 @@ const VideoPage: FC = (): ReactElement => {
           </TabItem>
         </li>
       </ul>
-      {downloadVideoButton}
-      {loadingRemovingVideo && activeVideoPage === 'own' && <Spinner />}
-      {successMessage}
+      {activeVideoPage === 'own' && isLoading && (
+        <div className="border d-flex p-2">
+          {downloadVideoButton}
+          {loadingRemovingVideo && activeVideoPage === 'own' && <Spinner />}
+          {successMessage}
+        </div>
+      )}
       {spinner}
       {videoList}
       {modal}
