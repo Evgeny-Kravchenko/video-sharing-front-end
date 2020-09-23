@@ -31,8 +31,11 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
             <button className="btn btn-outline-success">Watch video</button>
             {isOwner && (
               <>
+                <button type="button" className="btn btn-outline-warning ml-auto mr-1">
+                  <i className="fa fa-cog" aria-hidden="true"></i>
+                </button>
                 <button
-                  className="btn btn-outline-info ml-auto mr-1"
+                  className="btn btn-outline-info mr-1"
                   onClick={() => setIsShareWindowShown(true)}
                 >
                   <i className="fa fa-share-square-o"></i>
