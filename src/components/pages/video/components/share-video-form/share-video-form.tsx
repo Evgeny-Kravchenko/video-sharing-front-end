@@ -8,14 +8,14 @@ import { shareVideoRequest } from '../../../../../actions';
 import { State } from '../../../../../reducers/types';
 
 import ShareViedoFormProps from './types';
-import { Label } from '../../../../../styles/global-styled-components/index';
+import { Label } from '../../../../../styles/global-styled-components';
 
 const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => {
-  const { onSetIsShareWindowShown, title, id } = props;
+  const { onSetIsShareWindowShown, title, id, owner } = props;
   const dispatch = useDispatch();
   const { register, errors, handleSubmit } = useForm<{ email: string }>();
   const onSubmit = (data: { email: string }) => {
-    dispatch(shareVideoRequest(data.email, id));
+    dispatch(shareVideoRequest(data.email, id, owner));
   };
   const errorMessage = errors.email && <p className="text-danger">{errors.email.message}</p>;
   const { isSuccess, error } = useSelector((state: State) => ({

@@ -31,15 +31,20 @@ export default class VideoService {
   public async shareVideo({
     email,
     videoId,
+    videoOwnerEmail,
   }: {
     email: string;
     videoId: string;
+    videoOwnerEmail: string;
   }): Promise<boolean> {
+    if (videoOwnerEmail === email) {
+      return Promise.reject("You can't share the video to yourself.");
+    }
     this.videos.forEach((video: Video) => {
       if (video.id === videoId) {
         video.whoSharedWith.push(email);
       }
     });
-    return true;
+    return Promise.resolve(true);
   }
 }
