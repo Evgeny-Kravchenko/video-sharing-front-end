@@ -22,7 +22,7 @@ function* fetchEditNewVideo(action: Action) {
 }
 
 function* editVideoSaga() {
-  yield takeLatest(ActionVideosTypes.ADD_NEW_VIDEO_REQUEST, fetchEditNewVideo);
+  yield takeLatest(ActionVideosTypes.EDIT_VIDEO_REQUEST, fetchEditNewVideo);
 }
 
 export default editVideoSaga;

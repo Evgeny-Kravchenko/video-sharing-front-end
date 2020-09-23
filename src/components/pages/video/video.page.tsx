@@ -2,7 +2,11 @@ import React, { FC, ReactElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import VideoList from '../video/components/video-list';
-import { userOwnVideosRequest, userSharedVideosRequest } from '../../../actions';
+import {
+  addNewVideoRequest,
+  userOwnVideosRequest,
+  userSharedVideosRequest,
+} from '../../../actions';
 import TabItem from './styled-components';
 import Spinner from '../../local/spinner';
 import ModalWindow from './components/modal-window';
@@ -49,12 +53,26 @@ const VideoPage: FC = (): ReactElement => {
       </button>
     ) : null;
   const spinner = ownVideosLoading || sharedVideosLoading ? <Spinner /> : null;
-  const modal = isModal ? <ModalWindow onSetModalWindow={setIsModal} /> : null;
   const videoList = isLoading ? <VideoList videos={videos} /> : null;
   const successMessage =
     isSuccessDelete && activeVideoPage === 'own' ? (
       <p className="text-success pt-2 my-0 mx-auto">The video was removed successfully.</p>
     ) : null;
+  const isSuccessCallback = (state: State) =>
+    state.videosOfUser.ownVideos.statusOfAddingNewVideo.isSuccess;
+  const isLoadingCallback = (state: State) =>
+    state.videosOfUser.ownVideos.statusOfAddingNewVideo.loading;
+  const isErrorCallback = (state: State) =>
+    state.videosOfUser.ownVideos.statusOfAddingNewVideo.error;
+  const modal = isModal ? (
+    <ModalWindow
+      onSetModalWindow={setIsModal}
+      isSuccessCallback={isSuccessCallback}
+      isLoadingCallback={isLoadingCallback}
+      isErrorCallback={isErrorCallback}
+      action={addNewVideoRequest}
+    />
+  ) : null;
   return (
     <div className="py-lg-4 py-md-3 px-sm-0 p-2">
       <ul className="nav nav-tabs mb-4">
