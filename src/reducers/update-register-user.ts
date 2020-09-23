@@ -15,7 +15,6 @@ const updateRegisterUser = (state: State, action: Action): StateRegisterUser => 
         loading: false,
         isSuccess: true,
         error: null,
-        errorMessage: '',
       };
     }
     case 'REGISTER_USER_FAILURE': {
@@ -24,7 +23,6 @@ const updateRegisterUser = (state: State, action: Action): StateRegisterUser => 
         loading: false,
         isSuccess: false,
         error: action.payload,
-        errorMessage: action.payload,
       };
     }
     case 'REGISTER_CLEAR_MESSAGE': {

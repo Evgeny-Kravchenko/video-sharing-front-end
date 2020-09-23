@@ -47,7 +47,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
                 The video is {title || descr ? 'edited' : 'added'} successfully.
               </p>
             )}
-            {error && <p className="text-danger my-0 mx-auto">{error}</p>}
+            {error && <p className="text-danger my-0 mx-auto">{error.message}</p>}
             <button type="button" className="close" onClick={() => onSetModalWindow(false)}>
               <span>&times;</span>
             </button>

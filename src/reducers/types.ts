@@ -4,7 +4,6 @@ export interface StateRegisterUser {
   loading: boolean;
   error: Error | null;
   isSuccess: boolean | null;
-  errorMessage: string | null;
 }
 
 export interface StateAuthUser {

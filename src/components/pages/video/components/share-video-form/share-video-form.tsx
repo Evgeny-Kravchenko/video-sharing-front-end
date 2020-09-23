@@ -25,7 +25,7 @@ const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => 
   const statusSharingVideo = isSuccess ? (
     <p className="text-success m-0 mr-2">The video shared successfully.</p>
   ) : null;
-  const errorMessageOfSharing = error && <p className="text-danger m-0 mr-2">{error}</p>;
+  const errorMessageOfSharing = error && <p className="text-danger m-0 mr-2">{error.message}</p>;
   return (
     <div className="modal d-block">
       <div className="modal-dialog" role="document">

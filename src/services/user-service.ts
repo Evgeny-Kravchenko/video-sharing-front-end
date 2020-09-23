@@ -8,31 +8,31 @@ export default class UserService {
     this.users = users;
   }
 
-  public async getUser(email: string, password: string): Promise<User | string> {
+  public async getUser(email: string, password: string): Promise<User | Error> {
     const user = this.users.find(
       (user: User) => email === user.email && password === user.password
     );
     if (!user) {
-      return Promise.reject('There is no such user!');
+      return Promise.reject(new Error('There is no such user!'));
     }
     return user;
   }
 
-  public async registerUser(user: User): Promise<boolean> {
+  public async registerUser(user: User): Promise<boolean | Error> {
     const isSuchUserIn = this.users.some((item) => item.email === user.email);
     if (isSuchUserIn) {
-      return Promise.reject('Email is already in use');
+      return Promise.reject(new Error('Email is already in use'));
     }
     this.users.push(user);
-    return true;
+    return Promise.resolve(true);
   }
 
-  public async checkUser(email: string): Promise<boolean | string> {
+  public async checkUser(email: string): Promise<boolean | Error> {
     const isUser = this.users.some((user: User) => {
       return user.email === email;
     });
     return isUser
       ? Promise.resolve<boolean>(true)
-      : Promise.reject<string>('There is no such user.');
+      : Promise.reject<Error>(new Error('There is no such user.'));
   }
 }

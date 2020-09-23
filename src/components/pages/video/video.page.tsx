@@ -26,6 +26,7 @@ const VideoPage: FC = (): ReactElement => {
     loadingRemovingVideo,
     errorLoadingOwnVideos,
     errorLoadingSharedVideos,
+    errorRemovingVideo,
   } = useSelector((state: State) => ({
     ownVideos: state.videosOfUser.ownVideos.videos,
     ownVideosLoading: state.videosOfUser.ownVideos.loading,
@@ -36,8 +37,8 @@ const VideoPage: FC = (): ReactElement => {
     loadingRemovingVideo: state.videosOfUser.ownVideos.statusOfRemovingVideo.loading,
     errorLoadingOwnVideos: state.videosOfUser.ownVideos.error,
     errorLoadingSharedVideos: state.videosOfUser.sharedVideos.error,
+    errorRemovingVideo: state.videosOfUser.ownVideos.statusOfRemovingVideo.error,
   }));
-  console.log(errorLoadingSharedVideos);
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
   const videos = activeVideoPage === 'own' ? ownVideos : sharedVideos;
@@ -63,6 +64,10 @@ const VideoPage: FC = (): ReactElement => {
   const successMessage =
     isSuccessDelete && activeVideoPage === 'own' ? (
       <p className="text-success pt-2 my-0 mx-auto">The video was removed successfully.</p>
+    ) : null;
+  const errorMeassage =
+    errorRemovingVideo && activeVideoPage === 'own' ? (
+      <p className="text-danger pt-2 my-0 mx-auto">{errorRemovingVideo.message}</p>
     ) : null;
   const isSuccessCallback = (state: State) =>
     state.videosOfUser.ownVideos.statusOfAddingNewVideo.isSuccess;
@@ -103,6 +108,7 @@ const VideoPage: FC = (): ReactElement => {
         <div className="border d-flex p-2">
           {!errorLoadingOwnVideos && downloadVideoButton}
           {loadingRemovingVideo && activeVideoPage === 'own' && <Spinner />}
+          {errorMeassage}
           {successMessage}
           {errorLoadingOwnVideos && <ErrorIndicator />}
         </div>
