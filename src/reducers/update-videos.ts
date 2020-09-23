@@ -5,6 +5,14 @@ import { Video } from '../types';
 
 const updateVideos = (state: State, action: Action): VideoState => {
   switch (action.type) {
+    case UserActionTypes.UNAUTHORIZE: {
+      return {
+        ...state.videos,
+        collection: [],
+        ownVideosIds: [],
+        sharedVideosIds: [],
+      };
+    }
     case UserActionTypes.AUTH_USER_SUCCSESS: {
       return {
         ...state.videos,
