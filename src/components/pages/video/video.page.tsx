@@ -13,13 +13,15 @@ import ModalWindow from './components/modal-window';
 
 import { State } from '../../../reducers/types';
 import ErrorIndicator from '../../local/error-indicator';
+import { Video } from '../../../types';
 
 const VideoPage: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const {
-    ownVideos,
+    collection,
+    ownVideosIds,
     ownVideosLoading,
-    sharedVideos,
+    sharedVideosIds,
     sharedVideosLoading,
     userEmail,
     isSuccessDelete,
@@ -28,20 +30,24 @@ const VideoPage: FC = (): ReactElement => {
     errorLoadingSharedVideos,
     errorRemovingVideo,
   } = useSelector((state: State) => ({
-    ownVideos: state.videos.ownVideos.videos,
-    ownVideosLoading: state.videos.ownVideos.loading,
-    sharedVideos: state.videos.sharedVideos.videos,
-    sharedVideosLoading: state.videos.sharedVideos.loading,
-    userEmail: state.authUser.email,
-    isSuccessDelete: state.videos.ownVideos.statusOfRemovingVideo.isSuccess,
-    loadingRemovingVideo: state.videos.ownVideos.statusOfRemovingVideo.loading,
-    errorLoadingOwnVideos: state.videos.ownVideos.error,
-    errorLoadingSharedVideos: state.videos.sharedVideos.error,
-    errorRemovingVideo: state.videos.ownVideos.statusOfRemovingVideo.error,
+    collection: state.videos.collection,
+    ownVideosIds: state.videos.ownVideosIds,
+    ownVideosLoading: state.videos.statusOfLoadingOwnVideos.loading,
+    sharedVideosIds: state.videos.sharedVideosIds,
+    sharedVideosLoading: state.videos.statusOfLoadingSharedVideos.loading,
+    userEmail: state.user.email,
+    isSuccessDelete: state.videos.statusOfRemovingVideo.isSuccess,
+    loadingRemovingVideo: state.videos.statusOfRemovingVideo.loading,
+    errorLoadingOwnVideos: state.videos.statusOfLoadingOwnVideos.error,
+    errorLoadingSharedVideos: state.videos.statusOfLoadingSharedVideos.error,
+    errorRemovingVideo: state.videos.statusOfRemovingVideo.error,
   }));
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
-  const videos = activeVideoPage === 'own' ? ownVideos : sharedVideos;
+  const videos =
+    activeVideoPage === 'own'
+      ? collection.filter((video: Video) => ownVideosIds.includes(video.id))
+      : collection.filter((video: Video) => sharedVideosIds.includes(video.id));
   const handleSetActiveVideoPage = (
     cb: (userEmail: string) => void,
     userEmail: string,
@@ -69,10 +75,9 @@ const VideoPage: FC = (): ReactElement => {
     errorRemovingVideo && activeVideoPage === 'own' ? (
       <p className="text-danger pt-2 my-0 mx-auto">{errorRemovingVideo.message}</p>
     ) : null;
-  const isSuccessCallback = (state: State) =>
-    state.videos.ownVideos.statusOfAddingNewVideo.isSuccess;
-  const isLoadingCallback = (state: State) => state.videos.ownVideos.statusOfAddingNewVideo.loading;
-  const isErrorCallback = (state: State) => state.videos.ownVideos.statusOfAddingNewVideo.error;
+  const isSuccessCallback = (state: State) => state.videos.statusOfAddingNewVideo.isSuccess;
+  const isLoadingCallback = (state: State) => state.videos.statusOfAddingNewVideo.loading;
+  const isErrorCallback = (state: State) => state.videos.statusOfAddingNewVideo.error;
   const modal = isModal ? (
     <ModalWindow
       onSetModalWindow={setIsModal}

@@ -1,5 +1,4 @@
 import Action from './types';
-import { StateVideos } from '../reducers/types';
 import { Video } from '../types';
 
 enum ActionVideosTypes {
@@ -34,7 +33,7 @@ const userOwnVideosRequest = (email: string): Action => {
   };
 };
 
-const userOwnVideosSuccess = (videos: Array<StateVideos>): Action => {
+const userOwnVideosSuccess = (videos: Array<Video>): Action => {
   return {
     type: ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS,
     payload: videos,
@@ -55,7 +54,7 @@ const userSharedVideosRequest = (email: string): Action => {
   };
 };
 
-const userSharedVideosSuccess = (videos: Array<StateVideos>): Action => {
+const userSharedVideosSuccess = (videos: Array<Video>): Action => {
   return {
     type: ActionVideosTypes.USER_SHARED_VIDEOS_SUCCESS,
     payload: videos,

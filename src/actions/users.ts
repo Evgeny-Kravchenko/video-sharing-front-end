@@ -6,7 +6,7 @@ enum UserActionTypes {
   REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST',
   REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS',
   REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE',
-  REGISTER_CLEAR_MESSAGE = 'REGISTER_CLEAR_MESSAGE',
+  REGISTER_CLEAR_STATUS = 'REGISTER_CLEAR_STATUS',
   AUTH_USER_REQUEST = 'AUTH_USER_REQUEST',
   AUTH_USER_SUCCSESS = 'AUTH_USER_SUCCSESS',
   AUTH_USER_FAILURE = 'AUTH_USER_FAILURE',
@@ -33,9 +33,9 @@ const registerUserFailure = (err: Error): Action => {
   };
 };
 
-const registerClearMessage = (): Action => {
+const registerClearStatus = (): Action => {
   return {
-    type: UserActionTypes.REGISTER_CLEAR_MESSAGE,
+    type: UserActionTypes.REGISTER_CLEAR_STATUS,
   };
 };
 
@@ -68,7 +68,7 @@ export {
   registerUserRequest,
   registerUserSuccess,
   registerUserFailure,
-  registerClearMessage,
+  registerClearStatus,
   authorizeUserRequest,
   authorizeUserSuccsess,
   authorizeUserFailure,

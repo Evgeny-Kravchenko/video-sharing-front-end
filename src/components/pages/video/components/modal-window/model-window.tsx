@@ -21,7 +21,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
     whoSharedWith,
     id,
   } = props;
-  const userEmail: string = useSelector((state: State) => state.authUser.email);
+  const userEmail: string = useSelector((state: State) => state.user.email);
   const loading: boolean = useSelector(isLoadingCallback);
   const isSuccess: boolean | null = useSelector(isSuccessCallback);
   const error: Error | null = useSelector(isErrorCallback);

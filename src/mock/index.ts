@@ -119,4 +119,35 @@ const videos: Array<Video> = [
   },
 ];
 
+const usersVideos = [
+  { id: '1', userId: '1', videoId: '1' },
+  { userId: '2', videoId: '2' },
+  { userId: '3', videoId: '3' },
+  { userId: '4', videoId: '4' },
+  { userId: '5', videoId: '5' },
+  { userId: '6', videoId: '6' },
+  { userId: '7', videoId: '7' },
+  { userId: '8', videoId: '8' },
+  { userId: '9', videoId: '9' },
+  { userId: '10', videoId: '10' },
+  { userId: '11', videoId: '11' },
+  { userId: '12', videoId: '12' },
+];
+
+const usersSharedVideos = [
+  { userId: '1', videoId: '12' },
+  { userId: '2', videoId: '11' },
+  { userId: '3', videoId: '10' },
+  { userId: '4', videoId: '9' },
+  { userId: '5', videoId: '8' },
+  { userId: '6', videoId: '7' },
+  { userId: '7', videoId: '6' },
+  { userId: '8', videoId: '5' },
+  { userId: '9', videoId: '4' },
+  { userId: '10', videoId: '3' },
+  { userId: '11', videoId: '2' },
+  { userId: '12', videoId: '1' },
+];
+
 export { users, videos };
+
