@@ -1,6 +1,7 @@
 import IUser from '../types/user.interface';
 import Action from './types';
 import { Auth } from '../components/pages/authentication/components/auth-form/types';
+import UserResponse from '../types/get-user-response';
 
 enum UserActionTypes {
   REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST',
@@ -46,7 +47,7 @@ const authorizeUserRequest = (authData: Auth): Action => {
   };
 };
 
-const authorizeUserSuccsess = (user: IUser | string): Action => {
+const authorizeUserSuccsess = (user: UserResponse): Action => {
   return { type: UserActionTypes.AUTH_USER_SUCCSESS, payload: { user } };
 };
 

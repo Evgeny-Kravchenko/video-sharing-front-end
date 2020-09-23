@@ -1,10 +1,17 @@
 import { State, VideoState } from './types';
 import Action from '../actions/types';
-import { ActionVideosTypes } from '../actions';
+import { ActionVideosTypes, UserActionTypes } from '../actions';
 import { Video } from '../types';
 
 const updateVideos = (state: State, action: Action): VideoState => {
-  switch (action.payload) {
+  switch (action.type) {
+    case UserActionTypes.AUTH_USER_SUCCSESS: {
+      return {
+        ...state.videos,
+        ownVideosIds: action.payload.user.ownVideosIds,
+        sharedVideosIds: action.payload.user.sharedVideosIds,
+      };
+    }
     case ActionVideosTypes.USER_OWN_VIDEOS_REQUEST: {
       return {
         ...state.videos,
@@ -17,6 +24,7 @@ const updateVideos = (state: State, action: Action): VideoState => {
     case ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS: {
       return {
         ...state.videos,
+        collection: [...state.videos.collection, ...action.payload],
         statusOfLoadingOwnVideos: {
           isSuccess: true,
           error: null,

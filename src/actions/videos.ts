@@ -26,10 +26,10 @@ enum ActionVideosTypes {
   CLEAR_STATUS_OF_EDITING_VIDEO = 'CLEAR_STATUS_OF_EDITING_VIDEO',
 }
 
-const userOwnVideosRequest = (email: string): Action => {
+const userOwnVideosRequest = (id: string): Action => {
   return {
     type: ActionVideosTypes.USER_OWN_VIDEOS_REQUEST,
-    payload: email,
+    payload: id,
   };
 };
 

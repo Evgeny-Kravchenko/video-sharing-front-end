@@ -16,8 +16,8 @@ const updateUser = (state: State, action: Action): UserState => {
     case UserActionTypes.AUTH_USER_SUCCSESS: {
       return {
         ...state.user,
-        name: action.payload.user.name,
-        email: action.payload.user.email,
+        name: action.payload.user.user.name,
+        email: action.payload.user.user.email,
         statusOfAuthorizeUser: {
           error: null,
           loading: false,
