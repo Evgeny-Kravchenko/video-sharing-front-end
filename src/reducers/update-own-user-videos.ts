@@ -7,13 +7,13 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
   switch (action.type) {
     case ActionVideosTypes.USER_OWN_VIDEOS_REQUEST: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         loading: true,
       };
     }
     case ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         loading: false,
         error: null,
         videos: action.payload,
@@ -21,7 +21,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.USER_OWN_VIDEOS_FAILURE: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         loading: false,
         error: action.payload,
         videos: [],
@@ -29,7 +29,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.ADD_NEW_VIDEO_REQUEST: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfAddingNewVideo: {
           isSuccess: null,
           error: null,
@@ -39,8 +39,8 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.ADD_NEW_VIDEO_SUCCESS: {
       return {
-        ...state.videosOfUser.ownVideos,
-        videos: [...state.videosOfUser.ownVideos.videos, action.payload],
+        ...state.videos.ownVideos,
+        videos: [...state.videos.ownVideos.videos, action.payload],
         statusOfAddingNewVideo: {
           isSuccess: true,
           loading: false,
@@ -50,7 +50,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.ADD_NEW_VIDEO_FAILURE: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfAddingNewVideo: {
           isSuccess: false,
           loading: false,
@@ -60,7 +60,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.DELETE_VIDEO_REQUEST: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfRemovingVideo: {
           isSuccess: null,
           loading: true,
@@ -70,10 +70,8 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.DELETE_VIDEO_SUCCESS: {
       return {
-        ...state.videosOfUser.ownVideos,
-        videos: state.videosOfUser.ownVideos.videos.filter(
-          (video: Video) => video.id !== action.payload
-        ),
+        ...state.videos.ownVideos,
+        videos: state.videos.ownVideos.videos.filter((video: Video) => video.id !== action.payload),
         statusOfRemovingVideo: {
           isSuccess: true,
           loading: false,
@@ -83,7 +81,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.DELETE_VIDEO_FAILURE: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfRemovingVideo: {
           isSuccess: false,
           loading: false,
@@ -93,7 +91,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.CLEAR_STATUS_OF_REMOVING_VIDEO: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfRemovingVideo: {
           isSuccess: null,
           loading: false,
@@ -103,7 +101,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.CLEAR_STATUS_OF_ADDING_VIDEO: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfAddingNewVideo: {
           isSuccess: null,
           loading: false,
@@ -113,17 +111,17 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.EDIT_VIDEO_REQUEST: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfEditingVideo: {
-          ...state.videosOfUser.ownVideos.statusOfEditingVideo,
+          ...state.videos.ownVideos.statusOfEditingVideo,
           loading: true,
         },
       };
     }
     case ActionVideosTypes.EDIT_VIDEO_SUCCESS: {
       return {
-        ...state.videosOfUser.ownVideos,
-        videos: state.videosOfUser.ownVideos.videos.map((video: Video) => {
+        ...state.videos.ownVideos,
+        videos: state.videos.ownVideos.videos.map((video: Video) => {
           if (action.payload.id === video.id) {
             video.title = action.payload.title;
             video.description = action.payload.description;
@@ -140,7 +138,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.EDIT_VIDEO_FAILURE: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfEditingVideo: {
           isSuccess: false,
           error: action.payload,
@@ -150,7 +148,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
     }
     case ActionVideosTypes.CLEAR_STATUS_OF_EDITING_VIDEO: {
       return {
-        ...state.videosOfUser.ownVideos,
+        ...state.videos.ownVideos,
         statusOfEditingVideo: {
           isSuccess: null,
           error: null,
@@ -159,7 +157,7 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
       };
     }
     default: {
-      return state.videosOfUser.ownVideos;
+      return state.videos.ownVideos;
     }
   }
 };

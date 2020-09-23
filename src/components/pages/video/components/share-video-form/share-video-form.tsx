@@ -19,8 +19,8 @@ const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => 
   };
   const errorMessage = errors.email && <p className="text-danger">{errors.email.message}</p>;
   const { isSuccess, error } = useSelector((state: State) => ({
-    isSuccess: state.videosOfUser.sharedVideos.statusOfSharingVideo.isSuccess,
-    error: state.videosOfUser.sharedVideos.statusOfSharingVideo.error,
+    isSuccess: state.videos.sharedVideos.statusOfSharingVideo.isSuccess,
+    error: state.videos.sharedVideos.statusOfSharingVideo.error,
   }));
   const statusSharingVideo = isSuccess ? (
     <p className="text-success m-0 mr-2">The video shared successfully.</p>

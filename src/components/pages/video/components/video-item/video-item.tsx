@@ -20,11 +20,9 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
     video: { title, description, owner, id, whoSharedWith },
   } = props;
   const isOwner = useSelector((state: State) => state.authUser.email) === owner;
-  const isLoadingCallback = (state: State) =>
-    state.videosOfUser.ownVideos.statusOfEditingVideo.loading;
-  const isSuccessCallback = (state: State) =>
-    state.videosOfUser.ownVideos.statusOfEditingVideo.isSuccess;
-  const isErrorCallback = (state: State) => state.videosOfUser.ownVideos.statusOfEditingVideo.error;
+  const isLoadingCallback = (state: State) => state.videos.ownVideos.statusOfEditingVideo.loading;
+  const isSuccessCallback = (state: State) => state.videos.ownVideos.statusOfEditingVideo.isSuccess;
+  const isErrorCallback = (state: State) => state.videos.ownVideos.statusOfEditingVideo.error;
   return (
     <Wrapper width="300px" margin="0">
       <div className="card my-2">

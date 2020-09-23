@@ -9,7 +9,7 @@ const initialState: State = {
   currentPage: 'auth',
   registerUser: { loading: false, error: null, isSuccess: null },
   authUser: { name: '', email: '', isAuth: false, loading: false, error: null },
-  videosOfUser: {
+  videos: {
     ownVideos: {
       error: null,
       loading: false,
@@ -32,7 +32,7 @@ const reducer = (state: State = initialState, action: Action): State => {
     currentPage: updateCurrentPage(state, action),
     registerUser: updateRegisterUser(state, action),
     authUser: updateAuthUser(state, action),
-    videosOfUser: updateUserVideos(state, action),
+    videos: updateUserVideos(state, action),
   };
 };
 

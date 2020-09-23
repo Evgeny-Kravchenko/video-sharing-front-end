@@ -1,6 +1,6 @@
 import { Video } from '../types';
 
-export interface StateRegisterUser {
+export interface Status {
   loading: boolean;
   error: Error | null;
   isSuccess: boolean | null;
@@ -14,16 +14,21 @@ export interface StateAuthUser {
   loading: boolean;
 }
 
+export interface StateRegisterUser {
+  loading: boolean;
+  error: Error | null;
+  isSuccess: boolean | null;
+}
+
 export interface StateVideos {
   loading: boolean;
   videos: Array<Video>;
   error: Error | null;
 }
 
-export interface Status {
-  loading: boolean;
-  error: Error | null;
-  isSuccess: boolean | null;
+export interface VideosState {
+  ownVideos: StateOwnVideos;
+  sharedVideos: StateSharedVideos;
 }
 
 export interface StateOwnVideos extends StateVideos {
@@ -36,14 +41,9 @@ export interface StateSharedVideos extends StateVideos {
   statusOfSharingVideo: Status;
 }
 
-export interface StateUserVideo {
-  ownVideos: StateOwnVideos;
-  sharedVideos: StateSharedVideos;
-}
-
 export interface State {
   currentPage: string;
   registerUser: StateRegisterUser;
   authUser: StateAuthUser;
-  videosOfUser: StateUserVideo;
+  videos: VideosState;
 }

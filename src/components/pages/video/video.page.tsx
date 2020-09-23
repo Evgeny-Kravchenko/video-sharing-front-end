@@ -28,16 +28,16 @@ const VideoPage: FC = (): ReactElement => {
     errorLoadingSharedVideos,
     errorRemovingVideo,
   } = useSelector((state: State) => ({
-    ownVideos: state.videosOfUser.ownVideos.videos,
-    ownVideosLoading: state.videosOfUser.ownVideos.loading,
-    sharedVideos: state.videosOfUser.sharedVideos.videos,
-    sharedVideosLoading: state.videosOfUser.sharedVideos.loading,
+    ownVideos: state.videos.ownVideos.videos,
+    ownVideosLoading: state.videos.ownVideos.loading,
+    sharedVideos: state.videos.sharedVideos.videos,
+    sharedVideosLoading: state.videos.sharedVideos.loading,
     userEmail: state.authUser.email,
-    isSuccessDelete: state.videosOfUser.ownVideos.statusOfRemovingVideo.isSuccess,
-    loadingRemovingVideo: state.videosOfUser.ownVideos.statusOfRemovingVideo.loading,
-    errorLoadingOwnVideos: state.videosOfUser.ownVideos.error,
-    errorLoadingSharedVideos: state.videosOfUser.sharedVideos.error,
-    errorRemovingVideo: state.videosOfUser.ownVideos.statusOfRemovingVideo.error,
+    isSuccessDelete: state.videos.ownVideos.statusOfRemovingVideo.isSuccess,
+    loadingRemovingVideo: state.videos.ownVideos.statusOfRemovingVideo.loading,
+    errorLoadingOwnVideos: state.videos.ownVideos.error,
+    errorLoadingSharedVideos: state.videos.sharedVideos.error,
+    errorRemovingVideo: state.videos.ownVideos.statusOfRemovingVideo.error,
   }));
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
@@ -70,11 +70,9 @@ const VideoPage: FC = (): ReactElement => {
       <p className="text-danger pt-2 my-0 mx-auto">{errorRemovingVideo.message}</p>
     ) : null;
   const isSuccessCallback = (state: State) =>
-    state.videosOfUser.ownVideos.statusOfAddingNewVideo.isSuccess;
-  const isLoadingCallback = (state: State) =>
-    state.videosOfUser.ownVideos.statusOfAddingNewVideo.loading;
-  const isErrorCallback = (state: State) =>
-    state.videosOfUser.ownVideos.statusOfAddingNewVideo.error;
+    state.videos.ownVideos.statusOfAddingNewVideo.isSuccess;
+  const isLoadingCallback = (state: State) => state.videos.ownVideos.statusOfAddingNewVideo.loading;
+  const isErrorCallback = (state: State) => state.videos.ownVideos.statusOfAddingNewVideo.error;
   const modal = isModal ? (
     <ModalWindow
       onSetModalWindow={setIsModal}
