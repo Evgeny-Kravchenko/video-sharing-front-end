@@ -5,7 +5,7 @@ export interface ModalWindowProps {
   onSetModalWindow: (isShow: boolean) => void;
   isSuccessCallback: (state: State) => boolean | null;
   isLoadingCallback: (state: State) => boolean;
-  isErrorCallback: (state: State) => string | null;
+  isErrorCallback: (state: State) => Error | null;
   action: ([key]: any) => Action;
   title?: string;
   descr?: string;

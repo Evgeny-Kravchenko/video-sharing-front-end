@@ -12,6 +12,7 @@ import Spinner from '../../local/spinner';
 import ModalWindow from './components/modal-window';
 
 import { State } from '../../../reducers/types';
+import ErrorIndicator from '../../local/error-indicator';
 
 const VideoPage: FC = (): ReactElement => {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ const VideoPage: FC = (): ReactElement => {
     userEmail,
     isSuccessDelete,
     loadingRemovingVideo,
+    errorLoadingOwnVideos,
+    errorLoadingSharedVideos,
+    errorRemovingVideo,
   } = useSelector((state: State) => ({
     ownVideos: state.videosOfUser.ownVideos.videos,
     ownVideosLoading: state.videosOfUser.ownVideos.loading,
@@ -31,6 +35,9 @@ const VideoPage: FC = (): ReactElement => {
     userEmail: state.authUser.email,
     isSuccessDelete: state.videosOfUser.ownVideos.statusOfRemovingVideo.isSuccess,
     loadingRemovingVideo: state.videosOfUser.ownVideos.statusOfRemovingVideo.loading,
+    errorLoadingOwnVideos: state.videosOfUser.ownVideos.error,
+    errorLoadingSharedVideos: state.videosOfUser.sharedVideos.error,
+    errorRemovingVideo: state.videosOfUser.ownVideos.statusOfRemovingVideo.error,
   }));
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
@@ -57,6 +64,10 @@ const VideoPage: FC = (): ReactElement => {
   const successMessage =
     isSuccessDelete && activeVideoPage === 'own' ? (
       <p className="text-success pt-2 my-0 mx-auto">The video was removed successfully.</p>
+    ) : null;
+  const errorMeassage =
+    errorRemovingVideo && activeVideoPage === 'own' ? (
+      <p className="text-danger pt-2 my-0 mx-auto">{errorRemovingVideo.message}</p>
     ) : null;
   const isSuccessCallback = (state: State) =>
     state.videosOfUser.ownVideos.statusOfAddingNewVideo.isSuccess;
@@ -95,11 +106,14 @@ const VideoPage: FC = (): ReactElement => {
       </ul>
       {activeVideoPage === 'own' && isLoading && (
         <div className="border d-flex p-2">
-          {downloadVideoButton}
+          {!errorLoadingOwnVideos && downloadVideoButton}
           {loadingRemovingVideo && activeVideoPage === 'own' && <Spinner />}
+          {errorMeassage}
           {successMessage}
+          {errorLoadingOwnVideos && <ErrorIndicator />}
         </div>
       )}
+      {errorLoadingSharedVideos && activeVideoPage === 'shared' && <ErrorIndicator />}
       {spinner}
       {videoList}
       {modal}

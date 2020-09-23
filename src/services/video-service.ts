@@ -8,24 +8,24 @@ export default class VideoService {
     this.videos = videos;
   }
 
-  public async getOwnVideos(userEmail: string): Promise<Array<Video>> {
+  public async getOwnVideos(userEmail: string): Promise<Array<Video> | Error> {
     return this.videos.filter((video: Video): boolean => video.owner === userEmail);
   }
 
-  public async getWhoSharedVideosWith(email: string): Promise<Array<Video>> {
+  public async getWhoSharedVideosWith(email: string): Promise<Array<Video> | Error> {
     return this.videos.filter((video: Video): boolean => {
       return video.whoSharedWith.includes(email);
     });
   }
 
-  public async addNewVideo(data: Video): Promise<boolean> {
+  public async addNewVideo(data: Video): Promise<boolean | Error> {
     this.videos.push(data);
-    return true;
+    return Promise.resolve(true);
   }
 
-  public async deleteVideo(id: string): Promise<boolean> {
+  public async deleteVideo(id: string): Promise<boolean | Error> {
     this.videos = this.videos.filter((video: Video) => video.id !== id);
-    return true;
+    return Promise.resolve(true);
   }
 
   public async shareVideo({
@@ -36,9 +36,9 @@ export default class VideoService {
     email: string;
     videoId: string;
     videoOwnerEmail: string;
-  }): Promise<boolean> {
+  }): Promise<boolean | Error> {
     if (videoOwnerEmail === email) {
-      return Promise.reject("You can't share the video to yourself.");
+      return Promise.reject(new Error("You can't share the video to yourself."));
     }
     this.videos.forEach((video: Video) => {
       if (video.id === videoId) {
@@ -48,7 +48,7 @@ export default class VideoService {
     return Promise.resolve(true);
   }
 
-  public async editVideo(data: Video): Promise<boolean> {
+  public async editVideo(data: Video): Promise<boolean | Error> {
     this.videos = this.videos.map((video: Video) => {
       if (data.id === video.id) {
         video.title = data.title;

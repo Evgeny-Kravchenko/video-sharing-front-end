@@ -14,7 +14,7 @@ const updateAuthUser = (state: State, action: Action): StateAuthUser => {
         loading: false,
         name: action.payload.user.name,
         email: action.payload.user.email,
-        error: false,
+        error: null,
         isAuth: true,
       };
     }
@@ -22,14 +22,14 @@ const updateAuthUser = (state: State, action: Action): StateAuthUser => {
       return {
         ...state.authUser,
         loading: false,
-        error: true,
+        error: action.payload,
       };
     }
     case 'UNAUTHORIZE': {
       return {
         ...state.authUser,
         loading: false,
-        error: false,
+        error: null,
         name: '',
         email: '',
         isAuth: false,

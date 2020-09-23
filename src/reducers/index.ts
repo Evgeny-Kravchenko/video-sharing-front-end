@@ -7,8 +7,8 @@ import { State } from './types';
 
 const initialState: State = {
   currentPage: 'auth',
-  registerUser: { loading: false, error: null, isSuccess: null, errorMessage: null },
-  authUser: { name: '', email: '', isAuth: false, loading: false, error: false },
+  registerUser: { loading: false, error: null, isSuccess: null },
+  authUser: { name: '', email: '', isAuth: false, loading: false, error: null },
   videosOfUser: {
     ownVideos: {
       error: null,

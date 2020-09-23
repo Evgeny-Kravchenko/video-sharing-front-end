@@ -24,7 +24,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
   const userEmail: string = useSelector((state: State) => state.authUser.email);
   const loading: boolean = useSelector(isLoadingCallback);
   const isSuccess: boolean | null = useSelector(isSuccessCallback);
-  const error: string | null = useSelector(isErrorCallback);
+  const error: Error | null = useSelector(isErrorCallback);
   const dispatch = useDispatch();
   const { handleSubmit, register, errors } = useForm<Video>();
   const errorTitle = errors.title && <ValidationError>{errors.title.message}</ValidationError>;
@@ -47,7 +47,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
                 The video is {title || descr ? 'edited' : 'added'} successfully.
               </p>
             )}
-            {error && <p className="text-danger my-0 mx-auto">{error}</p>}
+            {error && <p className="text-danger my-0 mx-auto">{error.message}</p>}
             <button type="button" className="close" onClick={() => onSetModalWindow(false)}>
               <span>&times;</span>
             </button>

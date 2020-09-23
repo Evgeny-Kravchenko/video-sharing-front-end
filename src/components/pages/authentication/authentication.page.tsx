@@ -15,7 +15,7 @@ const AuthenticationPage: FC = (): ReactElement => {
       {error && (
         <MessageFailure
           header="There is no such user."
-          title="You are logged in wrong an email or a password. Try again."
+          title="Email or password is wrong. Try again."
         />
       )}
       {loading && <Spinner />}

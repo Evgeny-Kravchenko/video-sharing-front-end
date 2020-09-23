@@ -8,12 +8,10 @@ import { State, StateRegisterUser } from '../../../reducers/types';
 
 const RegistrationPage: FC = (): ReactElement => {
   const registerUser: StateRegisterUser = useSelector((state: State) => state.registerUser);
-  const { errorMessage, error, isSuccess, loading } = registerUser;
+  const { error, isSuccess, loading } = registerUser;
   return (
     <div className="p-lg-5 p-md-3 p-2">
-      {error && !loading && (
-        <MessageFailure header={errorMessage} title="You should enter another email." />
-      )}
+      {error && !loading && <MessageFailure header={error.name} title={error.message} />}
       {!loading && <RegistrationForm />}
       {loading && <Spinner />}
       {isSuccess && <p className="text-success text-center">You are successful registered.</p>}
