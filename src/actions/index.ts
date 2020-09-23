@@ -30,6 +30,10 @@ import {
   shareVideoSuccess,
   shareVideoFailure,
   clearStatusSharingVideo,
+  editVideoRequest,
+  editVideoSuccess,
+  editVideoFailure,
+  clearStatusOfEditingVideo,
 } from './videos';
 
 import { changeCurrentPage, PagesTypesActions, PagesList } from './pages';
@@ -66,4 +70,8 @@ export {
   shareVideoSuccess,
   shareVideoFailure,
   clearStatusSharingVideo,
+  editVideoRequest,
+  editVideoSuccess,
+  editVideoFailure,
+  clearStatusOfEditingVideo,
 };

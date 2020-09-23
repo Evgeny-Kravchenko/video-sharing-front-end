@@ -6,23 +6,25 @@ import { ModalWindowProps } from './types';
 import { Video } from '../../../../../types';
 import { State } from '../../../../../reducers/types';
 
-import { addNewVideoRequest } from '../../../../../actions';
-
 import ValidationError from '../../../registration/components/registration-form/styled-components';
 import Spinner from '../../../../local/spinner';
 
 const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElement => {
-  const { onSetModalWindow } = props;
+  const {
+    onSetModalWindow,
+    isSuccessCallback,
+    isLoadingCallback,
+    isErrorCallback,
+    action,
+    title,
+    descr,
+    whoSharedWith,
+    id,
+  } = props;
   const userEmail: string = useSelector((state: State) => state.authUser.email);
-  const loading: boolean = useSelector(
-    (state: State) => state.videosOfUser.ownVideos.statusOfAddingNewVideo.loading
-  );
-  const isSuccess: boolean | null = useSelector(
-    (state: State) => state.videosOfUser.ownVideos.statusOfAddingNewVideo.isSuccess
-  );
-  const error: string | null = useSelector(
-    (state: State) => state.videosOfUser.ownVideos.statusOfAddingNewVideo.error
-  );
+  const loading: boolean = useSelector(isLoadingCallback);
+  const isSuccess: boolean | null = useSelector(isSuccessCallback);
+  const error: string | null = useSelector(isErrorCallback);
   const dispatch = useDispatch();
   const { handleSubmit, register, errors } = useForm<Video>();
   const errorTitle = errors.title && <ValidationError>{errors.title.message}</ValidationError>;
@@ -31,17 +33,19 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
   );
   const errorFile = errors.file && <ValidationError>{errors.file.message}</ValidationError>;
   const onSubmit = (data: Video) => {
-    dispatch(addNewVideoRequest({ ...data, owner: userEmail, whoSharedWith: [] }));
+    dispatch(action({ ...data, owner: userEmail, whoSharedWith: whoSharedWith || [], id }));
   };
   return (
     <div className="modal d-block">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header d-flex justify-content-between align-items-center">
-            <h5 className="modal-title m-0">Add new video</h5>
+            <h5 className="modal-title m-0">{title || descr ? 'Edit' : 'Add new'} video</h5>
             {loading && <Spinner />}
             {isSuccess && (
-              <p className="text-success my-0 mx-auto">The video is downloaded successfully.</p>
+              <p className="text-success my-0 mx-auto">
+                The video is {title || descr ? 'edited' : 'added'} successfully.
+              </p>
             )}
             {error && <p className="text-danger my-0 mx-auto">{error}</p>}
             <button type="button" className="close" onClick={() => onSetModalWindow(false)}>
@@ -63,6 +67,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
                     name="title"
                     maxLength={30}
                     placeholder="Enter video title"
+                    defaultValue={title}
                     ref={register({ required: 'You must specify a title' })}
                   />
                   {errorTitle}
@@ -77,6 +82,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
                     name="description"
                     rows={3}
                     placeholder="Enter video description"
+                    defaultValue={descr}
                     ref={register({ required: 'You must specify a description' })}
                   ></textarea>
                   {errorDescription}
@@ -101,7 +107,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
             </fieldset>
             <div className="modal-footer">
               <button type="submit" className="btn btn-primary">
-                Add video
+                {title || descr ? 'Edit' : 'Add'} video
               </button>
               <button
                 type="button"

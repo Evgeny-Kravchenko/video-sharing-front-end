@@ -21,6 +21,10 @@ enum ActionVideosTypes {
   SHARE_VIDEO_SUCCESS = 'SHARE_VIDEO_SUCCESS',
   SHARE_VIDEO_FAILURE = 'SHARE_VIDEO_FAILURE',
   CLEAR_STATUS_OF_SHARING_VIDEO = 'CLEAR_STATUS_OF_SHARING_VIDEO',
+  EDIT_VIDEO_REQUEST = 'EDIT_VIDEO_REQUEST',
+  EDIT_VIDEO_SUCCESS = 'EDIT_VIDEO_SUCCESS',
+  EDIT_VIDEO_FAILURE = 'EDIT_VIDEO_FAILURE',
+  CLEAR_STATUS_OF_EDITING_VIDEO = 'CLEAR_STATUS_OF_EDITING_VIDEO',
 }
 
 const userOwnVideosRequest = (email: string): Action => {
@@ -154,6 +158,33 @@ const clearStatusSharingVideo = (): Action => {
   };
 };
 
+const editVideoRequest = (data: Video): Action => {
+  return {
+    type: ActionVideosTypes.EDIT_VIDEO_REQUEST,
+    payload: data,
+  };
+};
+
+const editVideoSuccess = (data: Video): Action => {
+  return {
+    type: ActionVideosTypes.EDIT_VIDEO_SUCCESS,
+    payload: data,
+  };
+};
+
+const editVideoFailure = (err: string): Action => {
+  return {
+    type: ActionVideosTypes.EDIT_VIDEO_FAILURE,
+    payload: err,
+  };
+};
+
+const clearStatusOfEditingVideo = (): Action => {
+  return {
+    type: ActionVideosTypes.CLEAR_STATUS_OF_EDITING_VIDEO,
+  };
+};
+
 export {
   ActionVideosTypes,
   userOwnVideosRequest,
@@ -174,4 +205,8 @@ export {
   shareVideoSuccess,
   shareVideoFailure,
   clearStatusSharingVideo,
+  editVideoRequest,
+  editVideoSuccess,
+  editVideoFailure,
+  clearStatusOfEditingVideo,
 };

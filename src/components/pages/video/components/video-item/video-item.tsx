@@ -7,17 +7,24 @@ import { Wrapper } from '../../../../../styles/global-styled-components';
 import { VideoItemProps } from './types';
 import { State } from '../../../../../reducers/types';
 
-import { deleteVideoRequest } from '../../../../../actions';
+import { deleteVideoRequest, editVideoRequest } from '../../../../../actions';
 
 import ShareVideoForm from '../share-video-form';
+import ModalWindow from '../modal-window';
 
 const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const dispatch = useDispatch();
   const [isShareWindowShown, setIsShareWindowShown] = useState(false);
+  const [isEditingWindowShown, setIsEditingVideoShown] = useState(false);
   const {
-    video: { title, description, owner, id },
+    video: { title, description, owner, id, whoSharedWith },
   } = props;
   const isOwner = useSelector((state: State) => state.authUser.email) === owner;
+  const isLoadingCallback = (state: State) =>
+    state.videosOfUser.ownVideos.statusOfEditingVideo.loading;
+  const isSuccessCallback = (state: State) =>
+    state.videosOfUser.ownVideos.statusOfEditingVideo.isSuccess;
+  const isErrorCallback = (state: State) => state.videosOfUser.ownVideos.statusOfEditingVideo.error;
   return (
     <Wrapper width="300px" margin="0">
       <div className="card my-2">
@@ -32,7 +39,14 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
             {isOwner && (
               <>
                 <button
-                  className="btn btn-outline-info ml-auto mr-1"
+                  type="button"
+                  className="btn btn-outline-warning ml-auto mr-1"
+                  onClick={() => setIsEditingVideoShown(true)}
+                >
+                  <i className="fa fa-cog" aria-hidden="true"></i>
+                </button>
+                <button
+                  className="btn btn-outline-info mr-1"
                   onClick={() => setIsShareWindowShown(true)}
                 >
                   <i className="fa fa-share-square-o"></i>
@@ -54,6 +68,19 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
           title={title}
           id={id}
           owner={owner}
+        />
+      )}
+      {isEditingWindowShown && (
+        <ModalWindow
+          onSetModalWindow={setIsEditingVideoShown}
+          isErrorCallback={isErrorCallback}
+          isSuccessCallback={isSuccessCallback}
+          isLoadingCallback={isLoadingCallback}
+          action={editVideoRequest}
+          whoSharedWith={whoSharedWith}
+          title={title}
+          descr={description}
+          id={id}
         />
       )}
     </Wrapper>

@@ -8,6 +8,7 @@ import {
   addNewVideoSaga,
   deleteVideoSaga,
   shareVideoSaga,
+  editVideoSaga,
 } from './index';
 
 function* rootSaga() {
@@ -19,6 +20,7 @@ function* rootSaga() {
     addNewVideoSaga(),
     deleteVideoSaga(),
     shareVideoSaga(),
+    editVideoSaga(),
   ]);
 }
 
