@@ -6,6 +6,7 @@ import userSharedVideosSaga from './user-shared-videos-saga';
 import addNewVideoSaga from './add-new-video-saga';
 import deleteVideoSaga from './delete-video-saga';
 import shareVideoSaga from './share-video-saga';
+import editVideoSaga from './edit-video-saga';
 
 export {
   rootSaga,
@@ -16,4 +17,5 @@ export {
   addNewVideoSaga,
   deleteVideoSaga,
   shareVideoSaga,
+  editVideoSaga,
 };

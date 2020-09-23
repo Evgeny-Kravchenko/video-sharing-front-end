@@ -47,4 +47,16 @@ export default class VideoService {
     });
     return Promise.resolve(true);
   }
+
+  public async editVideo(data: Video): Promise<boolean> {
+    this.videos = this.videos.map((video: Video) => {
+      if (data.id === video.id) {
+        video.title = data.title;
+        video.description = data.description;
+        video.file = data.file;
+      }
+      return video;
+    });
+    return Promise.resolve(true);
+  }
 }

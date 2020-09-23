@@ -111,6 +111,53 @@ const updateOwnVideos = (state: State, action: Action): StateOwnVideos => {
         },
       };
     }
+    case ActionVideosTypes.EDIT_VIDEO_REQUEST: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfEditingVideo: {
+          ...state.videosOfUser.ownVideos.statusOfEditingVideo,
+          loading: true,
+        },
+      };
+    }
+    case ActionVideosTypes.EDIT_VIDEO_SUCCESS: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        videos: state.videosOfUser.ownVideos.videos.map((video: Video) => {
+          if (action.payload.id === video.id) {
+            video.title = action.payload.title;
+            video.description = action.payload.description;
+            video.file = action.payload.file;
+          }
+          return video;
+        }),
+        statusOfEditingVideo: {
+          isSuccess: true,
+          error: null,
+          loading: false,
+        },
+      };
+    }
+    case ActionVideosTypes.EDIT_VIDEO_FAILURE: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfEditingVideo: {
+          isSuccess: false,
+          error: action.payload,
+          loading: false,
+        },
+      };
+    }
+    case ActionVideosTypes.CLEAR_STATUS_OF_EDITING_VIDEO: {
+      return {
+        ...state.videosOfUser.ownVideos,
+        statusOfEditingVideo: {
+          isSuccess: null,
+          error: null,
+          loading: false,
+        },
+      };
+    }
     default: {
       return state.videosOfUser.ownVideos;
     }

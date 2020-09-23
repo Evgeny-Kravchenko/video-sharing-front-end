@@ -30,6 +30,7 @@ export interface Status {
 export interface StateOwnVideos extends StateVideos {
   statusOfAddingNewVideo: Status;
   statusOfRemovingVideo: Status;
+  statusOfEditingVideo: Status;
 }
 
 export interface StateSharedVideos extends StateVideos {
