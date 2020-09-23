@@ -14,7 +14,7 @@ const updateRegisterUser = (state: State, action: Action): StateRegisterUser => 
         ...state.registerUser,
         loading: false,
         isSuccess: true,
-        error: false,
+        error: null,
         errorMessage: '',
       };
     }
@@ -23,7 +23,7 @@ const updateRegisterUser = (state: State, action: Action): StateRegisterUser => 
         ...state.registerUser,
         loading: false,
         isSuccess: false,
-        error: true,
+        error: action.payload,
         errorMessage: action.payload,
       };
     }

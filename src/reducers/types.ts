@@ -2,7 +2,7 @@ import { Video } from '../types';
 
 export interface StateRegisterUser {
   loading: boolean;
-  error: boolean | null;
+  error: Error | null;
   isSuccess: boolean | null;
   errorMessage: string | null;
 }
@@ -11,19 +11,19 @@ export interface StateAuthUser {
   name: string;
   email: string;
   isAuth: boolean;
-  error: boolean;
+  error: Error | null;
   loading: boolean;
 }
 
 export interface StateVideos {
   loading: boolean;
   videos: Array<Video>;
-  error: string | null;
+  error: Error | null;
 }
 
 export interface Status {
   loading: boolean;
-  error: string | null;
+  error: Error | null;
   isSuccess: boolean | null;
 }
 
