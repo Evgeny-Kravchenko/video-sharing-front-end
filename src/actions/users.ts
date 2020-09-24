@@ -1,7 +1,7 @@
-import IUser from '../types/user.interface';
 import Action from './types';
 import { Auth } from '../components/pages/authentication/components/auth-form/types';
 import UserResponse from '../types/get-user-response';
+import { Registration } from '../components/pages/registration/components/registration-form/types';
 
 enum UserActionTypes {
   REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST',
@@ -14,7 +14,7 @@ enum UserActionTypes {
   UNAUTHORIZE = 'UNAUTHORIZE',
 }
 
-const registerUserRequest = (registerUserData: IUser): Action => {
+const registerUserRequest = (registerUserData: Registration): Action => {
   return {
     type: UserActionTypes.REGISTER_USER_REQUEST,
     payload: registerUserData,
