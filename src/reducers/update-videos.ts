@@ -6,7 +6,7 @@ import { ActionVideosTypes, UserActionTypes } from '../actions';
 
 import { getArrayFromSet, getSetFromArray } from '../helpers';
 
-import updateStatusOfLoadingOwnVideos from './update-status';
+import updateStatus from './update-status';
 
 const updateVideos = (state: State, action: Action): VideoState => {
   switch (action.type) {
@@ -28,7 +28,7 @@ const updateVideos = (state: State, action: Action): VideoState => {
     case ActionVideosTypes.USER_OWN_VIDEOS_REQUEST: {
       return {
         ...state.videos,
-        statusOfLoadingOwnVideos: updateStatusOfLoadingOwnVideos(state, action),
+        statusOfLoadingOwnVideos: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS: {
@@ -38,31 +38,19 @@ const updateVideos = (state: State, action: Action): VideoState => {
       return {
         ...state.videos,
         collection,
-        statusOfLoadingOwnVideos: {
-          isSuccess: true,
-          error: null,
-          loading: false,
-        },
+        statusOfLoadingOwnVideos: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.USER_OWN_VIDEOS_FAILURE: {
       return {
         ...state.videos,
-        statusOfLoadingOwnVideos: {
-          isSuccess: false,
-          error: action.payload,
-          loading: false,
-        },
+        statusOfLoadingOwnVideos: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.ADD_NEW_VIDEO_REQUEST: {
       return {
         ...state.videos,
-        statusOfAddingNewVideo: {
-          isSuccess: null,
-          error: null,
-          loading: true,
-        },
+        statusOfAddingNewVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.ADD_NEW_VIDEO_SUCCESS: {
@@ -76,31 +64,19 @@ const updateVideos = (state: State, action: Action): VideoState => {
         ...state.videos,
         collection,
         ownVideosIds: [...state.videos.ownVideosIds, action.payload.videoId],
-        statusOfAddingNewVideo: {
-          isSuccess: true,
-          loading: false,
-          error: null,
-        },
+        statusOfAddingNewVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.ADD_NEW_VIDEO_FAILURE: {
       return {
         ...state.videos,
-        statusOfAddingNewVideo: {
-          isSuccess: false,
-          loading: false,
-          error: action.payload,
-        },
+        statusOfAddingNewVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.DELETE_VIDEO_REQUEST: {
       return {
         ...state.videos,
-        statusOfRemovingVideo: {
-          isSuccess: null,
-          loading: true,
-          error: null,
-        },
+        statusOfRemovingVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.DELETE_VIDEO_SUCCESS: {
@@ -114,50 +90,31 @@ const updateVideos = (state: State, action: Action): VideoState => {
         ownVideosIds: state.videos.ownVideosIds.filter(
           (videoId: string) => videoId !== action.payload
         ),
-        statusOfRemovingVideo: {
-          isSuccess: true,
-          loading: false,
-          error: null,
-        },
+        statusOfRemovingVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.DELETE_VIDEO_FAILURE: {
       return {
         ...state.videos,
-        statusOfRemovingVideo: {
-          isSuccess: false,
-          loading: false,
-          error: action.payload,
-        },
+        statusOfRemovingVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.CLEAR_STATUS_OF_REMOVING_VIDEO: {
       return {
         ...state.videos,
-        statusOfRemovingVideo: {
-          isSuccess: null,
-          loading: false,
-          error: null,
-        },
+        statusOfRemovingVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.CLEAR_STATUS_OF_ADDING_VIDEO: {
       return {
         ...state.videos,
-        statusOfAddingNewVideo: {
-          isSuccess: null,
-          loading: false,
-          error: null,
-        },
+        statusOfAddingNewVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.EDIT_VIDEO_REQUEST: {
       return {
         ...state.videos,
-        statusOfEditingVideo: {
-          ...state.videos.statusOfEditingVideo,
-          loading: true,
-        },
+        statusOfEditingVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.EDIT_VIDEO_SUCCESS: {
@@ -174,40 +131,25 @@ const updateVideos = (state: State, action: Action): VideoState => {
       return {
         ...state.videos,
         collection,
-        statusOfEditingVideo: {
-          isSuccess: true,
-          error: null,
-          loading: false,
-        },
+        statusOfEditingVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.EDIT_VIDEO_FAILURE: {
       return {
         ...state.videos,
-        statusOfEditingVideo: {
-          isSuccess: false,
-          error: action.payload,
-          loading: false,
-        },
+        statusOfEditingVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.CLEAR_STATUS_OF_EDITING_VIDEO: {
       return {
         ...state.videos,
-        statusOfEditingVideo: {
-          isSuccess: null,
-          error: null,
-          loading: false,
-        },
+        statusOfEditingVideo: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.USER_SHARED_VIDEOS_REQUEST: {
       return {
         ...state.videos,
-        statusOfLoadingSharedVideos: {
-          ...state.videos.statusOfLoadingSharedVideos,
-          loading: true,
-        },
+        statusOfLoadingSharedVideos: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.USER_SHARED_VIDEOS_SUCCESS: {
@@ -217,60 +159,37 @@ const updateVideos = (state: State, action: Action): VideoState => {
       return {
         ...state.videos,
         collection,
-        statusOfLoadingSharedVideos: {
-          loading: false,
-          error: null,
-          isSuccess: true,
-        },
+        statusOfLoadingSharedVideos: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.USER_SHARED_VIDEOS_FAILURE: {
       return {
         ...state.videos,
-        statusOfLoadingSharedVideos: {
-          loading: false,
-          error: action.payload,
-          isSuccess: false,
-        },
+        statusOfLoadingSharedVideos: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.SHARE_VIDEO_REQUEST: {
       return {
         ...state.videos,
-        statusOfSharingVideoToUser: {
-          ...state.videos.statusOfSharingVideoToUser,
-          loading: true,
-        },
+        statusOfSharingVideoToUser: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.SHARE_VIDEO_SUCCESS: {
       return {
         ...state.videos,
-        statusOfSharingVideoToUser: {
-          loading: false,
-          error: null,
-          isSuccess: true,
-        },
+        statusOfSharingVideoToUser: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.SHARE_VIDEO_FAILURE: {
       return {
         ...state.videos,
-        statusOfSharingVideoToUser: {
-          loading: false,
-          error: action.payload,
-          isSuccess: false,
-        },
+        statusOfSharingVideoToUser: updateStatus(state, action),
       };
     }
     case ActionVideosTypes.CLEAR_STATUS_OF_SHARING_VIDEO: {
       return {
         ...state.videos,
-        statusOfSharingVideoToUser: {
-          loading: false,
-          error: null,
-          isSuccess: null,
-        },
+        statusOfSharingVideoToUser: updateStatus(state, action),
       };
     }
     default: {

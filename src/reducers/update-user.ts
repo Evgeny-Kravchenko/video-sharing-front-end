@@ -1,16 +1,16 @@
 import { State, UserState } from './types';
+
 import { Action } from '../actions';
 import { UserActionTypes } from '../actions';
+
+import updateStatus from './update-status';
 
 const updateUser = (state: State, action: Action): UserState => {
   switch (action.type) {
     case UserActionTypes.AUTH_USER_REQUEST: {
       return {
         ...state.user,
-        statusOfAuthorizeUser: {
-          ...state.user.statusOfAuthorizeUser,
-          loading: true,
-        },
+        statusOfAuthorizeUser: updateStatus(state, action),
       };
     }
     case UserActionTypes.AUTH_USER_SUCCSESS: {
@@ -18,21 +18,13 @@ const updateUser = (state: State, action: Action): UserState => {
         ...state.user,
         name: action.payload.user.user.name,
         email: action.payload.user.user.email,
-        statusOfAuthorizeUser: {
-          error: null,
-          loading: false,
-          isSuccess: true,
-        },
+        statusOfAuthorizeUser: updateStatus(state, action),
       };
     }
     case UserActionTypes.AUTH_USER_FAILURE: {
       return {
         ...state.user,
-        statusOfAuthorizeUser: {
-          error: action.payload,
-          loading: false,
-          isSuccess: false,
-        },
+        statusOfAuthorizeUser: updateStatus(state, action),
       };
     }
     case UserActionTypes.UNAUTHORIZE: {
@@ -40,50 +32,31 @@ const updateUser = (state: State, action: Action): UserState => {
         ...state.user,
         name: '',
         email: '',
-        statusOfAuthorizeUser: {
-          isSuccess: null,
-          error: null,
-          loading: false,
-        },
+        statusOfAuthorizeUser: updateStatus(state, action),
       };
     }
     case UserActionTypes.REGISTER_USER_REQUEST: {
       return {
         ...state.user,
-        statusOfRegisterUser: {
-          ...state.user.statusOfRegisterUser,
-          loading: true,
-        },
+        statusOfRegisterUser: updateStatus(state, action),
       };
     }
     case UserActionTypes.REGISTER_USER_SUCCESS: {
       return {
         ...state.user,
-        statusOfRegisterUser: {
-          error: null,
-          loading: false,
-          isSuccess: true,
-        },
+        statusOfRegisterUser: updateStatus(state, action),
       };
     }
     case UserActionTypes.REGISTER_USER_FAILURE: {
       return {
         ...state.user,
-        statusOfRegisterUser: {
-          loading: false,
-          isSuccess: false,
-          error: action.payload,
-        },
+        statusOfRegisterUser: updateStatus(state, action),
       };
     }
     case UserActionTypes.REGISTER_CLEAR_STATUS: {
       return {
         ...state.user,
-        statusOfRegisterUser: {
-          isSuccess: null,
-          error: null,
-          loading: false,
-        },
+        statusOfRegisterUser: updateStatus(state, action),
       };
     }
     default: {

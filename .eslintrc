@@ -23,6 +23,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "linebreak-style": "off",
     "strict": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
   }
