@@ -4,7 +4,7 @@ import { userOwnVideosSuccess, userOwnVideosFailure } from '../actions';
 import { videoService } from '../index';
 
 import { ActionVideosTypes } from '../actions';
-import Action from '../actions/types';
+import { Action } from '../actions';
 
 function* fetchUserOwnVideo(action: Action) {
   try {

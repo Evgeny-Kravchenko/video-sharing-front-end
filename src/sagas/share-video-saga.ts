@@ -3,8 +3,7 @@ import { shareVideoSuccess, shareVideoFailure, clearStatusSharingVideo } from '.
 
 import { videoService } from '../index';
 
-import { ActionVideosTypes } from '../actions';
-import Action from '../actions/types';
+import { ActionVideosTypes, Action } from '../actions';
 
 function* fetchShareVideo(action: Action) {
   try {

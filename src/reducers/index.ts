@@ -2,7 +2,7 @@ import updateCurrentPage from './update-current-page';
 import updateVideos from './update-videos';
 import updateUser from './update-user';
 
-import Action from '../actions/types';
+import { Action } from '../actions';
 import { State } from './types';
 
 const initialState: State = {

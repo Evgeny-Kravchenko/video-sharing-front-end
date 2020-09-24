@@ -4,7 +4,7 @@ import { registerUserSuccess, registerUserFailure, registerClearStatus } from '.
 import { userService } from '../index';
 
 import { UserActionTypes } from '../actions';
-import Action from '../actions/types';
+import { Action } from '../actions';
 
 function* fetchRegisterUserHandler(action: Action) {
   try {

@@ -1,4 +1,4 @@
-import Action from '../actions/types';
+import { Action } from '../actions';
 import { State } from './types';
 
 const updateCurrentPage = (state: State, action: Action): string => {

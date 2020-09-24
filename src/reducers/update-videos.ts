@@ -1,5 +1,5 @@
 import { State, VideoState } from './types';
-import Action from '../actions/types';
+import { Action } from '../actions';
 import { ActionVideosTypes, UserActionTypes } from '../actions';
 import { Video } from '../types';
 import { getArrayFromSet, getSetFromArray } from '../helpers';

@@ -4,7 +4,7 @@ import { authorizeUserSuccsess, authorizeUserFailure, userOwnVideosRequest } fro
 import { userService } from '../index';
 
 import { UserActionTypes } from '../actions';
-import Action from '../actions/types';
+import { Action } from '../actions';
 
 function* fetchAuthUserHandler(action: Action) {
   try {

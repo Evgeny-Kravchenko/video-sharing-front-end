@@ -1,5 +1,5 @@
 import { State, UserState } from './types';
-import Action from '../actions/types';
+import { Action } from '../actions';
 import { UserActionTypes } from '../actions';
 
 const updateUser = (state: State, action: Action): UserState => {

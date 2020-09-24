@@ -1,5 +1,4 @@
 import {
-  UserActionTypes,
   authorizeUserRequest,
   authorizeUserFailure,
   authorizeUserSuccsess,
@@ -11,7 +10,6 @@ import {
 } from './users';
 
 import {
-  ActionVideosTypes,
   userOwnVideosRequest,
   userOwnVideosSuccess,
   userOwnVideosFailure,
@@ -36,9 +34,12 @@ import {
   clearStatusOfEditingVideo,
 } from './videos';
 
-import { changeCurrentPage, PagesTypesActions, PagesList } from './pages';
+import { changeCurrentPage } from './pages';
+
+import { Action, PagesList, ActionVideosTypes, PagesTypesActions, UserActionTypes } from './types';
 
 export {
+  Action,
   UserActionTypes,
   ActionVideosTypes,
   changeCurrentPage,

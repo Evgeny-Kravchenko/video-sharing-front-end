@@ -1,13 +1,4 @@
-import Action from './types';
-
-enum PagesList {
-  Authentication = 'auth',
-  Videos = 'videos',
-}
-
-enum PagesTypesActions {
-  MOVE_TO_ANOTHER_PAGE = 'MOVE_TO_ANOTHER_PAGE',
-}
+import { Action, PagesList, PagesTypesActions } from './types';
 
 const changeCurrentPage = (currentPage: PagesList): Action => {
   return {

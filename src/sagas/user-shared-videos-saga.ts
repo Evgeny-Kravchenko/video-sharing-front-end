@@ -4,7 +4,7 @@ import { userSharedVideosSuccess, userSharedVideosFailure } from '../actions';
 import { videoService } from '../index';
 
 import { ActionVideosTypes } from '../actions';
-import Action from '../actions/types';
+import { Action } from '../actions';
 
 function* fetchUserSharedVideo(action: Action) {
   try {
