@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Wrapper } from '../../../../../styles/global-styled-components';
 
 import { unauthorize } from '../../../../../actions';
+
 import { State } from '../../../../../reducers/types';
 
 const AuthSuccessed: FC = () => {

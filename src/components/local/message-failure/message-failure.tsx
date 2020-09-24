@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
 import { Wrapper } from '../../../styles/global-styled-components';
+
 import MessageFailureProps from './types';
 
 const MessageFailure: FC<MessageFailureProps> = (props: MessageFailureProps): ReactElement => {

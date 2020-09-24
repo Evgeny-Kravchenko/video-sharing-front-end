@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 
 import ErrorIndicator from '../error-indicator';
+
 import { ErrorBoundryProps, ErrorBoundryState } from './types';
 
 export default class ErrorBoundry extends Component<ErrorBoundryProps> {

@@ -13,13 +13,18 @@ import ShareVideoForm from '../share-video-form';
 import ModalWindow from '../modal-window';
 
 const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
-  const dispatch = useDispatch();
-  const [isShareWindowShown, setIsShareWindowShown] = useState(false);
-  const [isEditingWindowShown, setIsEditingVideoShown] = useState(false);
   const {
     video: { title, description, id },
   } = props;
+
+  const dispatch = useDispatch();
+  const onDeleteVideo = () => dispatch(deleteVideoRequest(id));
+
   const isOwner = useSelector((state: State) => state.videos.ownVideosIds).includes(id);
+
+  const [isShareWindowShown, setIsShareWindowShown] = useState(false);
+  const [isEditingWindowShown, setIsEditingVideoShown] = useState(false);
+
   const isLoadingCallback = (state: State) => state.videos.statusOfEditingVideo.loading;
   const isSuccessCallback = (state: State) => state.videos.statusOfEditingVideo.isSuccess;
   const isErrorCallback = (state: State) => state.videos.statusOfEditingVideo.error;
@@ -49,10 +54,7 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
                 >
                   <i className="fa fa-share-square-o"></i>
                 </button>
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={() => dispatch(deleteVideoRequest(id))}
-                >
+                <button className="btn btn-outline-danger" onClick={onDeleteVideo}>
                   <i className="fa fa-trash-o"></i>
                 </button>
               </>

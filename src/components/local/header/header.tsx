@@ -7,16 +7,19 @@ import { changeCurrentPage, PagesList } from '../../../actions';
 import { HeaderStyled, Logo, LogoIcon } from './styled-components';
 
 import logoIcon from './images/video.png';
+
 import { State } from '../../../reducers/types';
 
 const Header: FC = (): ReactElement => {
   const dispatch = useDispatch();
+  const handleOnClickItemMenu = (path: PagesList) => () => dispatch(changeCurrentPage(path));
+
   const { currentPage, isAuth } = useSelector((state: State) => ({
     currentPage: state.currentPage,
     isAuth: state.user.statusOfAuthorizeUser.isSuccess,
   }));
-  const handleOnClickItemMenu = (path: PagesList) => () => dispatch(changeCurrentPage(path));
   const pathForLogo = isAuth ? PagesList.Videos : PagesList.Authentication;
+
   return (
     <HeaderStyled>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark px-2 py-md-3 py-2">

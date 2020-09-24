@@ -1,19 +1,22 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import VideoList from '../video/components/video-list';
 import {
   addNewVideoRequest,
   userOwnVideosRequest,
   userSharedVideosRequest,
 } from '../../../actions';
+
 import TabItem from './styled-components';
+
 import Spinner from '../../local/spinner';
 import ModalWindow from './components/modal-window';
+import VideoList from '../video/components/video-list';
+import ErrorIndicator from '../../local/error-indicator';
 
 import { State } from '../../../reducers/types';
-import ErrorIndicator from '../../local/error-indicator';
 import { Video } from '../../../types';
+
 import { getArrayFromSet } from '../../../helpers';
 
 const VideoPage: FC = (): ReactElement => {
@@ -43,12 +46,15 @@ const VideoPage: FC = (): ReactElement => {
     errorLoadingSharedVideos: state.videos.statusOfLoadingSharedVideos.error,
     errorRemovingVideo: state.videos.statusOfRemovingVideo.error,
   }));
+
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
+
   const videos =
     activeVideoPage === 'own'
       ? collection.filter((video: Video) => ownVideosIds.includes(video.id))
       : collection.filter((video: Video) => sharedVideosIds.includes(video.id));
+
   const handleSetActiveVideoPage = (
     cb: (userEmail: string) => void,
     userEmail: string,
@@ -59,7 +65,9 @@ const VideoPage: FC = (): ReactElement => {
       dispatch(cb(userEmail));
     }
   };
+
   const isLoading = !ownVideosLoading && !sharedVideosLoading;
+
   const downloadVideoButton =
     isLoading && activeVideoPage === 'own' ? (
       <button className="btn btn-primary" onClick={() => setIsModal(true)}>
@@ -76,9 +84,11 @@ const VideoPage: FC = (): ReactElement => {
     errorRemovingVideo && activeVideoPage === 'own' ? (
       <p className="text-danger pt-2 my-0 mx-auto">{errorRemovingVideo.message}</p>
     ) : null;
+
   const isSuccessCallback = (state: State) => state.videos.statusOfAddingNewVideo.isSuccess;
   const isLoadingCallback = (state: State) => state.videos.statusOfAddingNewVideo.loading;
   const isErrorCallback = (state: State) => state.videos.statusOfAddingNewVideo.error;
+
   const modal = isModal ? (
     <ModalWindow
       onSetModalWindow={setIsModal}
@@ -88,6 +98,7 @@ const VideoPage: FC = (): ReactElement => {
       action={addNewVideoRequest}
     />
   ) : null;
+
   return (
     <div className="py-lg-4 py-md-3 px-sm-0 p-2">
       <ul className="nav nav-tabs mb-4">

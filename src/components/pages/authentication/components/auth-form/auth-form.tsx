@@ -1,6 +1,7 @@
 import React, { FC, ReactElement, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { Form, Label } from '../../../../../styles/global-styled-components';
 import RegistrationLink from './styled-components';
@@ -8,14 +9,13 @@ import RegistrationLink from './styled-components';
 import { authorizeUserRequest } from '../../../../../actions';
 
 import { Auth } from './types';
-import { Dispatch } from 'redux';
 
 const AuthForm: FC = (): ReactElement => {
-  const { handleSubmit, register } = useForm<Auth>();
   const dispatch: Dispatch = useDispatch();
   const onSubmit = useCallback((data: Auth) => {
     dispatch(authorizeUserRequest(data));
   }, []);
+  const { handleSubmit, register } = useForm<Auth>();
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <fieldset>

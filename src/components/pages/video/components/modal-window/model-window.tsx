@@ -20,33 +20,42 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
     descr,
     id: videoId,
   } = props;
+
   const loading: boolean = useSelector(isLoadingCallback);
   const isSuccess: boolean | null = useSelector(isSuccessCallback);
   const error: Error | null = useSelector(isErrorCallback);
   const userEmail: string = useSelector((state: State) => state.user.email);
+
   const dispatch = useDispatch();
+  const onSubmit = (data: Video) => {
+    dispatch(action({ data, userEmail, videoId }));
+  };
+
   const { handleSubmit, register, errors } = useForm<Video>();
+
   const errorTitle = errors.title && <ValidationError>{errors.title.message}</ValidationError>;
   const errorDescription = errors.description && (
     <ValidationError>{errors.description.message}</ValidationError>
   );
   const errorFile = errors.file && <ValidationError>{errors.file.message}</ValidationError>;
-  const onSubmit = (data: Video) => {
-    dispatch(action({ data, userEmail, videoId }));
-  };
+
+  const successMessage = isSuccess && (
+    <p className="text-success my-0 mx-auto">
+      The video is {title || descr ? 'edited' : 'added'} successfully.
+    </p>
+  );
+  const errorMessage = error && <p className="text-danger my-0 mx-auto">{error.message}</p>;
+  const spinner = loading && <Spinner />;
+
   return (
     <div className="modal d-block">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header d-flex justify-content-between align-items-center">
             <h5 className="modal-title m-0">{title || descr ? 'Edit' : 'Add new'} video</h5>
-            {loading && <Spinner />}
-            {isSuccess && (
-              <p className="text-success my-0 mx-auto">
-                The video is {title || descr ? 'edited' : 'added'} successfully.
-              </p>
-            )}
-            {error && <p className="text-danger my-0 mx-auto">{error.message}</p>}
+            {spinner}
+            {successMessage}
+            {errorMessage}
             <button type="button" className="close" onClick={() => onSetModalWindow(false)}>
               <span>&times;</span>
             </button>

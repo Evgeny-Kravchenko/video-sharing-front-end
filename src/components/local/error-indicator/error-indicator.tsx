@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import icon from './error.png';
+
 import { Wrapper, Image, Message } from './styled-components';
 
 const ErrorIndicator: FC = () => (

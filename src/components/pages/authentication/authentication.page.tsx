@@ -5,6 +5,7 @@ import AuthForm from '../../pages/authentication/components/auth-form';
 import AuthSuccessed from '../../pages/authentication/components/auth-successed';
 import MessageFailure from '../../local/message-failure';
 import Spinner from '../../local/spinner';
+
 import { State, Status } from '../../../reducers/types';
 
 const AuthenticationPage: FC = (): ReactElement => {

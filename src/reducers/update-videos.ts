@@ -1,8 +1,12 @@
 import { State, VideoState } from './types';
+import { Video } from '../types';
+
 import { Action } from '../actions';
 import { ActionVideosTypes, UserActionTypes } from '../actions';
-import { Video } from '../types';
+
 import { getArrayFromSet, getSetFromArray } from '../helpers';
+
+import updateStatusOfLoadingOwnVideos from './update-status';
 
 const updateVideos = (state: State, action: Action): VideoState => {
   switch (action.type) {
@@ -24,10 +28,7 @@ const updateVideos = (state: State, action: Action): VideoState => {
     case ActionVideosTypes.USER_OWN_VIDEOS_REQUEST: {
       return {
         ...state.videos,
-        statusOfLoadingOwnVideos: {
-          ...state.videos.statusOfLoadingOwnVideos,
-          loading: true,
-        },
+        statusOfLoadingOwnVideos: updateStatusOfLoadingOwnVideos(state, action),
       };
     }
     case ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS: {

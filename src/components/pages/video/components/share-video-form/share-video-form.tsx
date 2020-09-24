@@ -1,28 +1,31 @@
 import React, { FC } from 'react';
-
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { shareVideoRequest } from '../../../../../actions';
 
-import { State } from '../../../../../reducers/types';
-
-import ShareViedoFormProps from './types';
 import { Label } from '../../../../../styles/global-styled-components';
+
+import { State } from '../../../../../reducers/types';
+import ShareViedoFormProps from './types';
 
 const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => {
   const { onSetIsShareWindowShown, title, id } = props;
+
+  const { isSuccess, error, userEmailWhoShareVideo } = useSelector((state: State) => ({
+    isSuccess: state.videos.statusOfSharingVideoToUser.isSuccess,
+    error: state.videos.statusOfSharingVideoToUser.error,
+    userEmailWhoShareVideo: state.user.email,
+  }));
+
   const dispatch = useDispatch();
-  const userEmailWhoShareVideo = useSelector((state: State) => state.user.email);
-  const { register, errors, handleSubmit } = useForm<{ email: string }>();
   const onSubmit = (data: { email: string }) => {
     dispatch(shareVideoRequest(data.email, id, userEmailWhoShareVideo));
   };
+
+  const { register, errors, handleSubmit } = useForm<{ email: string }>();
+
   const errorMessage = errors.email && <p className="text-danger">{errors.email.message}</p>;
-  const { isSuccess, error } = useSelector((state: State) => ({
-    isSuccess: state.videos.statusOfSharingVideoToUser.isSuccess,
-    error: state.videos.statusOfSharingVideoToUser.error,
-  }));
   const statusSharingVideo = isSuccess ? (
     <p className="text-success m-0 mr-2">The video shared successfully.</p>
   ) : null;
