@@ -10,7 +10,7 @@ export default class VideoService {
     return db.getWhoSharedVideosWith(email);
   }
 
-  public async addNewVideo(data: Video): Promise<boolean | Error> {
+  public async addNewVideo(data: { data: Video; userEmail: string }): Promise<string | Error> {
     return db.addNewVideo(data);
   }
 

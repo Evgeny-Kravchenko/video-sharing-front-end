@@ -11,11 +11,11 @@ import ShareViedoFormProps from './types';
 import { Label } from '../../../../../styles/global-styled-components';
 
 const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => {
-  const { onSetIsShareWindowShown, title, id, owner } = props;
+  const { onSetIsShareWindowShown, title, id } = props;
   const dispatch = useDispatch();
   const { register, errors, handleSubmit } = useForm<{ email: string }>();
   const onSubmit = (data: { email: string }) => {
-    dispatch(shareVideoRequest(data.email, id, owner));
+    dispatch(shareVideoRequest(data.email, id));
   };
   const errorMessage = errors.email && <p className="text-danger">{errors.email.message}</p>;
   const { isSuccess, error } = useSelector((state: State) => ({

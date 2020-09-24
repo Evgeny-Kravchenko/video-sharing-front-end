@@ -63,7 +63,11 @@ const updateVideos = (state: State, action: Action): VideoState => {
     case ActionVideosTypes.ADD_NEW_VIDEO_SUCCESS: {
       return {
         ...state.videos,
-        collection: [...state.videos.collection, action.payload],
+        collection: [
+          ...state.videos.collection,
+          { ...action.payload.video, id: action.payload.videoId },
+        ],
+        ownVideosIds: [...state.videos.ownVideosIds, action.payload.videoId],
         statusOfAddingNewVideo: {
           isSuccess: true,
           loading: false,

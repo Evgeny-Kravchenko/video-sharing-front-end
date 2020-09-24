@@ -68,17 +68,17 @@ const userSharedVideosFailure = (error: Error): Action => {
   };
 };
 
-const addNewVideoRequest = (video: Video): Action => {
+const addNewVideoRequest = (data: { data: Video; userEmail: string }): Action => {
   return {
     type: ActionVideosTypes.ADD_NEW_VIDEO_REQUEST,
-    payload: video,
+    payload: data,
   };
 };
 
-const addNewVideoSuccess = (video: Video): Action => {
+const addNewVideoSuccess = (data: { video: Video; videoId: string }): Action => {
   return {
     type: ActionVideosTypes.ADD_NEW_VIDEO_SUCCESS,
-    payload: video,
+    payload: data,
   };
 };
 
@@ -122,10 +122,10 @@ const clearStatusOfRemovingVideo = (): Action => {
   };
 };
 
-const shareVideoRequest = (email: string, videoId: string, videoOwnerEmail: string): Action => {
+const shareVideoRequest = (email: string, videoId: string): Action => {
   return {
     type: ActionVideosTypes.SHARE_VIDEO_REQUEST,
-    payload: { email, videoId, videoOwnerEmail },
+    payload: { email, videoId },
   };
 };
 

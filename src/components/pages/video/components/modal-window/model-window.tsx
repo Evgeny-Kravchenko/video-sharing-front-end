@@ -18,13 +18,11 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
     action,
     title,
     descr,
-    whoSharedWith,
-    id,
   } = props;
-  const userEmail: string = useSelector((state: State) => state.user.email);
   const loading: boolean = useSelector(isLoadingCallback);
   const isSuccess: boolean | null = useSelector(isSuccessCallback);
   const error: Error | null = useSelector(isErrorCallback);
+  const userEmail: string = useSelector((state: State) => state.user.email);
   const dispatch = useDispatch();
   const { handleSubmit, register, errors } = useForm<Video>();
   const errorTitle = errors.title && <ValidationError>{errors.title.message}</ValidationError>;
@@ -33,7 +31,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
   );
   const errorFile = errors.file && <ValidationError>{errors.file.message}</ValidationError>;
   const onSubmit = (data: Video) => {
-    dispatch(action({ ...data, owner: userEmail, whoSharedWith: whoSharedWith || [], id }));
+    dispatch(action({ data, userEmail }));
   };
   return (
     <div className="modal d-block">

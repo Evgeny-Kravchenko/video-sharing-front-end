@@ -193,9 +193,17 @@ export class MockDataBase {
     });
   }
 
-  public async addNewVideo(data: Video): Promise<boolean | Error> {
-    this.videos.push(data);
-    return Promise.resolve(true);
+  public async addNewVideo(data: { data: Video; userEmail: string }): Promise<string | Error> {
+    this.videos.push(data.data);
+    const user = this.users.find((user: User) => user.email === data.userEmail);
+    if (!user) {
+      return Promise.reject(new Error('Something went wrong'));
+    }
+    const userId = user.id;
+    const videoId = String(Math.floor(Math.random() * 10000));
+    const usersVideosId = String(Math.floor(Math.random() * 10000));
+    this.usersVideo.push({ id: usersVideosId, videoId, userId });
+    return Promise.resolve(videoId);
   }
 
   public async deleteVideo(id: string): Promise<boolean | Error> {

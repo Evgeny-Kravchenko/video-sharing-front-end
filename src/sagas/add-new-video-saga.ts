@@ -12,8 +12,8 @@ import { videoService } from '../index';
 function* fetchAddNewVideo(action: Action) {
   try {
     yield delay(1000);
-    yield videoService.addNewVideo(action.payload);
-    yield put(addNewVideoSuccess(action.payload));
+    const videoId = yield videoService.addNewVideo(action.payload);
+    yield put(addNewVideoSuccess({ video: action.payload.data, videoId: videoId }));
   } catch (err) {
     yield put(addNewVideoFailure(err));
   }
