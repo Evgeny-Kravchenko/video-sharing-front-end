@@ -168,7 +168,7 @@ const editVideoRequest = (data: { data: Video; userEmail: string; videoId: strin
   };
 };
 
-const editVideoSuccess = (data: Video): Action => {
+const editVideoSuccess = (data: { data: Video; videoId: string }): Action => {
   return {
     type: ActionVideosTypes.EDIT_VIDEO_SUCCESS,
     payload: data,

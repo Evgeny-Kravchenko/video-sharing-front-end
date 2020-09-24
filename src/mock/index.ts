@@ -226,15 +226,6 @@ export class MockDataBase {
     videoId: string;
     userEmailWhoShareVideo: string;
   }): Promise<boolean | Error> {
-    // if (userEmailWhoShareVideo === email) {
-    //   return Promise.reject(new Error("You can't share the video to yourself."));
-    // }
-    // this.videos.forEach((video: Video) => {
-    //   if (video.id === videoId) {
-    //     video.whoSharedWith.push(email);
-    //   }
-    // });
-    // return Promise.resolve(true);
     const userIdWhoShareVideo = this.users.find(
       (user: User) => user.email === userEmailWhoShareVideo
     )?.id;
@@ -249,7 +240,6 @@ export class MockDataBase {
       ...this.usersSharedVideos,
       { id: String(Math.floor(Math.random() * 100000)), userId: userIdWhomShareVideo, videoId },
     ];
-    console.log(this.usersSharedVideos);
     return Promise.resolve(true);
   }
 

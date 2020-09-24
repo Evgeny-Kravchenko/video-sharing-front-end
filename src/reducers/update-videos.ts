@@ -2,13 +2,14 @@ import { State, VideoState } from './types';
 import Action from '../actions/types';
 import { ActionVideosTypes, UserActionTypes } from '../actions';
 import { Video } from '../types';
+import { getArrayFromSet, getSetFromArray } from '../helpers';
 
 const updateVideos = (state: State, action: Action): VideoState => {
   switch (action.type) {
     case UserActionTypes.UNAUTHORIZE: {
       return {
         ...state.videos,
-        collection: [],
+        collection: new Set(),
         ownVideosIds: [],
         sharedVideosIds: [],
       };
@@ -30,9 +31,12 @@ const updateVideos = (state: State, action: Action): VideoState => {
       };
     }
     case ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS: {
+      const stateArray = getArrayFromSet(state.videos.collection);
+      const newStateArray = [...stateArray, ...action.payload];
+      const collection = getSetFromArray(newStateArray);
       return {
         ...state.videos,
-        collection: [...state.videos.collection, ...action.payload],
+        collection,
         statusOfLoadingOwnVideos: {
           isSuccess: true,
           error: null,
@@ -61,12 +65,15 @@ const updateVideos = (state: State, action: Action): VideoState => {
       };
     }
     case ActionVideosTypes.ADD_NEW_VIDEO_SUCCESS: {
+      const video: Video = {
+        ...action.payload.video,
+        id: action.payload.videoId,
+      };
+      const collection = state.videos.collection;
+      collection.add(JSON.stringify(video));
       return {
         ...state.videos,
-        collection: [
-          ...state.videos.collection,
-          { ...action.payload.video, id: action.payload.videoId },
-        ],
+        collection,
         ownVideosIds: [...state.videos.ownVideosIds, action.payload.videoId],
         statusOfAddingNewVideo: {
           isSuccess: true,
@@ -96,9 +103,13 @@ const updateVideos = (state: State, action: Action): VideoState => {
       };
     }
     case ActionVideosTypes.DELETE_VIDEO_SUCCESS: {
+      const stateArray = getArrayFromSet(state.videos.collection);
+      const newStateArray = stateArray.filter((video: Video) => video.id !== action.payload);
+      const collection = getSetFromArray(newStateArray);
+
       return {
         ...state.videos,
-        collection: state.videos.collection.filter((video: Video) => video.id !== action.payload),
+        collection,
         ownVideosIds: state.videos.ownVideosIds.filter(
           (videoId: string) => videoId !== action.payload
         ),
@@ -149,16 +160,19 @@ const updateVideos = (state: State, action: Action): VideoState => {
       };
     }
     case ActionVideosTypes.EDIT_VIDEO_SUCCESS: {
+      const stateArray = getArrayFromSet(state.videos.collection);
+      const newStateArray = stateArray.map((video: Video) => {
+        if (action.payload.videoId === video.id) {
+          video.title = action.payload.data.title;
+          video.description = action.payload.data.description;
+          video.file = action.payload.data.file;
+        }
+        return video;
+      });
+      const collection = getSetFromArray(newStateArray);
       return {
         ...state.videos,
-        collection: state.videos.collection.map((video: Video) => {
-          if (action.payload.id === video.id) {
-            video.title = action.payload.title;
-            video.description = action.payload.description;
-            video.file = action.payload.file;
-          }
-          return video;
-        }),
+        collection,
         statusOfEditingVideo: {
           isSuccess: true,
           error: null,
@@ -196,9 +210,12 @@ const updateVideos = (state: State, action: Action): VideoState => {
       };
     }
     case ActionVideosTypes.USER_SHARED_VIDEOS_SUCCESS: {
+      const stateArray = getArrayFromSet(state.videos.collection);
+      const newStateArray = [...stateArray, ...action.payload];
+      const collection = getSetFromArray(newStateArray);
       return {
         ...state.videos,
-        collection: [...state.videos.collection, ...action.payload],
+        collection,
         statusOfLoadingSharedVideos: {
           loading: false,
           error: null,

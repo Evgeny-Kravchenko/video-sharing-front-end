@@ -14,6 +14,7 @@ import ModalWindow from './components/modal-window';
 import { State } from '../../../reducers/types';
 import ErrorIndicator from '../../local/error-indicator';
 import { Video } from '../../../types';
+import { getArrayFromSet } from '../../../helpers';
 
 const VideoPage: FC = (): ReactElement => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const VideoPage: FC = (): ReactElement => {
     errorLoadingSharedVideos,
     errorRemovingVideo,
   } = useSelector((state: State) => ({
-    collection: state.videos.collection,
+    collection: getArrayFromSet(state.videos.collection),
     ownVideosIds: state.videos.ownVideosIds,
     ownVideosLoading: state.videos.statusOfLoadingOwnVideos.loading,
     sharedVideosIds: state.videos.sharedVideosIds,
@@ -44,7 +45,6 @@ const VideoPage: FC = (): ReactElement => {
   }));
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
-  console.log(collection, ownVideosIds, sharedVideosIds);
   const videos =
     activeVideoPage === 'own'
       ? collection.filter((video: Video) => ownVideosIds.includes(video.id))

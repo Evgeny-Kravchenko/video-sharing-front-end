@@ -18,7 +18,7 @@ const initialState: State = {
     statusOfRegisterUser: { loading: false, error: null, isSuccess: null },
   },
   videos: {
-    collection: [],
+    collection: new Set(),
     ownVideosIds: [],
     sharedVideosIds: [],
     statusOfLoadingOwnVideos: { isSuccess: null, loading: false, error: null },

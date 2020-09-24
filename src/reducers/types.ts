@@ -1,5 +1,3 @@
-import { Video } from '../types';
-
 export interface Status {
   loading: boolean;
   error: Error | null;
@@ -14,7 +12,7 @@ export interface UserState {
 }
 
 export interface VideoState {
-  collection: Array<Video>;
+  collection: Set<string>;
   ownVideosIds: Array<string>;
   sharedVideosIds: Array<string>;
   statusOfLoadingOwnVideos: Status;
