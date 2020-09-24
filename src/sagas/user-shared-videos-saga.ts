@@ -10,7 +10,7 @@ function* fetchUserSharedVideo(action: Action) {
   try {
     const userEmail = action.payload;
     yield delay(1000);
-    const videos = yield videoService.getWhoSharedVideosWith(userEmail);
+    const videos = yield videoService.getSharedVideos(userEmail);
     yield put(userSharedVideosSuccess(videos));
   } catch (err) {
     yield put(userSharedVideosFailure(err));

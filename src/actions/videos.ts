@@ -122,25 +122,29 @@ const clearStatusOfRemovingVideo = (): Action => {
   };
 };
 
-const shareVideoRequest = (email: string, videoId: string): Action => {
+const shareVideoRequest = (
+  email: string,
+  videoId: string,
+  userEmailWhoShareVideo: string
+): Action => {
   return {
     type: ActionVideosTypes.SHARE_VIDEO_REQUEST,
-    payload: { email, videoId },
+    payload: { email, videoId, userEmailWhoShareVideo },
   };
 };
 
 const shareVideoSuccess = ({
   email,
   videoId,
-  videoOwnerEmail,
+  userEmailWhoShareVideo,
 }: {
   email: string;
   videoId: string;
-  videoOwnerEmail: string;
+  userEmailWhoShareVideo: string;
 }): Action => {
   return {
     type: ActionVideosTypes.SHARE_VIDEO_SUCCESS,
-    payload: { email, videoId, videoOwnerEmail },
+    payload: { email, videoId, userEmailWhoShareVideo },
   };
 };
 

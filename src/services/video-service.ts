@@ -6,8 +6,8 @@ export default class VideoService {
     return db.getOwnVideos(id);
   }
 
-  public async getWhoSharedVideosWith(email: string): Promise<Array<Video> | Error> {
-    return db.getWhoSharedVideosWith(email);
+  public async getSharedVideos(email: string): Promise<Array<Video> | Error> {
+    return db.getSharedVideos(email);
   }
 
   public async addNewVideo(data: { data: Video; userEmail: string }): Promise<string | Error> {
@@ -21,13 +21,13 @@ export default class VideoService {
   public async shareVideo({
     email,
     videoId,
-    videoOwnerEmail,
+    userEmailWhoShareVideo,
   }: {
     email: string;
     videoId: string;
-    videoOwnerEmail: string;
+    userEmailWhoShareVideo: string;
   }): Promise<boolean | Error> {
-    return db.shareVideo({ email, videoId, videoOwnerEmail });
+    return db.shareVideo({ email, videoId, userEmailWhoShareVideo });
   }
 
   public async editVideo(data: { data: Video; videoId: string }): Promise<boolean | Error> {

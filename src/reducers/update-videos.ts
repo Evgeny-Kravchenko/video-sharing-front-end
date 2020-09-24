@@ -198,7 +198,7 @@ const updateVideos = (state: State, action: Action): VideoState => {
     case ActionVideosTypes.USER_SHARED_VIDEOS_SUCCESS: {
       return {
         ...state.videos,
-        collection: [...state.videos.collection, action.payload],
+        collection: [...state.videos.collection, ...action.payload],
         statusOfLoadingSharedVideos: {
           loading: false,
           error: null,

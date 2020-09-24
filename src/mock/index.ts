@@ -187,10 +187,12 @@ export class MockDataBase {
     return Promise.resolve(videos);
   }
 
-  public async getWhoSharedVideosWith(email: string): Promise<Array<Video> | Error> {
-    return this.videos.filter((video: Video): boolean => {
-      return video.whoSharedWith.includes(email);
-    });
+  public async getSharedVideos(email: string): Promise<Array<Video> | Error> {
+    const userId = this.users.find((user: User) => user.email === email)?.id;
+    const sharedVideosIds = this.usersSharedVideos
+      .filter((item: VideoAffilation) => item.userId === userId)
+      .map((item: VideoAffilation) => item.videoId);
+    return this.videos.filter((video: Video) => sharedVideosIds.includes(video.id));
   }
 
   public async addNewVideo(data: { data: Video; userEmail: string }): Promise<string | Error> {
@@ -218,20 +220,36 @@ export class MockDataBase {
   public async shareVideo({
     email,
     videoId,
-    videoOwnerEmail,
+    userEmailWhoShareVideo,
   }: {
     email: string;
     videoId: string;
-    videoOwnerEmail: string;
+    userEmailWhoShareVideo: string;
   }): Promise<boolean | Error> {
-    if (videoOwnerEmail === email) {
+    // if (userEmailWhoShareVideo === email) {
+    //   return Promise.reject(new Error("You can't share the video to yourself."));
+    // }
+    // this.videos.forEach((video: Video) => {
+    //   if (video.id === videoId) {
+    //     video.whoSharedWith.push(email);
+    //   }
+    // });
+    // return Promise.resolve(true);
+    const userIdWhoShareVideo = this.users.find(
+      (user: User) => user.email === userEmailWhoShareVideo
+    )?.id;
+    const userIdWhomShareVideo = this.users.find((user: User) => user.email === email)?.id;
+    if (!userIdWhoShareVideo || !userIdWhomShareVideo) {
+      return Promise.reject('Something went wrong');
+    }
+    if (userIdWhoShareVideo === userIdWhomShareVideo) {
       return Promise.reject(new Error("You can't share the video to yourself."));
     }
-    this.videos.forEach((video: Video) => {
-      if (video.id === videoId) {
-        video.whoSharedWith.push(email);
-      }
-    });
+    this.usersSharedVideos = [
+      ...this.usersSharedVideos,
+      { id: String(Math.floor(Math.random() * 100000)), userId: userIdWhomShareVideo, videoId },
+    ];
+    console.log(this.usersSharedVideos);
     return Promise.resolve(true);
   }
 
