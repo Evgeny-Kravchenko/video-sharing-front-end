@@ -99,6 +99,9 @@ const updateVideos = (state: State, action: Action): VideoState => {
       return {
         ...state.videos,
         collection: state.videos.collection.filter((video: Video) => video.id !== action.payload),
+        ownVideosIds: state.videos.ownVideosIds.filter(
+          (videoId: string) => videoId !== action.payload
+        ),
         statusOfRemovingVideo: {
           isSuccess: true,
           loading: false,

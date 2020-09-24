@@ -208,6 +208,10 @@ export class MockDataBase {
 
   public async deleteVideo(id: string): Promise<boolean | Error> {
     this.videos = this.videos.filter((video: Video) => video.id !== id);
+    this.usersVideo = this.usersVideo.filter((item: VideoAffilation) => item.videoId !== id);
+    this.usersSharedVideos = this.usersSharedVideos.filter(
+      (item: VideoAffilation) => item.videoId !== id
+    );
     return Promise.resolve(true);
   }
 

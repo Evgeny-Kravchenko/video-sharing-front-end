@@ -44,7 +44,6 @@ const VideoPage: FC = (): ReactElement => {
   }));
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
-  console.log(collection);
   const videos =
     activeVideoPage === 'own'
       ? collection.filter((video: Video) => ownVideosIds.includes(video.id))
