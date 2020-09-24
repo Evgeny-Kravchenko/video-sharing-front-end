@@ -1,5 +1,4 @@
 import Action from './types';
-import { StateVideos } from '../reducers/types';
 import { Video } from '../types';
 
 enum ActionVideosTypes {
@@ -27,14 +26,14 @@ enum ActionVideosTypes {
   CLEAR_STATUS_OF_EDITING_VIDEO = 'CLEAR_STATUS_OF_EDITING_VIDEO',
 }
 
-const userOwnVideosRequest = (email: string): Action => {
+const userOwnVideosRequest = (id: string): Action => {
   return {
     type: ActionVideosTypes.USER_OWN_VIDEOS_REQUEST,
-    payload: email,
+    payload: id,
   };
 };
 
-const userOwnVideosSuccess = (videos: Array<StateVideos>): Action => {
+const userOwnVideosSuccess = (videos: Array<Video>): Action => {
   return {
     type: ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS,
     payload: videos,
@@ -55,7 +54,7 @@ const userSharedVideosRequest = (email: string): Action => {
   };
 };
 
-const userSharedVideosSuccess = (videos: Array<StateVideos>): Action => {
+const userSharedVideosSuccess = (videos: Array<Video>): Action => {
   return {
     type: ActionVideosTypes.USER_SHARED_VIDEOS_SUCCESS,
     payload: videos,
@@ -69,17 +68,17 @@ const userSharedVideosFailure = (error: Error): Action => {
   };
 };
 
-const addNewVideoRequest = (video: Video): Action => {
+const addNewVideoRequest = (data: { data: Video; userEmail: string }): Action => {
   return {
     type: ActionVideosTypes.ADD_NEW_VIDEO_REQUEST,
-    payload: video,
+    payload: data,
   };
 };
 
-const addNewVideoSuccess = (video: Video): Action => {
+const addNewVideoSuccess = (data: { video: Video; videoId: string }): Action => {
   return {
     type: ActionVideosTypes.ADD_NEW_VIDEO_SUCCESS,
-    payload: video,
+    payload: data,
   };
 };
 
@@ -123,25 +122,29 @@ const clearStatusOfRemovingVideo = (): Action => {
   };
 };
 
-const shareVideoRequest = (email: string, videoId: string, videoOwnerEmail: string): Action => {
+const shareVideoRequest = (
+  email: string,
+  videoId: string,
+  userEmailWhoShareVideo: string
+): Action => {
   return {
     type: ActionVideosTypes.SHARE_VIDEO_REQUEST,
-    payload: { email, videoId, videoOwnerEmail },
+    payload: { email, videoId, userEmailWhoShareVideo },
   };
 };
 
 const shareVideoSuccess = ({
   email,
   videoId,
-  videoOwnerEmail,
+  userEmailWhoShareVideo,
 }: {
   email: string;
   videoId: string;
-  videoOwnerEmail: string;
+  userEmailWhoShareVideo: string;
 }): Action => {
   return {
     type: ActionVideosTypes.SHARE_VIDEO_SUCCESS,
-    payload: { email, videoId, videoOwnerEmail },
+    payload: { email, videoId, userEmailWhoShareVideo },
   };
 };
 
@@ -158,14 +161,14 @@ const clearStatusSharingVideo = (): Action => {
   };
 };
 
-const editVideoRequest = (data: Video): Action => {
+const editVideoRequest = (data: { data: Video; userEmail: string; videoId: string }): Action => {
   return {
     type: ActionVideosTypes.EDIT_VIDEO_REQUEST,
-    payload: data,
+    payload: { data: data.data, videoId: data.videoId },
   };
 };
 
-const editVideoSuccess = (data: Video): Action => {
+const editVideoSuccess = (data: { data: Video; videoId: string }): Action => {
   return {
     type: ActionVideosTypes.EDIT_VIDEO_SUCCESS,
     payload: data,

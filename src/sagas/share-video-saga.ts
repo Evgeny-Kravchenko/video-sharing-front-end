@@ -1,7 +1,7 @@
 import { put, takeLatest, delay } from 'redux-saga/effects';
 import { shareVideoSuccess, shareVideoFailure, clearStatusSharingVideo } from '../actions';
 
-import { userService, videoService } from '../index';
+import { videoService } from '../index';
 
 import { ActionVideosTypes } from '../actions';
 import Action from '../actions/types';
@@ -10,7 +10,6 @@ function* fetchShareVideo(action: Action) {
   try {
     const data = action.payload;
     yield delay(1000);
-    yield userService.checkUser(data.email);
     yield videoService.shareVideo(data);
     yield put(shareVideoSuccess(data));
   } catch (err) {

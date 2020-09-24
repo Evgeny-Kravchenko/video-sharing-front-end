@@ -17,14 +17,12 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const [isShareWindowShown, setIsShareWindowShown] = useState(false);
   const [isEditingWindowShown, setIsEditingVideoShown] = useState(false);
   const {
-    video: { title, description, owner, id, whoSharedWith },
+    video: { title, description, id },
   } = props;
-  const isOwner = useSelector((state: State) => state.authUser.email) === owner;
-  const isLoadingCallback = (state: State) =>
-    state.videosOfUser.ownVideos.statusOfEditingVideo.loading;
-  const isSuccessCallback = (state: State) =>
-    state.videosOfUser.ownVideos.statusOfEditingVideo.isSuccess;
-  const isErrorCallback = (state: State) => state.videosOfUser.ownVideos.statusOfEditingVideo.error;
+  const isOwner = useSelector((state: State) => state.videos.ownVideosIds).includes(id);
+  const isLoadingCallback = (state: State) => state.videos.statusOfEditingVideo.loading;
+  const isSuccessCallback = (state: State) => state.videos.statusOfEditingVideo.isSuccess;
+  const isErrorCallback = (state: State) => state.videos.statusOfEditingVideo.error;
   return (
     <Wrapper width="300px" margin="0">
       <div className="card my-2">
@@ -63,12 +61,7 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
         </div>
       </div>
       {isShareWindowShown && (
-        <ShareVideoForm
-          onSetIsShareWindowShown={setIsShareWindowShown}
-          title={title}
-          id={id}
-          owner={owner}
-        />
+        <ShareVideoForm onSetIsShareWindowShown={setIsShareWindowShown} title={title} id={id} />
       )}
       {isEditingWindowShown && (
         <ModalWindow
@@ -77,7 +70,6 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
           isSuccessCallback={isSuccessCallback}
           isLoadingCallback={isLoadingCallback}
           action={editVideoRequest}
-          whoSharedWith={whoSharedWith}
           title={title}
           descr={description}
           id={id}

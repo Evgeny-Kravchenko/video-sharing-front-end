@@ -13,7 +13,7 @@ const Header: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const { currentPage, isAuth } = useSelector((state: State) => ({
     currentPage: state.currentPage,
-    isAuth: state.authUser.isAuth,
+    isAuth: state.user.statusOfAuthorizeUser.isSuccess,
   }));
   const handleOnClickItemMenu = (path: PagesList) => () => dispatch(changeCurrentPage(path));
   const pathForLogo = isAuth ? PagesList.Videos : PagesList.Authentication;

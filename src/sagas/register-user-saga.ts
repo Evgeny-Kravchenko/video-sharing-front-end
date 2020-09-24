@@ -1,5 +1,5 @@
 import { put, takeLatest, delay } from 'redux-saga/effects';
-import { registerUserSuccess, registerUserFailure, registerClearMessage } from '../actions';
+import { registerUserSuccess, registerUserFailure, registerClearStatus } from '../actions';
 
 import { userService } from '../index';
 
@@ -12,7 +12,7 @@ function* fetchRegisterUserHandler(action: Action) {
     yield userService.registerUser(action.payload);
     yield put(registerUserSuccess());
     yield delay(2000);
-    yield put(registerClearMessage());
+    yield put(registerClearStatus());
   } catch (err) {
     yield put(registerUserFailure(err));
   }

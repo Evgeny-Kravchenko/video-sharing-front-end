@@ -1,19 +1,20 @@
-import IUser from '../types/user.interface';
 import Action from './types';
 import { Auth } from '../components/pages/authentication/components/auth-form/types';
+import UserResponse from '../types/get-user-response';
+import { Registration } from '../components/pages/registration/components/registration-form/types';
 
 enum UserActionTypes {
   REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST',
   REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS',
   REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE',
-  REGISTER_CLEAR_MESSAGE = 'REGISTER_CLEAR_MESSAGE',
+  REGISTER_CLEAR_STATUS = 'REGISTER_CLEAR_STATUS',
   AUTH_USER_REQUEST = 'AUTH_USER_REQUEST',
   AUTH_USER_SUCCSESS = 'AUTH_USER_SUCCSESS',
   AUTH_USER_FAILURE = 'AUTH_USER_FAILURE',
   UNAUTHORIZE = 'UNAUTHORIZE',
 }
 
-const registerUserRequest = (registerUserData: IUser): Action => {
+const registerUserRequest = (registerUserData: Registration): Action => {
   return {
     type: UserActionTypes.REGISTER_USER_REQUEST,
     payload: registerUserData,
@@ -33,9 +34,9 @@ const registerUserFailure = (err: Error): Action => {
   };
 };
 
-const registerClearMessage = (): Action => {
+const registerClearStatus = (): Action => {
   return {
-    type: UserActionTypes.REGISTER_CLEAR_MESSAGE,
+    type: UserActionTypes.REGISTER_CLEAR_STATUS,
   };
 };
 
@@ -46,7 +47,7 @@ const authorizeUserRequest = (authData: Auth): Action => {
   };
 };
 
-const authorizeUserSuccsess = (user: IUser | string): Action => {
+const authorizeUserSuccsess = (user: UserResponse): Action => {
   return { type: UserActionTypes.AUTH_USER_SUCCSESS, payload: { user } };
 };
 
@@ -68,7 +69,7 @@ export {
   registerUserRequest,
   registerUserSuccess,
   registerUserFailure,
-  registerClearMessage,
+  registerClearStatus,
   authorizeUserRequest,
   authorizeUserSuccsess,
   authorizeUserFailure,

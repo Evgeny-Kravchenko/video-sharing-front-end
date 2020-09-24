@@ -7,7 +7,7 @@ import {
   registerUserRequest,
   registerUserSuccess,
   registerUserFailure,
-  registerClearMessage,
+  registerClearStatus,
 } from './users';
 
 import {
@@ -49,7 +49,7 @@ export {
   registerUserRequest,
   registerUserSuccess,
   registerUserFailure,
-  registerClearMessage,
+  registerClearStatus,
   userOwnVideosRequest,
   userOwnVideosSuccess,
   userOwnVideosFailure,

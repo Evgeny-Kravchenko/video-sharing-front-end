@@ -4,8 +4,8 @@ import { State } from './types';
 const updateCurrentPage = (state: State, action: Action): string => {
   switch (action.type) {
     case 'MOVE_TO_ANOTHER_PAGE': {
-      const { isAuth }: { isAuth: boolean } = state.authUser;
-      return !isAuth ? 'auth' : action.payload;
+      const { isSuccess }: { isSuccess: boolean | null } = state.user.statusOfAuthorizeUser;
+      return !isSuccess ? 'auth' : action.payload;
     }
     default: {
       return state.currentPage;

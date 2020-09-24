@@ -7,7 +7,7 @@ import { unauthorize } from '../../../../../actions';
 import { State } from '../../../../../reducers/types';
 
 const AuthSuccessed: FC = () => {
-  const email: string = useSelector((state: State) => state.authUser.email);
+  const email: string = useSelector((state: State) => state.user.email);
   const dispatch = useDispatch();
   const handleOnClick: () => void = () => dispatch(unauthorize());
   return (

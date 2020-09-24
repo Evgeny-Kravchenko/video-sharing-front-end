@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import RegistrationForm from '../../pages/registration/components/registration-form';
 import MessageFailure from '../../local/message-failure';
 import Spinner from '../../local/spinner';
-import { State, StateRegisterUser } from '../../../reducers/types';
+import { State, Status } from '../../../reducers/types';
 
 const RegistrationPage: FC = (): ReactElement => {
-  const registerUser: StateRegisterUser = useSelector((state: State) => state.registerUser);
-  const { error, isSuccess, loading } = registerUser;
+  const registerUserStatus: Status = useSelector((state: State) => state.user.statusOfRegisterUser);
+  const { error, isSuccess, loading } = registerUserStatus;
   return (
     <div className="p-lg-5 p-md-3 p-2">
       {error && !loading && <MessageFailure header={error.name} title={error.message} />}

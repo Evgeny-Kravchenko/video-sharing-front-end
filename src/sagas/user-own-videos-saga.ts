@@ -8,9 +8,9 @@ import Action from '../actions/types';
 
 function* fetchUserOwnVideo(action: Action) {
   try {
-    const userEmail = action.payload;
+    const id = action.payload;
     yield delay(1000);
-    const videos = yield videoService.getOwnVideos(userEmail);
+    const videos = yield videoService.getOwnVideos(id);
     yield put(userOwnVideosSuccess(videos));
   } catch (err) {
     yield put(userOwnVideosFailure(err));

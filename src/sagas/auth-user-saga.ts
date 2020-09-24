@@ -12,7 +12,7 @@ function* fetchAuthUserHandler(action: Action) {
     yield delay(1000);
     const user = yield userService.getUser(email, password);
     yield put(authorizeUserSuccsess(user));
-    yield put(userOwnVideosRequest(email));
+    yield put(userOwnVideosRequest(user.user.id));
   } catch (error) {
     yield put(authorizeUserFailure(error));
   }

@@ -1,5 +1,5 @@
-import { StateAuthUser } from '../../../reducers/types';
+import { UserState } from '../../../reducers/types';
 
 export default interface AuthenticationPageProps {
-  authUser: StateAuthUser;
+  user: UserState;
 }
