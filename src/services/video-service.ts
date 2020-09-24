@@ -30,7 +30,7 @@ export default class VideoService {
     return db.shareVideo({ email, videoId, videoOwnerEmail });
   }
 
-  public async editVideo(data: Video): Promise<boolean | Error> {
+  public async editVideo(data: { data: Video; videoId: string }): Promise<boolean | Error> {
     return db.editVideo(data);
   }
 }

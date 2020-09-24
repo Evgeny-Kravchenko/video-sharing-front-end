@@ -18,6 +18,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
     action,
     title,
     descr,
+    id: videoId,
   } = props;
   const loading: boolean = useSelector(isLoadingCallback);
   const isSuccess: boolean | null = useSelector(isSuccessCallback);
@@ -31,7 +32,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
   );
   const errorFile = errors.file && <ValidationError>{errors.file.message}</ValidationError>;
   const onSubmit = (data: Video) => {
-    dispatch(action({ data, userEmail }));
+    dispatch(action({ data, userEmail, videoId }));
   };
   return (
     <div className="modal d-block">

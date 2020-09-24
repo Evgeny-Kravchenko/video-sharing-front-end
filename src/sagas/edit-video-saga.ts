@@ -13,7 +13,7 @@ function* fetchEditNewVideo(action: Action) {
   try {
     yield delay(1000);
     yield videoService.editVideo(action.payload);
-    yield put(editVideoSuccess(action.payload));
+    yield put(editVideoSuccess(action.payload.data));
   } catch (err) {
     yield put(editVideoFailure(err));
   }

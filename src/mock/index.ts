@@ -235,12 +235,12 @@ export class MockDataBase {
     return Promise.resolve(true);
   }
 
-  public async editVideo(data: Video): Promise<boolean | Error> {
+  public async editVideo(data: { data: Video; videoId: string }): Promise<boolean | Error> {
     this.videos = this.videos.map((video: Video) => {
-      if (data.id === video.id) {
-        video.title = data.title;
-        video.description = data.description;
-        video.file = data.file;
+      if (data.videoId === video.id) {
+        video.title = data.data.title;
+        video.description = data.data.description;
+        video.file = data.data.file;
       }
       return video;
     });
