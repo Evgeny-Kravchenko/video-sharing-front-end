@@ -6,6 +6,7 @@ export interface Action {
 export enum PagesList {
   Authentication = 'auth',
   Videos = 'videos',
+  Registrations = 'registration',
 }
 
 export enum PagesTypesActions {

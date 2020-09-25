@@ -44,6 +44,16 @@ const Header: FC = (): ReactElement => {
               Authentication
             </Link>
           </li>
+          {!isAuth && (
+            <li
+              className={`nav-item ${currentPage === PagesList.Registrations ? 'active' : null}`}
+              onClick={handleOnClickItemMenu(PagesList.Registrations)}
+            >
+              <Link className="nav-link" to="/registration">
+                Registration
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </HeaderStyled>

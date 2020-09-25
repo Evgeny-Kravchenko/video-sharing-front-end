@@ -2,11 +2,13 @@ import updateCurrentPage from './update-current-page';
 import updateVideos from './update-videos';
 import updateUser from './update-user';
 
-import { Action } from '../actions';
+import { Action, PagesList } from '../actions';
 import { State } from './types';
 
+const initialCurrentPage = window.location.pathname.match(/\/(.+)\/*/) || PagesList.Authentication;
+
 const initialState: State = {
-  currentPage: 'auth',
+  currentPage: initialCurrentPage[1],
   user: {
     name: '',
     email: '',
