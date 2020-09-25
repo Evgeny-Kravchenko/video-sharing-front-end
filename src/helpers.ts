@@ -13,11 +13,11 @@ const getSetFromArray = (arr: Array<any>) => {
 const getInitialState = () => {
   const initialCurrentPage =
     window.location.pathname.match(/\/(.+)\/*/) || PagesList.Authentication;
-  const initialName = localStorage.getItem('name');
   const initialEmail = localStorage.getItem('email');
   const initialCollectionArray = localStorage.getItem('collection');
   const initialOwnVideosIdsStringify = localStorage.getItem('own-videos-ids');
   const initialSharedVideosIdsStringify = localStorage.getItem('shared-videos-ids');
+  const initialUid = localStorage.getItem('uid');
   let initialOwnVideosIds;
   let initialSharedVideosIds;
   let initialCollection;
@@ -33,11 +33,11 @@ const getInitialState = () => {
 
   return {
     initialCurrentPage,
-    initialName,
     initialEmail,
     initialOwnVideosIds,
     initialSharedVideosIds,
     initialCollection,
+    initialUid,
   };
 };
 

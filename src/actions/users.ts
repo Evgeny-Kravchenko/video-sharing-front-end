@@ -1,6 +1,5 @@
 import { Action, UserActionTypes } from './types';
 import { Auth } from '../components/pages/authentication/components/auth-form/types';
-import UserResponse from '../types/get-user-response';
 import { Registration } from '../components/pages/registration/components/registration-form/types';
 
 const registerUserRequest = (registerUserData: Registration): Action => {
@@ -36,7 +35,7 @@ const authorizeUserRequest = (authData: Auth): Action => {
   };
 };
 
-const authorizeUserSuccsess = (user: UserResponse): Action => {
+const authorizeUserSuccsess = (user: { email: string; uid: string }): Action => {
   return { type: UserActionTypes.AUTH_USER_SUCCSESS, payload: { user } };
 };
 

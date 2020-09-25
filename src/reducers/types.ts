@@ -5,7 +5,7 @@ export interface Status {
 }
 
 export interface UserState {
-  name: string;
+  uid: string;
   email: string;
   statusOfAuthorizeUser: Status;
   statusOfRegisterUser: Status;

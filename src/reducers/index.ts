@@ -8,20 +8,20 @@ import { getInitialState } from '../helpers';
 
 const {
   initialCurrentPage,
-  initialName,
   initialEmail,
   initialOwnVideosIds,
   initialSharedVideosIds,
   initialCollection,
+  initialUid,
 } = getInitialState();
 
 const initialState: State = {
   currentPage: initialCurrentPage[1],
   user: {
-    name: initialName || '',
+    uid: initialUid || '',
     email: initialEmail || '',
     statusOfAuthorizeUser: {
-      isSuccess: !!initialName,
+      isSuccess: !!initialEmail,
       loading: false,
       error: null,
     },

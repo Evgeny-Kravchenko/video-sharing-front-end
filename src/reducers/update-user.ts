@@ -14,12 +14,10 @@ const updateUser = (state: State, action: Action): UserState => {
       };
     }
     case UserActionTypes.AUTH_USER_SUCCSESS: {
-      localStorage.setItem('name', action.payload.user.user.name);
-      localStorage.setItem('email', action.payload.user.user.email);
+      localStorage.setItem('email', action.payload.user.email);
       return {
         ...state.user,
-        name: action.payload.user.user.name,
-        email: action.payload.user.user.email,
+        email: action.payload.user.email,
         statusOfAuthorizeUser: updateStatus(state, action),
       };
     }
@@ -33,7 +31,6 @@ const updateUser = (state: State, action: Action): UserState => {
       localStorage.clear();
       return {
         ...state.user,
-        name: '',
         email: '',
         statusOfAuthorizeUser: updateStatus(state, action),
       };
