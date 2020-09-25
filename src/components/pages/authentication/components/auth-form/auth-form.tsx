@@ -6,12 +6,13 @@ import { Dispatch } from 'redux';
 import { Form, Label } from '../../../../../styles/global-styled-components';
 import RegistrationLink from './styled-components';
 
-import { authorizeUserRequest } from '../../../../../actions';
+import { authorizeUserRequest, changeCurrentPage, PagesList } from '../../../../../actions';
 
 import { Auth } from './types';
 
 const AuthForm: FC = (): ReactElement => {
   const dispatch: Dispatch = useDispatch();
+  const handleOnClickItemMenu = (path: PagesList) => () => dispatch(changeCurrentPage(path));
   const onSubmit = useCallback((data: Auth) => {
     dispatch(authorizeUserRequest(data));
   }, []);
@@ -53,7 +54,7 @@ const AuthForm: FC = (): ReactElement => {
       <button type="submit" className="btn btn-primary">
         Log In
       </button>
-      <RegistrationLink to="registration">
+      <RegistrationLink to="registration" onClick={handleOnClickItemMenu(PagesList.Registrations)}>
         If you aren&apos;t our user, you should register and authenticate to use the application
       </RegistrationLink>
     </Form>
