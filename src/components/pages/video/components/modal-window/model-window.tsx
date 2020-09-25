@@ -8,6 +8,7 @@ import { State } from '../../../../../reducers/types';
 
 import ValidationError from '../../../registration/components/registration-form/styled-components';
 import Spinner from '../../../../local/spinner';
+import { ButtonClose, SpinnerWrapper, StatusMessage } from './styled-components/modal-header';
 
 const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElement => {
   const {
@@ -40,25 +41,35 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
   const errorFile = errors.file && <ValidationError>{errors.file.message}</ValidationError>;
 
   const successMessage = isSuccess && (
-    <p className="text-success my-0 mx-auto">
+    <StatusMessage className="text-success my-0 mx-auto order-1">
       The video is {title || descr ? 'edited' : 'added'} successfully.
-    </p>
+    </StatusMessage>
   );
-  const errorMessage = error && <p className="text-danger my-0 mx-auto">{error.message}</p>;
-  const spinner = loading && <Spinner />;
+  const errorMessage = error && (
+    <StatusMessage className="text-danger my-0 mx-auto order-1">{error.message}</StatusMessage>
+  );
+  const spinner = loading && (
+    <SpinnerWrapper className="mx-auto order-1">
+      <Spinner />
+    </SpinnerWrapper>
+  );
 
   return (
     <div className="modal d-block">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
-          <div className="modal-header d-flex justify-content-between align-items-center">
-            <h5 className="modal-title m-0">{title || descr ? 'Edit' : 'Add new'} video</h5>
+          <div className="modal-header d-flex justify-content-between align-items-center flex-wrap">
+            <h5 className="modal-title order-0">{title || descr ? 'Edit' : 'Add new'} video</h5>
             {spinner}
             {successMessage}
             {errorMessage}
-            <button type="button" className="close" onClick={() => onSetModalWindow(false)}>
+            <ButtonClose
+              type="button"
+              className="close order-2 m-0 p-0"
+              onClick={() => onSetModalWindow(false)}
+            >
               <span>&times;</span>
-            </button>
+            </ButtonClose>
           </div>
           <form className="modal-body" onSubmit={handleSubmit(onSubmit)}>
             <fieldset>

@@ -14,12 +14,16 @@ const Logo = styled(Link)`
     color: #ffffff;
   }
 
-  @media screen and (max-width: 700px) {
-    font-size: 1.5rem;
+  @media screen and (max-width: 575px) {
+    align-self: flex-start;
+    padding: 10px;
   }
 
   @media screen and (max-width: 400px) {
-    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
   }
 `;
 

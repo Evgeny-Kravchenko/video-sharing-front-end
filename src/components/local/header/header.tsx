@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { changeCurrentPage, PagesList } from '../../../actions';
 
-import { HeaderStyled, Logo, LogoIcon } from './styled-components';
+import { HeaderStyled, Logo, LogoIcon, NavUl } from './styled-components';
 
 import logoIcon from './images/video.png';
 
@@ -27,7 +27,7 @@ const Header: FC = (): ReactElement => {
           <LogoIcon src={logoIcon} alt="Video sharing" />
           Video sharing
         </Logo>
-        <ul className="navbar-nav d-flex justify-content-end ml-auto">
+        <NavUl className="navbar-nav d-flex justify-content-end ml-auto">
           <li
             className={`nav-item ${currentPage === PagesList.Videos && isAuth ? 'active' : null}`}
             onClick={handleOnClickItemMenu(PagesList.Videos)}
@@ -54,7 +54,7 @@ const Header: FC = (): ReactElement => {
               </Link>
             </li>
           )}
-        </ul>
+        </NavUl>
       </nav>
     </HeaderStyled>
   );
