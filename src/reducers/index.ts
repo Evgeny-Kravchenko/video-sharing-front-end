@@ -6,14 +6,16 @@ import { Action, PagesList } from '../actions';
 import { State } from './types';
 
 const initialCurrentPage = window.location.pathname.match(/\/(.+)\/*/) || PagesList.Authentication;
+const initialName = localStorage.getItem('name');
+const initialEmail = localStorage.getItem('email');
 
 const initialState: State = {
   currentPage: initialCurrentPage[1],
   user: {
-    name: '',
-    email: '',
+    name: initialName || '',
+    email: initialEmail || '',
     statusOfAuthorizeUser: {
-      isSuccess: false,
+      isSuccess: !!initialName,
       loading: false,
       error: null,
     },
