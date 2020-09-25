@@ -11,11 +11,11 @@ function* fetchRegisterUserHandler(action: Action) {
     yield delay(1000);
     yield userService.registerUser(action.payload);
     yield put(registerUserSuccess());
-    yield delay(2000);
-    yield put(registerClearStatus());
   } catch (err) {
     yield put(registerUserFailure(err));
   }
+  yield delay(2000);
+  yield put(registerClearStatus());
 }
 
 function* registerUserSaga() {
