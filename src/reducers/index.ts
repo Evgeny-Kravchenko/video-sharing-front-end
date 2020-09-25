@@ -2,12 +2,18 @@ import updateCurrentPage from './update-current-page';
 import updateVideos from './update-videos';
 import updateUser from './update-user';
 
-import { Action, PagesList } from '../actions';
+import { Action } from '../actions';
 import { State } from './types';
+import { getInitialState } from '../helpers';
 
-const initialCurrentPage = window.location.pathname.match(/\/(.+)\/*/) || PagesList.Authentication;
-const initialName = localStorage.getItem('name');
-const initialEmail = localStorage.getItem('email');
+const {
+  initialCurrentPage,
+  initialName,
+  initialEmail,
+  initialOwnVideosIds,
+  initialSharedVideosIds,
+  initialCollection,
+} = getInitialState();
 
 const initialState: State = {
   currentPage: initialCurrentPage[1],
@@ -22,9 +28,9 @@ const initialState: State = {
     statusOfRegisterUser: { loading: false, error: null, isSuccess: null },
   },
   videos: {
-    collection: new Set(),
-    ownVideosIds: [],
-    sharedVideosIds: [],
+    collection: initialCollection || new Set(),
+    ownVideosIds: initialOwnVideosIds || [],
+    sharedVideosIds: initialSharedVideosIds || [],
     statusOfLoadingOwnVideos: { isSuccess: null, loading: false, error: null },
     statusOfLoadingSharedVideos: { isSuccess: null, loading: false, error: null },
     statusOfSharingVideoToUser: { isSuccess: null, loading: false, error: null },

@@ -19,6 +19,11 @@ const updateVideos = (state: State, action: Action): VideoState => {
       };
     }
     case UserActionTypes.AUTH_USER_SUCCSESS: {
+      localStorage.setItem('own-videos-ids', JSON.stringify(action.payload.user.ownVideosIds));
+      localStorage.setItem(
+        'shared-videos-ids',
+        JSON.stringify(action.payload.user.sharedVideosIds)
+      );
       return {
         ...state.videos,
         ownVideosIds: action.payload.user.ownVideosIds,
@@ -34,6 +39,7 @@ const updateVideos = (state: State, action: Action): VideoState => {
     case ActionVideosTypes.USER_OWN_VIDEOS_SUCCESS: {
       const stateArray = getArrayFromSet(state.videos.collection);
       const newStateArray = [...stateArray, ...action.payload];
+      localStorage.setItem('collection', JSON.stringify(newStateArray));
       const collection = getSetFromArray(newStateArray);
       return {
         ...state.videos,
@@ -58,11 +64,17 @@ const updateVideos = (state: State, action: Action): VideoState => {
         ...action.payload.video,
         id: action.payload.videoId,
       };
-      const collection = state.videos.collection;
-      collection.add(JSON.stringify(video));
+      const collectionArray = getArrayFromSet(state.videos.collection);
+      const newStateOfCollectionArray = [...collectionArray, video];
+      const newStateOfCollectionSet = getSetFromArray(newStateOfCollectionArray);
+      localStorage.setItem('collection', JSON.stringify(newStateOfCollectionArray));
+      localStorage.setItem(
+        'own-videos-ids',
+        JSON.stringify([...state.videos.ownVideosIds, action.payload.videoId])
+      );
       return {
         ...state.videos,
-        collection,
+        collection: newStateOfCollectionSet,
         ownVideosIds: [...state.videos.ownVideosIds, action.payload.videoId],
         statusOfAddingNewVideo: updateStatus(state, action),
       };
@@ -82,14 +94,17 @@ const updateVideos = (state: State, action: Action): VideoState => {
     case ActionVideosTypes.DELETE_VIDEO_SUCCESS: {
       const stateArray = getArrayFromSet(state.videos.collection);
       const newStateArray = stateArray.filter((video: Video) => video.id !== action.payload);
+      const newOwnVideosIds = state.videos.ownVideosIds.filter(
+        (videoId: string) => videoId !== action.payload
+      );
+      localStorage.setItem('collection', JSON.stringify(newStateArray));
+      localStorage.setItem('own-videos-ids', JSON.stringify(newOwnVideosIds));
       const collection = getSetFromArray(newStateArray);
 
       return {
         ...state.videos,
         collection,
-        ownVideosIds: state.videos.ownVideosIds.filter(
-          (videoId: string) => videoId !== action.payload
-        ),
+        ownVideosIds: newOwnVideosIds,
         statusOfRemovingVideo: updateStatus(state, action),
       };
     }
@@ -127,6 +142,7 @@ const updateVideos = (state: State, action: Action): VideoState => {
         }
         return video;
       });
+      localStorage.setItem('collection', JSON.stringify(newStateArray));
       const collection = getSetFromArray(newStateArray);
       return {
         ...state.videos,
@@ -155,6 +171,7 @@ const updateVideos = (state: State, action: Action): VideoState => {
     case ActionVideosTypes.USER_SHARED_VIDEOS_SUCCESS: {
       const stateArray = getArrayFromSet(state.videos.collection);
       const newStateArray = [...stateArray, ...action.payload];
+      localStorage.setItem('collection', JSON.stringify(newStateArray));
       const collection = getSetFromArray(newStateArray);
       return {
         ...state.videos,
