@@ -18,6 +18,10 @@ import { State } from '../../../reducers/types';
 import { Video } from '../../../types';
 
 import { getArrayFromSet } from '../../../helpers';
+import {
+  SpinnerWrapper,
+  StatusMessage,
+} from './components/modal-window/styled-components/modal-header';
 
 const VideoPage: FC = (): ReactElement => {
   const dispatch = useDispatch();
@@ -78,7 +82,9 @@ const VideoPage: FC = (): ReactElement => {
   const videoList = isLoading ? <VideoList videos={videos} /> : null;
   const successMessage =
     isSuccessDelete && activeVideoPage === 'own' ? (
-      <p className="text-success pt-2 my-0 mx-auto">The video was removed successfully.</p>
+      <StatusMessage className="text-success pt-2 my-0 mx-auto">
+        The video was removed successfully.
+      </StatusMessage>
     ) : null;
   const errorMeassage =
     errorRemovingVideo && activeVideoPage === 'own' ? (
@@ -120,9 +126,13 @@ const VideoPage: FC = (): ReactElement => {
         </li>
       </ul>
       {activeVideoPage === 'own' && isLoading && (
-        <div className="border d-flex p-2">
+        <div className="border d-flex flex-wrap p-2">
           {!errorLoadingOwnVideos && downloadVideoButton}
-          {loadingRemovingVideo && activeVideoPage === 'own' && <Spinner />}
+          {loadingRemovingVideo && activeVideoPage === 'own' && (
+            <SpinnerWrapper className="mx-auto order-1">
+              <Spinner />
+            </SpinnerWrapper>
+          )}
           {errorMeassage}
           {successMessage}
           {errorLoadingOwnVideos && <ErrorIndicator />}
