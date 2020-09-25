@@ -74,7 +74,6 @@ export class MockDataBase {
   public async addNewVideo(data: { data: Video; userEmail: string }): Promise<string | Error> {
     const videoId = String(Math.floor(Math.random() * 10000));
     this.videos.push({ ...data.data, id: videoId });
-    console.log(this.videos);
     const user = this.users.find((user: User) => user.email === data.userEmail);
     if (!user) {
       return Promise.reject(new Error('Something went wrong'));
