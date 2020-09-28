@@ -1,6 +1,7 @@
 import { Action, UserActionTypes } from './types';
 import { Auth } from '../components/pages/authentication/components/auth-form/types';
 import { Registration } from '../components/pages/registration/components/registration-form/types';
+import { UserSuccessActionProperty } from '../reducers/types';
 
 const registerUserRequest = (registerUserData: Registration): Action => {
   return {
@@ -35,7 +36,7 @@ const authorizeUserRequest = (authData: Auth): Action => {
   };
 };
 
-const authorizeUserSuccsess = (user: { email: string; uid: string }): Action => {
+const authorizeUserSuccsess = (user: UserSuccessActionProperty): Action => {
   return { type: UserActionTypes.AUTH_USER_SUCCSESS, payload: { user } };
 };
 

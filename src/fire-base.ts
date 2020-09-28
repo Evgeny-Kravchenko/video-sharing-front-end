@@ -1,5 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -14,10 +15,14 @@ const config = {
 
 class Firebase {
   private auth: app.auth.Auth;
+  private readUsersVideosRef: app.database.Reference;
+  private readUsersSharedVideosRef: app.database.Reference;
 
   constructor() {
     app.initializeApp(config);
     this.auth = app.auth();
+    this.readUsersVideosRef = app.database().ref('users-videos');
+    this.readUsersSharedVideosRef = app.database().ref('shared-users-videos');
   }
 
   public doCreateUserWithEmailAndPassword = (
@@ -30,13 +35,21 @@ class Firebase {
     password: string
   ): Promise<app.auth.UserCredential> => this.auth.signInWithEmailAndPassword(email, password);
 
-  public doSignOut = (): Promise<void> => this.auth.signOut();
+  public getUsersVideos = () => {
+    return this.readUsersVideosRef.once('value');
+  };
 
-  public doPasswordReset = (email: string): Promise<void> =>
-    this.auth.sendPasswordResetEmail(email);
+  public getUsersSharedVideos = () => {
+    return this.readUsersSharedVideosRef.once('value');
+  };
 
-  public doPasswordUpdate = (password: string): Promise<void> | undefined =>
-    this.auth.currentUser?.updatePassword(password);
+  // public doSignOut = (): Promise<void> => this.auth.signOut();
+  //
+  // public doPasswordReset = (email: string): Promise<void> =>
+  //   this.auth.sendPasswordResetEmail(email);
+  //
+  // public doPasswordUpdate = (password: string): Promise<void> | undefined =>
+  //   this.auth.currentUser?.updatePassword(password);
 }
 
 export default Firebase;

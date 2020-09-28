@@ -14,10 +14,10 @@ const updateUser = (state: State, action: Action): UserState => {
       };
     }
     case UserActionTypes.AUTH_USER_SUCCSESS: {
-      localStorage.setItem('email', action.payload.user.email);
+      localStorage.setItem('email', action.payload.user.user.email);
       return {
         ...state.user,
-        email: action.payload.user.email,
+        email: action.payload.user.user.email,
         statusOfAuthorizeUser: updateStatus(state, action),
       };
     }

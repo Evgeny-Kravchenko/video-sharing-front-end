@@ -1,6 +1,7 @@
 import { db } from '../mock';
 import { firebase } from '../index';
 import { User } from '../types';
+import UserCredential = firebase.auth.UserCredential;
 
 export default class UserService {
   private static transformSignIn(response: any): { email: string; uid: string } {
@@ -15,9 +16,8 @@ export default class UserService {
     // return db.getUser(email, password);
   }
 
-  public async registerUser(user: User): Promise<boolean | Error> {
-    await firebase.doCreateUserWithEmailAndPassword(user.email, user.password);
-    return db.registerUser(user);
+  public async registerUser(user: User): Promise<UserCredential | Error> {
+    return await firebase.doCreateUserWithEmailAndPassword(user.email, user.password);
   }
 
   public async checkUser(email: string): Promise<boolean | Error> {
