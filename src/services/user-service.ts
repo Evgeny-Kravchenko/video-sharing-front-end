@@ -10,8 +10,8 @@ export default class UserService {
     };
   }
   public async signIn(email: string, password: string): Promise<{ email: string; uid: string }> {
-    const user = await firebase.doSignInWithEmailAndPassword(email, password);
-    return Promise.resolve(UserService.transformSignIn(user));
+    const userResponse = await firebase.doSignInWithEmailAndPassword(email, password);
+    return UserService.transformSignIn(userResponse);
     // return db.getUser(email, password);
   }
 
