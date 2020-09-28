@@ -9,7 +9,7 @@ import { put, takeLatest, delay } from 'redux-saga/effects';
 
 import { videoService } from '../index';
 
-function* fetchAddNewVideo(action: Action) {
+function* fetchDeleteVideo(action: Action) {
   try {
     yield delay(1000);
     yield videoService.deleteVideo(action.payload);
@@ -22,7 +22,7 @@ function* fetchAddNewVideo(action: Action) {
 }
 
 function* deleteVideoSaga() {
-  yield takeLatest(ActionVideosTypes.DELETE_VIDEO_REQUEST, fetchAddNewVideo);
+  yield takeLatest(ActionVideosTypes.DELETE_VIDEO_REQUEST, fetchDeleteVideo);
 }
 
 export default deleteVideoSaga;

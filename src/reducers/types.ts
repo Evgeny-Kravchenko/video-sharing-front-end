@@ -1,3 +1,11 @@
+import { User } from '../types';
+
+export interface UserSuccessActionProperty {
+  user: User;
+  ownVideosIds: Array<string>;
+  sharedVideosIds: Array<string>;
+}
+
 export interface Status {
   loading: boolean;
   error: Error | null;
@@ -5,7 +13,7 @@ export interface Status {
 }
 
 export interface UserState {
-  name: string;
+  uid: string;
   email: string;
   statusOfAuthorizeUser: Status;
   statusOfRegisterUser: Status;

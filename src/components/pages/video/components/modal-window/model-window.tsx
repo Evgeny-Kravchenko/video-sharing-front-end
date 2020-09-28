@@ -25,11 +25,11 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
   const loading: boolean = useSelector(isLoadingCallback);
   const isSuccess: boolean | null = useSelector(isSuccessCallback);
   const error: Error | null = useSelector(isErrorCallback);
-  const userEmail: string = useSelector((state: State) => state.user.email);
+  const uid: string = useSelector((state: State) => state.user.uid);
 
   const dispatch = useDispatch();
   const onSubmit = (data: Video) => {
-    dispatch(action({ data, userEmail, videoId }));
+    dispatch(action({ data, uid, videoId }));
   };
 
   const { handleSubmit, register, errors } = useForm<Video>();

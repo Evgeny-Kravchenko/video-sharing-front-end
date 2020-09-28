@@ -1,17 +1,21 @@
-import { db } from '../mock';
+import { firebase } from '../index';
 import { User } from '../types';
-import UserResponse from '../types/get-user-response';
+import UserCredential = firebase.auth.UserCredential;
 
 export default class UserService {
-  public async getUser(email: string, password: string): Promise<UserResponse | Error> {
-    return db.getUser(email, password);
+  private static transformSignIn(response: any): { email: string; uid: string } {
+    return {
+      email: response.user.email,
+      uid: response.user.uid,
+    };
+  }
+  public async signIn(email: string, password: string): Promise<{ email: string; uid: string }> {
+    const userResponse = await firebase.doSignInWithEmailAndPassword(email, password);
+    return UserService.transformSignIn(userResponse);
+    // return db.getUser(email, password);
   }
 
-  public async registerUser(user: User): Promise<boolean | Error> {
-    return db.registerUser(user);
-  }
-
-  public async checkUser(email: string): Promise<boolean | Error> {
-    return db.checkUser(email);
+  public async registerUser(user: User): Promise<UserCredential | Error> {
+    return await firebase.doCreateUserWithEmailAndPassword(user.email, user.password);
   }
 }

@@ -13,7 +13,7 @@ function* fetchAddNewVideo(action: Action) {
   try {
     yield delay(1000);
     const videoId = yield videoService.addNewVideo(action.payload);
-    yield put(addNewVideoSuccess({ video: action.payload.data, videoId: videoId }));
+    yield put(addNewVideoSuccess({ video: action.payload.data, videoId }));
   } catch (err) {
     yield put(addNewVideoFailure(err));
   }

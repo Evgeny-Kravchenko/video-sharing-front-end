@@ -14,6 +14,10 @@ import store from './store';
 import UserService from './services/user-service';
 import VideoService from './services/video-service';
 
+import { Firebase } from './firebase/';
+
+const firebase = new Firebase();
+
 const AppWithHot = hot(App);
 
 const userService = new UserService();
@@ -30,4 +34,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-export { userService, videoService };
+export { userService, videoService, firebase };
