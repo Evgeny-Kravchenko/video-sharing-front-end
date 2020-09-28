@@ -14,7 +14,7 @@ import store from './store';
 import UserService from './services/user-service';
 import VideoService from './services/video-service';
 
-import Firebase from './fire-base';
+import { Firebase } from './firebase/';
 
 const firebase = new Firebase();
 

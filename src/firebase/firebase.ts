@@ -2,11 +2,9 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
-import { Video } from './types';
-import VideoAffilation from './mock/types';
+import { Video } from '../types';
+import { VideoAffilation } from './index';
 import DataSnapshot = firebase.database.DataSnapshot;
-
-import { firebase } from './index';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -19,7 +17,7 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-class Firebase {
+export default class Firebase {
   private auth: any;
   private usersVideosRef: app.database.Reference;
   private usersSharedVideosRef: app.database.Reference;
@@ -82,9 +80,9 @@ class Firebase {
   public deleteVideo = async (id: string) => {
     const allVideosSnapshot = await this.getVideos();
     let allVideosVal = allVideosSnapshot.val() || [];
-    const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
+    const usersVideosSnapShot: DataSnapshot = await this.getUsersVideos();
     let usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
-    const usersSharedVideosSnapShot: DataSnapshot = await firebase.getUsersSharedVideos();
+    const usersSharedVideosSnapShot: DataSnapshot = await this.getUsersSharedVideos();
     let usersSharedVideosVal: Array<VideoAffilation> = usersSharedVideosSnapShot.val() || [];
     allVideosVal = allVideosVal.filter((video: Video) => video.id !== id);
     usersVideosVal = usersVideosVal.filter((item: VideoAffilation) => item.videoId !== id);
@@ -131,5 +129,3 @@ class Firebase {
     return await this.videosRef.set(videosVal);
   };
 }
-
-export default Firebase;

@@ -1,7 +1,5 @@
-import { db } from '../mock';
-
 import { Video } from '../types';
-import VideoAffilation from '../mock/types';
+import { VideoAffilation } from '../firebase';
 
 import { firebase } from '../index';
 import DataSnapshot = firebase.database.DataSnapshot;
@@ -22,7 +20,7 @@ export default class VideoService {
     const allVideosSnapshot = await firebase.getVideos();
     const allVideosVal = allVideosSnapshot.val() || [];
     const usersSharedVideosSnapShot: DataSnapshot = await firebase.getUsersSharedVideos();
-    const usersSharedVideosVal: Array<VideoAffilation> = usersSharedVideosSnapShot.val();
+    const usersSharedVideosVal: Array<VideoAffilation> = usersSharedVideosSnapShot.val() || [];
     const sharedVideosIds = usersSharedVideosVal
       .filter((item: VideoAffilation) => item.userId === uid)
       .map((item: VideoAffilation) => item.videoId);
@@ -50,8 +48,7 @@ export default class VideoService {
     videoId: string;
     userEmailWhoShareVideo: string;
   }): Promise<boolean | Error> {
-    await firebase.shareVideo({ email, videoId, userEmailWhoShareVideo });
-    return db.shareVideo({ email, videoId, userEmailWhoShareVideo });
+    return await firebase.shareVideo({ email, videoId, userEmailWhoShareVideo });
   }
 
   public async editVideo(data: { data: Video; videoId: string }): Promise<boolean | Error> {
