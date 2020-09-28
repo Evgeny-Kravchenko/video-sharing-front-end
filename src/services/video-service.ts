@@ -50,6 +50,7 @@ export default class VideoService {
     videoId: string;
     userEmailWhoShareVideo: string;
   }): Promise<boolean | Error> {
+    await firebase.shareVideo({ email, videoId, userEmailWhoShareVideo });
     return db.shareVideo({ email, videoId, userEmailWhoShareVideo });
   }
 

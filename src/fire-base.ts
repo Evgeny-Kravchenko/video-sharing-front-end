@@ -20,10 +20,11 @@ const config = {
 };
 
 class Firebase {
-  private auth: app.auth.Auth;
+  private auth: any;
   private usersVideosRef: app.database.Reference;
   private usersSharedVideosRef: app.database.Reference;
   private videosRef: app.database.Reference;
+  private userRef: app.database.Reference;
 
   constructor() {
     app.initializeApp(config);
@@ -31,12 +32,20 @@ class Firebase {
     this.usersVideosRef = app.database().ref('users-videos');
     this.usersSharedVideosRef = app.database().ref('shared-users-videos');
     this.videosRef = app.database().ref('videos');
+    this.userRef = app.database().ref('users');
   }
 
-  public doCreateUserWithEmailAndPassword = (
+  public doCreateUserWithEmailAndPassword = async (
     email: string,
     password: string
-  ): Promise<app.auth.UserCredential> => this.auth.createUserWithEmailAndPassword(email, password);
+  ): Promise<app.auth.UserCredential> => {
+    const registerUser = await this.auth.createUserWithEmailAndPassword(email, password);
+    const registerUserSnapShot = await this.userRef.once('value');
+    const registerUserVal = registerUserSnapShot.val() || [];
+    registerUserVal.push({ email, id: registerUser.user?.uid });
+    await this.userRef.set(registerUserVal);
+    return registerUser;
+  };
 
   public doSignInWithEmailAndPassword = (
     email: string,
@@ -59,7 +68,7 @@ class Firebase {
     const allVideosSnapshot = await this.getVideos();
     const allVideosVal = allVideosSnapshot.val() || [];
     allVideosVal.push(data.data);
-    const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
+    const usersVideosSnapShot: DataSnapshot = await this.getUsersVideos();
     const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
     const newUsersVideosItem = {
       userId: data.uid,
@@ -85,6 +94,27 @@ class Firebase {
     await this.usersVideosRef.set(usersVideosVal);
     await this.usersSharedVideosRef.set(usersSharedVideosVal);
     return await this.videosRef.set(allVideosVal);
+  };
+
+  public shareVideo = async ({
+    email,
+    videoId,
+    userEmailWhoShareVideo,
+  }: {
+    email: string;
+    videoId: string;
+    userEmailWhoShareVideo: string;
+  }) => {
+    if (email === userEmailWhoShareVideo) {
+      return Promise.reject(new Error("You can't share the video to yourself."));
+    }
+    const usersSnapShot = await this.userRef.once('value');
+    const usersVal = usersSnapShot.val();
+    const userId = usersVal.find((user: { id: string; email: string }) => user.email === email).id;
+    const usersSharedVideosSnapShot = await this.usersSharedVideosRef.once('value');
+    const usersSharedVideosVal = usersSharedVideosSnapShot.val() || [];
+    usersSharedVideosVal.push({ userId, videoId });
+    return await this.usersSharedVideosRef.set(usersSharedVideosVal);
   };
 }
 
