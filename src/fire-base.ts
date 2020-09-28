@@ -116,6 +116,20 @@ class Firebase {
     usersSharedVideosVal.push({ userId, videoId });
     return await this.usersSharedVideosRef.set(usersSharedVideosVal);
   };
+
+  public editVideo = async (data: { data: Video; videoId: string }) => {
+    const videosSnapShot = await this.videosRef.once('value');
+    let videosVal = videosSnapShot.val() || [];
+    videosVal = videosVal.map((video: Video) => {
+      if (data.videoId === video.id) {
+        video.title = data.data.title;
+        video.description = data.data.description;
+        video.file = data.data.file;
+      }
+      return video;
+    });
+    return await this.videosRef.set(videosVal);
+  };
 }
 
 export default Firebase;

@@ -55,7 +55,7 @@ export default class VideoService {
   }
 
   public async editVideo(data: { data: Video; videoId: string }): Promise<boolean | Error> {
-    return db.editVideo(data);
+    return firebase.editVideo(data);
   }
 
   public async getOwnVideosIds(uid: string) {
