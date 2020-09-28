@@ -29,8 +29,10 @@ export default class VideoService {
     return allVideosVal.filter((video: Video) => sharedVideosIds.includes(video.id));
   }
 
-  public async addNewVideo(data: { data: Video; userEmail: string }): Promise<string | Error> {
-    return db.addNewVideo(data);
+  public async addNewVideo(data: { data: Video; uid: string }): Promise<string | Error> {
+    data.data.id = String(Math.floor(Math.random() * 10000));
+    data.data.videoUrl = '#';
+    return firebase.addNewVideo(data);
   }
 
   public async deleteVideo(id: string): Promise<boolean | Error> {

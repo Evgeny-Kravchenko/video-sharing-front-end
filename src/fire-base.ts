@@ -2,6 +2,12 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
+import { Video } from './types';
+import VideoAffilation from './mock/types';
+import DataSnapshot = firebase.database.DataSnapshot;
+
+import { firebase } from './index';
+
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -15,16 +21,16 @@ const config = {
 
 class Firebase {
   private auth: app.auth.Auth;
-  private readUsersVideosRef: app.database.Reference;
-  private readUsersSharedVideosRef: app.database.Reference;
-  private readVideosRef: app.database.Reference;
+  private usersVideosRef: app.database.Reference;
+  private usersSharedVideosRef: app.database.Reference;
+  private videosRef: app.database.Reference;
 
   constructor() {
     app.initializeApp(config);
     this.auth = app.auth();
-    this.readUsersVideosRef = app.database().ref('users-videos');
-    this.readUsersSharedVideosRef = app.database().ref('shared-users-videos');
-    this.readVideosRef = app.database().ref('videos');
+    this.usersVideosRef = app.database().ref('users-videos');
+    this.usersSharedVideosRef = app.database().ref('shared-users-videos');
+    this.videosRef = app.database().ref('videos');
   }
 
   public doCreateUserWithEmailAndPassword = (
@@ -38,24 +44,31 @@ class Firebase {
   ): Promise<app.auth.UserCredential> => this.auth.signInWithEmailAndPassword(email, password);
 
   public getUsersVideos = () => {
-    return this.readUsersVideosRef.once('value');
+    return this.usersVideosRef.once('value');
   };
 
   public getUsersSharedVideos = () => {
-    return this.readUsersSharedVideosRef.once('value');
+    return this.usersSharedVideosRef.once('value');
   };
 
   public getVideos = () => {
-    return this.readVideosRef.once('value');
+    return this.videosRef.once('value');
   };
 
-  // public doSignOut = (): Promise<void> => this.auth.signOut();
-  //
-  // public doPasswordReset = (email: string): Promise<void> =>
-  //   this.auth.sendPasswordResetEmail(email);
-  //
-  // public doPasswordUpdate = (password: string): Promise<void> | undefined =>
-  //   this.auth.currentUser?.updatePassword(password);
+  public addNewVideo = async (data: { data: Video; uid: string }) => {
+    const allVideosSnapshot = await this.getVideos();
+    const allVideosVal = allVideosSnapshot.val();
+    allVideosVal.push(data.data);
+    const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
+    const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val();
+    const newUsersVideosItem = {
+      userId: data.uid,
+      videoId: data.data.id,
+    };
+    usersVideosVal.push(newUsersVideosItem);
+    await this.usersVideosRef.set(usersVideosVal);
+    return await this.videosRef.set(allVideosVal);
+  };
 }
 
 export default Firebase;
