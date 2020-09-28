@@ -18,6 +18,7 @@ const updateUser = (state: State, action: Action): UserState => {
       return {
         ...state.user,
         email: action.payload.user.user.email,
+        uid: action.payload.user.user.uid,
         statusOfAuthorizeUser: updateStatus(state, action),
       };
     }

@@ -17,12 +17,14 @@ class Firebase {
   private auth: app.auth.Auth;
   private readUsersVideosRef: app.database.Reference;
   private readUsersSharedVideosRef: app.database.Reference;
+  private readVideosRef: app.database.Reference;
 
   constructor() {
     app.initializeApp(config);
     this.auth = app.auth();
     this.readUsersVideosRef = app.database().ref('users-videos');
     this.readUsersSharedVideosRef = app.database().ref('shared-users-videos');
+    this.readVideosRef = app.database().ref('videos');
   }
 
   public doCreateUserWithEmailAndPassword = (
@@ -41,6 +43,10 @@ class Firebase {
 
   public getUsersSharedVideos = () => {
     return this.readUsersSharedVideosRef.once('value');
+  };
+
+  public getVideos = () => {
+    return this.readVideosRef.once('value');
   };
 
   // public doSignOut = (): Promise<void> => this.auth.signOut();

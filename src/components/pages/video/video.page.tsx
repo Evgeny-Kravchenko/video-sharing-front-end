@@ -31,25 +31,27 @@ const VideoPage: FC = (): ReactElement => {
     ownVideosLoading,
     sharedVideosIds,
     sharedVideosLoading,
-    userEmail,
+    uid,
     isSuccessDelete,
     loadingRemovingVideo,
     errorLoadingOwnVideos,
     errorLoadingSharedVideos,
     errorRemovingVideo,
-  } = useSelector((state: State) => ({
-    collection: getArrayFromSet(state.videos.collection),
-    ownVideosIds: state.videos.ownVideosIds,
-    ownVideosLoading: state.videos.statusOfLoadingOwnVideos.loading,
-    sharedVideosIds: state.videos.sharedVideosIds,
-    sharedVideosLoading: state.videos.statusOfLoadingSharedVideos.loading,
-    userEmail: state.user.email,
-    isSuccessDelete: state.videos.statusOfRemovingVideo.isSuccess,
-    loadingRemovingVideo: state.videos.statusOfRemovingVideo.loading,
-    errorLoadingOwnVideos: state.videos.statusOfLoadingOwnVideos.error,
-    errorLoadingSharedVideos: state.videos.statusOfLoadingSharedVideos.error,
-    errorRemovingVideo: state.videos.statusOfRemovingVideo.error,
-  }));
+  } = useSelector((state: State) => {
+    return {
+      collection: getArrayFromSet(state.videos.collection),
+      ownVideosIds: state.videos.ownVideosIds,
+      ownVideosLoading: state.videos.statusOfLoadingOwnVideos.loading,
+      sharedVideosIds: state.videos.sharedVideosIds,
+      sharedVideosLoading: state.videos.statusOfLoadingSharedVideos.loading,
+      uid: state.user.uid,
+      isSuccessDelete: state.videos.statusOfRemovingVideo.isSuccess,
+      loadingRemovingVideo: state.videos.statusOfRemovingVideo.loading,
+      errorLoadingOwnVideos: state.videos.statusOfLoadingOwnVideos.error,
+      errorLoadingSharedVideos: state.videos.statusOfLoadingSharedVideos.error,
+      errorRemovingVideo: state.videos.statusOfRemovingVideo.error,
+    };
+  });
 
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
@@ -110,7 +112,7 @@ const VideoPage: FC = (): ReactElement => {
       <ul className="nav nav-tabs mb-4">
         <li
           className="nav-item"
-          onClick={handleSetActiveVideoPage(userOwnVideosRequest, userEmail, 'own')}
+          onClick={handleSetActiveVideoPage(userOwnVideosRequest, uid, 'own')}
         >
           <TabItem className={`nav-link ${activeVideoPage === 'own' ? 'active' : null}`}>
             My videos
@@ -118,7 +120,7 @@ const VideoPage: FC = (): ReactElement => {
         </li>
         <li
           className="nav-item"
-          onClick={handleSetActiveVideoPage(userSharedVideosRequest, userEmail, 'shared')}
+          onClick={handleSetActiveVideoPage(userSharedVideosRequest, uid, 'shared')}
         >
           <TabItem className={`nav-link ${activeVideoPage === 'shared' ? 'active' : null}`}>
             Video shared to me
