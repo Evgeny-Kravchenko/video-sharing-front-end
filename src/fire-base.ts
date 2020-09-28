@@ -57,16 +57,33 @@ class Firebase {
 
   public addNewVideo = async (data: { data: Video; uid: string }) => {
     const allVideosSnapshot = await this.getVideos();
-    const allVideosVal = allVideosSnapshot.val();
+    const allVideosVal = allVideosSnapshot.val() || [];
     allVideosVal.push(data.data);
     const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
-    const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val();
+    const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
     const newUsersVideosItem = {
       userId: data.uid,
       videoId: data.data.id,
     };
     usersVideosVal.push(newUsersVideosItem);
     await this.usersVideosRef.set(usersVideosVal);
+    return await this.videosRef.set(allVideosVal);
+  };
+
+  public deleteVideo = async (id: string) => {
+    const allVideosSnapshot = await this.getVideos();
+    let allVideosVal = allVideosSnapshot.val() || [];
+    const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
+    let usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
+    const usersSharedVideosSnapShot: DataSnapshot = await firebase.getUsersSharedVideos();
+    let usersSharedVideosVal: Array<VideoAffilation> = usersSharedVideosSnapShot.val() || [];
+    allVideosVal = allVideosVal.filter((video: Video) => video.id !== id);
+    usersVideosVal = usersVideosVal.filter((item: VideoAffilation) => item.videoId !== id);
+    usersSharedVideosVal = usersSharedVideosVal.filter(
+      (item: VideoAffilation) => item.videoId !== id
+    );
+    await this.usersVideosRef.set(usersVideosVal);
+    await this.usersSharedVideosRef.set(usersSharedVideosVal);
     return await this.videosRef.set(allVideosVal);
   };
 }

@@ -9,9 +9,9 @@ import DataSnapshot = firebase.database.DataSnapshot;
 export default class VideoService {
   public async getOwnVideos(uid: string): Promise<Array<Video> | Error> {
     const allVideosSnapshot = await firebase.getVideos();
-    const allVideosVal = allVideosSnapshot.val();
+    const allVideosVal = allVideosSnapshot.val() || [];
     const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
-    const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val();
+    const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
     const ownVideosIds = usersVideosVal
       .filter((item: VideoAffilation) => item.userId === uid)
       .map((item: VideoAffilation) => item.videoId);
@@ -20,7 +20,7 @@ export default class VideoService {
 
   public async getSharedVideos(uid: string): Promise<Array<Video> | Error> {
     const allVideosSnapshot = await firebase.getVideos();
-    const allVideosVal = allVideosSnapshot.val();
+    const allVideosVal = allVideosSnapshot.val() || [];
     const usersSharedVideosSnapShot: DataSnapshot = await firebase.getUsersSharedVideos();
     const usersSharedVideosVal: Array<VideoAffilation> = usersSharedVideosSnapShot.val();
     const sharedVideosIds = usersSharedVideosVal
@@ -29,14 +29,16 @@ export default class VideoService {
     return allVideosVal.filter((video: Video) => sharedVideosIds.includes(video.id));
   }
 
-  public async addNewVideo(data: { data: Video; uid: string }): Promise<string | Error> {
-    data.data.id = String(Math.floor(Math.random() * 10000));
+  public async addNewVideo(data: { data: Video; uid: string }) {
+    const videoId = String(Math.floor(Math.random() * 10000));
+    data.data.id = videoId;
     data.data.videoUrl = '#';
-    return firebase.addNewVideo(data);
+    await firebase.addNewVideo(data);
+    return videoId;
   }
 
-  public async deleteVideo(id: string): Promise<boolean | Error> {
-    return db.deleteVideo(id);
+  public async deleteVideo(id: string) {
+    return await firebase.deleteVideo(id);
   }
 
   public async shareVideo({
@@ -58,7 +60,7 @@ export default class VideoService {
   public async getOwnVideosIds(uid: string) {
     try {
       const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
-      const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val();
+      const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
       return usersVideosVal
         .filter((item: VideoAffilation) => item.userId === uid)
         .map((item: VideoAffilation) => item.videoId);

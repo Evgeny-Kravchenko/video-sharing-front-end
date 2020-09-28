@@ -16,7 +16,6 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const {
     video: { title, description, id },
   } = props;
-
   const dispatch = useDispatch();
   const onDeleteVideo = () => dispatch(deleteVideoRequest(id));
 
