@@ -13,18 +13,15 @@ import { ButtonClose, SpinnerWrapper, StatusMessage } from './styled-components/
 const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElement => {
   const {
     onSetModalWindow,
-    isSuccessCallback,
-    isLoadingCallback,
-    isErrorCallback,
+    isSuccess,
+    isLoading,
+    isError,
     action,
     title,
     descr,
     id: videoId,
   } = props;
 
-  const loading: boolean = useSelector(isLoadingCallback);
-  const isSuccess: boolean | null = useSelector(isSuccessCallback);
-  const error: Error | null = useSelector(isErrorCallback);
   const uid: string = useSelector((state: State) => state.user.uid);
 
   const dispatch = useDispatch();
@@ -45,10 +42,10 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
       The video is {title || descr ? 'edited' : 'added'} successfully.
     </StatusMessage>
   );
-  const errorMessage = error && (
-    <StatusMessage className="text-danger my-0 mx-auto order-1">{error.message}</StatusMessage>
+  const errorMessage = isError && (
+    <StatusMessage className="text-danger my-0 mx-auto order-1">{isError.message}</StatusMessage>
   );
-  const spinner = loading && (
+  const spinner = isLoading && (
     <SpinnerWrapper className="mx-auto order-1">
       <Spinner />
     </SpinnerWrapper>

@@ -14,7 +14,6 @@ import ModalWindow from './components/modal-window';
 import VideoList from '../video/components/video-list';
 import ErrorIndicator from '../../components/error-indicator';
 
-import { State } from '../../redux/reducers/types';
 import { Video } from '../../types';
 
 import {
@@ -33,6 +32,7 @@ import {
   getOwnVideosLoading,
   getSharedVideosIds,
   getSharedVideosLoading,
+  getStatusOfAddingNewVideo,
   getUid,
 } from '../../redux/selectors';
 
@@ -90,16 +90,14 @@ const VideoPage: FC = (): ReactElement => {
       <p className="text-danger pt-2 my-0 mx-auto">{errorRemovingVideo.message}</p>
     ) : null;
 
-  const isSuccessCallback = (state: State) => state.videos.statusOfAddingNewVideo.isSuccess;
-  const isLoadingCallback = (state: State) => state.videos.statusOfAddingNewVideo.loading;
-  const isErrorCallback = (state: State) => state.videos.statusOfAddingNewVideo.error;
+  const { isSuccess, loading, error } = useSelector(getStatusOfAddingNewVideo);
 
   const modal = isModal ? (
     <ModalWindow
       onSetModalWindow={setIsModal}
-      isSuccessCallback={isSuccessCallback}
-      isLoadingCallback={isLoadingCallback}
-      isErrorCallback={isErrorCallback}
+      isSuccess={isSuccess}
+      isLoading={loading}
+      isError={error}
       action={addNewVideoRequest}
     />
   ) : null;

@@ -5,14 +5,13 @@ import { VideoStyled, ButtonsWrapper } from './styled-components';
 import { Wrapper } from '../../../../styles/global-styled-components';
 
 import { VideoItemProps } from './types';
-import { State } from '../../../../redux/reducers/types';
 
 import { deleteVideoRequest, editVideoRequest } from '../../../../redux/actions';
 
 import ShareVideoForm from '../share-video-form';
 import ModalWindow from '../modal-window';
 
-import { getOwnVideosIds } from '../../../../redux/selectors';
+import { getOwnVideosIds, getStatusOfEditingVideo } from '../../../../redux/selectors';
 
 const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const {
@@ -22,14 +21,12 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const onDeleteVideo = () => dispatch(deleteVideoRequest(id));
 
   const ownVideosIds = useSelector(getOwnVideosIds);
+  const { isSuccess, error, loading } = useSelector(getStatusOfEditingVideo);
   const isOwner = ownVideosIds.includes(id);
 
   const [isShareWindowShown, setIsShareWindowShown] = useState(false);
   const [isEditingWindowShown, setIsEditingVideoShown] = useState(false);
 
-  const isLoadingCallback = (state: State) => state.videos.statusOfEditingVideo.loading;
-  const isSuccessCallback = (state: State) => state.videos.statusOfEditingVideo.isSuccess;
-  const isErrorCallback = (state: State) => state.videos.statusOfEditingVideo.error;
   return (
     <Wrapper width="300px" margin="0">
       <div className="card my-2">
@@ -70,9 +67,9 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
       {isEditingWindowShown && (
         <ModalWindow
           onSetModalWindow={setIsEditingVideoShown}
-          isErrorCallback={isErrorCallback}
-          isSuccessCallback={isSuccessCallback}
-          isLoadingCallback={isLoadingCallback}
+          isError={error}
+          isSuccess={isSuccess}
+          isLoading={loading}
           action={editVideoRequest}
           title={title}
           descr={description}
