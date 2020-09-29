@@ -27,10 +27,9 @@ export default class VideoService {
     return allVideosVal.filter((video: Video) => sharedVideosIds.includes(video.id));
   }
 
-  public async addNewVideo(data: { data: Video; uid: string }) {
+  public async addNewVideo(data: { newVideo: Video; uid: string; videoId: string | undefined }) {
     const videoId = String(Math.floor(Math.random() * 10000));
-    data.data.id = videoId;
-    data.data.videoUrl = '#';
+    data.newVideo.id = videoId;
     await firebase.addNewVideo(data);
     return videoId;
   }

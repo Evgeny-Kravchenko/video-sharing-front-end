@@ -43,7 +43,11 @@ const userSharedVideosFailure = (error: Error): Action => {
   };
 };
 
-const addNewVideoRequest = (data: { data: Video; userEmail: string }): Action => {
+const addNewVideoRequest = (data: {
+  newVideo: Video;
+  uid: string;
+  videoId: string | undefined;
+}): Action => {
   return {
     type: ActionVideosTypes.ADD_NEW_VIDEO_REQUEST,
     payload: data,

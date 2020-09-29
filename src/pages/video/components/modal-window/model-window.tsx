@@ -26,7 +26,13 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
 
   const dispatch = useDispatch();
   const onSubmit = (data: Video) => {
-    dispatch(action({ data, uid, videoId }));
+    const newVideo = {
+      description: data.description,
+      id: data.id,
+      title: data.title,
+      videoUrl: data.videoUrl,
+    };
+    dispatch(action({ newVideo, uid, videoId }));
   };
 
   const { handleSubmit, register, errors } = useForm<Video>();
@@ -35,7 +41,9 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
   const errorDescription = errors.description && (
     <ValidationError>{errors.description.message}</ValidationError>
   );
-  const errorFile = errors.file && <ValidationError>{errors.file.message}</ValidationError>;
+  const errorVideoUrl = errors.videoUrl && (
+    <ValidationError>{errors.videoUrl.message}</ValidationError>
+  );
 
   const successMessage = isSuccess && (
     <StatusMessage className="text-success my-0 mx-auto order-1">
@@ -72,7 +80,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
             <fieldset>
               <legend>Enter video information</legend>
               <div className="form-group">
-                <label htmlFor="staticEmail" className="col-sm-2 col-form-label">
+                <label htmlFor="title" className="col-sm-2 col-form-label">
                   Title:
                 </label>
                 <div className="col-sm-12">
@@ -91,7 +99,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
               </div>
               <div className="form-group">
                 <div className="col-sm-12">
-                  <label htmlFor="exampleTextarea">Enter video description</label>
+                  <label htmlFor="description">Enter video description: </label>
                   <textarea
                     className="form-control"
                     id="description"
@@ -106,18 +114,18 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
               </div>
               <div className="form-group">
                 <div className="col-12">
-                  <label htmlFor="exampleInputFile">Choose file</label>
+                  <label htmlFor="videoUrl">Video url: </label>
                   <input
-                    type="file"
-                    className="form-control-file"
-                    id="file"
-                    name="file"
-                    ref={register({ required: 'You must choose a file' })}
+                    type="url"
+                    className="form-control-file border"
+                    id="videoUrl"
+                    name="videoUrl"
+                    ref={register({ required: 'You must enter video url' })}
                   />
-                  <small id="fileHelp" className="form-text text-muted">
-                    Select a video file on your device to download it.
+                  <small id="videoUrlHelp" className="form-text text-muted">
+                    Input a video url.
                   </small>
-                  {errorFile}
+                  {errorVideoUrl}
                 </div>
               </div>
             </fieldset>

@@ -1,6 +1,6 @@
 export default interface Video {
+  description: string;
   id: string;
   title: string;
-  description: string;
-  [key: string]: any;
+  videoUrl: string;
 }

@@ -62,15 +62,19 @@ export default class Firebase {
     return this.videosRef.once('value');
   };
 
-  public addNewVideo = async (data: { data: Video; uid: string }) => {
+  public addNewVideo = async (data: {
+    newVideo: Video;
+    uid: string;
+    videoId: string | undefined;
+  }) => {
     const allVideosSnapshot = await this.getVideos();
     const allVideosVal = allVideosSnapshot.val() || [];
-    allVideosVal.push(data.data);
+    allVideosVal.push(data.newVideo);
     const usersVideosSnapShot: DataSnapshot = await this.getUsersVideos();
     const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
     const newUsersVideosItem = {
       userId: data.uid,
-      videoId: data.data.id,
+      videoId: data.newVideo.id,
     };
     usersVideosVal.push(newUsersVideosItem);
     await this.usersVideosRef.set(usersVideosVal);
@@ -122,7 +126,7 @@ export default class Firebase {
       if (data.videoId === video.id) {
         video.title = data.data.title;
         video.description = data.data.description;
-        video.file = data.data.file;
+        video.videoUrl = data.data.videoUrl;
       }
       return video;
     });
