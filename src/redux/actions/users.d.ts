@@ -1,0 +1,13 @@
+import { Action, UserActionTypes } from './types';
+import { Auth } from '../components/pages/authentication/components/auth-form/types';
+import UserResponse from '../types/get-user-response';
+import { Registration } from '../components/pages/registration/components/registration-form/types';
+declare const registerUserRequest: (registerUserData: Registration) => Action;
+declare const registerUserSuccess: () => Action;
+declare const registerUserFailure: (err: Error) => Action;
+declare const registerClearStatus: () => Action;
+declare const authorizeUserRequest: (authData: Auth) => Action;
+declare const authorizeUserSuccsess: (user: UserResponse) => Action;
+declare const authorizeUserFailure: (error: Error) => Action;
+declare const unauthorize: () => Action;
+export { UserActionTypes, registerUserRequest, registerUserSuccess, registerUserFailure, registerClearStatus, authorizeUserRequest, authorizeUserSuccsess, authorizeUserFailure, unauthorize, };
