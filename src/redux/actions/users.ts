@@ -47,9 +47,22 @@ const authorizeUserFailure = (error: Error): Action => {
   };
 };
 
-const unauthorize = (): Action => {
+const unauthorizeRequest = (): Action => {
   return {
-    type: UserActionTypes.UNAUTHORIZE,
+    type: UserActionTypes.UNAUTHORIZE_REQUEST,
+  };
+};
+
+const unauthorizeSuccess = (): Action => {
+  return {
+    type: UserActionTypes.UNAUTHORIZE_SUCCESS,
+  };
+};
+
+const unauthorizeFailure = (err: Error): Action => {
+  return {
+    type: UserActionTypes.UNAUTHORIZE_FAILURE,
+    payload: err,
   };
 };
 
@@ -62,5 +75,7 @@ export {
   authorizeUserRequest,
   authorizeUserSuccsess,
   authorizeUserFailure,
-  unauthorize,
+  unauthorizeRequest,
+  unauthorizeSuccess,
+  unauthorizeFailure,
 };

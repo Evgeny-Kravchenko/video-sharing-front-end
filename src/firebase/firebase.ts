@@ -50,6 +50,10 @@ export default class Firebase {
     password: string
   ): Promise<app.auth.UserCredential> => this.auth.signInWithEmailAndPassword(email, password);
 
+  public doSignOut = () => {
+    return this.auth.signOut();
+  };
+
   public getUsersVideos = () => {
     return this.usersVideosRef.once('value');
   };

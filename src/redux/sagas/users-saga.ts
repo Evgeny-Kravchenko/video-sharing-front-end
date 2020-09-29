@@ -6,6 +6,8 @@ import {
   registerUserSuccess,
   registerUserFailure,
   registerClearStatus,
+  unauthorizeSuccess,
+  unauthorizeFailure,
 } from '../actions';
 
 import { userService, videoService } from '../../index';
@@ -39,9 +41,20 @@ function* fetchRegisterUserHandler(action: Action) {
   yield put(registerClearStatus());
 }
 
+function* fetchSignOut() {
+  try {
+    yield delay(1000);
+    yield userService.signOut();
+    yield put(unauthorizeSuccess());
+  } catch (error) {
+    yield put(unauthorizeFailure(error));
+  }
+}
+
 function* usersSaga() {
   yield takeLatest(UserActionTypes.AUTH_USER_REQUEST, fetchAuthUserHandler);
   yield takeLatest(UserActionTypes.REGISTER_USER_REQUEST, fetchRegisterUserHandler);
+  yield takeLatest(UserActionTypes.UNAUTHORIZE_REQUEST, fetchSignOut);
 }
 
 export default usersSaga;

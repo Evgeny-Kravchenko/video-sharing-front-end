@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Wrapper } from '../../../../styles/global-styled-components';
 
-import { unauthorize } from '../../../../redux/actions';
+import { unauthorizeRequest } from '../../../../redux/actions';
 
 import { getEmail } from '../../../../redux/selectors';
 
 const AuthSuccessed: FC = () => {
   const email: string = useSelector(getEmail);
   const dispatch = useDispatch();
-  const handleOnClick: () => void = () => dispatch(unauthorize());
+  const handleOnClick: () => void = () => dispatch(unauthorizeRequest());
   return (
     <Wrapper width="500px">
       <div className="card border-success mb-3 p-2">

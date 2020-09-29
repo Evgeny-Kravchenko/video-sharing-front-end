@@ -8,22 +8,24 @@ import Spinner from '../../components/spinner';
 
 import { Status } from '../../redux/reducers/types';
 
-import { getAuthUser } from '../../redux/selectors';
+import { getAuthUser, getStatusOfUnauthorizeUser } from '../../redux/selectors';
 
 const AuthenticationPage: FC = (): ReactElement => {
   const authUser: Status = useSelector(getAuthUser);
-  const { isSuccess, error, loading } = authUser;
+  const statusOfUnauthorizeUser: Status = useSelector(getStatusOfUnauthorizeUser);
+  const { isSuccess: isSuccessAuth, error: errorAuth, loading: loadingAuth } = authUser;
+  const { loading: loadingUnauth } = statusOfUnauthorizeUser;
   return (
     <div className="p-lg-5 p-md-3 p-2">
-      {error && (
+      {errorAuth && (
         <MessageFailure
           header="There is no such user."
           title="Email or password is wrong. Try again."
         />
       )}
-      {loading && <Spinner />}
-      {!isSuccess && !loading && <AuthForm />}
-      {isSuccess && !error && !loading && <AuthSuccessed />}
+      {(loadingAuth || loadingUnauth) && <Spinner />}
+      {!isSuccessAuth && !loadingAuth && <AuthForm />}
+      {isSuccessAuth && !errorAuth && !loadingAuth && !loadingUnauth && <AuthSuccessed />}
     </div>
   );
 };

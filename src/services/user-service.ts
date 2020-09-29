@@ -15,6 +15,10 @@ export default class UserService {
     // return db.getUser(email, password);
   }
 
+  public async signOut() {
+    return await firebase.doSignOut();
+  }
+
   public async registerUser(user: User): Promise<UserCredential | Error> {
     return await firebase.doCreateUserWithEmailAndPassword(user.email, user.password);
   }

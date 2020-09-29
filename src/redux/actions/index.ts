@@ -2,11 +2,13 @@ import {
   authorizeUserRequest,
   authorizeUserFailure,
   authorizeUserSuccsess,
-  unauthorize,
   registerUserRequest,
   registerUserSuccess,
   registerUserFailure,
   registerClearStatus,
+  unauthorizeRequest,
+  unauthorizeSuccess,
+  unauthorizeFailure,
 } from './users';
 
 import {
@@ -46,7 +48,9 @@ export {
   authorizeUserRequest,
   authorizeUserFailure,
   authorizeUserSuccsess,
-  unauthorize,
+  unauthorizeRequest,
+  unauthorizeSuccess,
+  unauthorizeFailure,
   registerUserRequest,
   registerUserSuccess,
   registerUserFailure,
