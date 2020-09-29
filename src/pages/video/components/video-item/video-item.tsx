@@ -15,7 +15,7 @@ import { getOwnVideosIds, getStatusOfEditingVideo } from '../../../../redux/sele
 
 const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const {
-    video: { title, description, id },
+    video: { title, description, id, videoUrl },
   } = props;
   const dispatch = useDispatch();
   const onDeleteVideo = () => dispatch(deleteVideoRequest(id));
@@ -33,6 +33,7 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
         <div className="card-body">
           <h4 className="card-title">{title}</h4>
           <VideoStyled src="#" controls>
+            <source src={videoUrl} />
             Your browser does not support the video tag.
           </VideoStyled>
           <p className="card-text">{description}</p>
