@@ -1,45 +1,103 @@
-import { State } from '../reducers/types';
+import { createSelector } from 'reselect';
+
+import { State, Status, UserState, VideoState } from '../reducers/types';
 
 import { getArrayFromSet } from '../helpers';
 
 const getCurrentPage = (state: State) => state.currentPage;
 
-const getIsAuth = (state: State) => state.user.statusOfAuthorizeUser.isSuccess;
+const getUser = (state: State) => state.user;
 
-const getAuthUser = (state: State) => state.user.statusOfAuthorizeUser;
+const getAuthUser = createSelector(getUser, (user: UserState) => user.statusOfAuthorizeUser);
 
-const getEmail = (state: State) => state.user.email;
+const getIsAuth = createSelector(getAuthUser, (status: Status) => status.isSuccess);
 
-const getStatusOfRegisterUser = (state: State) => state.user.statusOfRegisterUser;
+const getEmail = createSelector(getUser, (user: UserState) => user.email);
 
-const getCollection = (state: State) => getArrayFromSet(state.videos.collection);
+const getStatusOfRegisterUser = createSelector(
+  getUser,
+  (user: UserState) => user.statusOfRegisterUser
+);
 
-const getOwnVideosIds = (state: State) => state.videos.ownVideosIds;
+const getUid = createSelector(getUser, (user: UserState) => user.uid);
 
-const getOwnVideosLoading = (state: State) => state.videos.statusOfLoadingOwnVideos.loading;
+const getVideos = (state: State) => state.videos;
 
-const getSharedVideosIds = (state: State) => state.videos.sharedVideosIds;
+const getCollection = createSelector(getVideos, (videos: VideoState) =>
+  getArrayFromSet(videos.collection)
+);
 
-const getSharedVideosLoading = (state: State) => state.videos.statusOfSharingVideoToUser.loading;
+const getOwnVideosIds = createSelector(getVideos, (videos: VideoState) => videos.ownVideosIds);
 
-const getUid = (state: State) => state.user.uid;
+const getStatusOfLoadingOwnVideos = createSelector(
+  getVideos,
+  (videos: VideoState) => videos.statusOfLoadingOwnVideos
+);
 
-const getIsSuccessDelete = (state: State) => state.videos.statusOfRemovingVideo.isSuccess;
+const getOwnVideosLoading = createSelector(
+  getStatusOfLoadingOwnVideos,
+  (status: Status) => status.loading
+);
 
-const getLoadingRemovingVideo = (state: State) => state.videos.statusOfRemovingVideo.loading;
+const getSharedVideosIds = createSelector(
+  getVideos,
+  (videos: VideoState) => videos.sharedVideosIds
+);
 
-const getErrorLoadingOwnVideos = (state: State) => state.videos.statusOfLoadingOwnVideos.error;
+const getStatusOfSharedVideos = createSelector(
+  getVideos,
+  (videos: VideoState) => videos.statusOfLoadingSharedVideos
+);
 
-const getErrorLoadingSharedVideos = (state: State) =>
-  state.videos.statusOfLoadingSharedVideos.error;
+const getSharedVideosLoading = createSelector(
+  getStatusOfSharedVideos,
+  (status: Status) => status.loading
+);
 
-const getErrorRemovingVideo = (state: State) => state.videos.statusOfRemovingVideo.error;
+const getStatusOfRemovingVideo = createSelector(
+  getVideos,
+  (videos: VideoState) => videos.statusOfRemovingVideo
+);
 
-const getIsSuccessOfSharingVideoToUser = (state: State) =>
-  state.videos.statusOfSharingVideoToUser.isSuccess;
+const getIsSuccessDelete = createSelector(
+  getStatusOfRemovingVideo,
+  (status: Status) => status.isSuccess
+);
 
-const getErrorOfSharingVideoToUser = (state: State) =>
-  state.videos.statusOfSharingVideoToUser.error;
+const getLoadingRemovingVideo = createSelector(
+  getStatusOfRemovingVideo,
+  (status: Status) => status.loading
+);
+
+const getErrorLoadingOwnVideos = createSelector(
+  getStatusOfLoadingOwnVideos,
+  (status: Status) => status.error
+);
+
+const getErrorLoadingSharedVideos = createSelector(
+  getStatusOfSharedVideos,
+  (status: Status) => status.error
+);
+
+const getErrorRemovingVideo = createSelector(
+  getStatusOfRemovingVideo,
+  (status: Status) => status.error
+);
+
+const getStatusSharingVideoToUser = createSelector(
+  getVideos,
+  (videos: VideoState) => videos.statusOfSharingVideoToUser
+);
+
+const getIsSuccessOfSharingVideoToUser = createSelector(
+  getStatusSharingVideoToUser,
+  (status: Status) => status.isSuccess
+);
+
+const getErrorOfSharingVideoToUser = createSelector(
+  getStatusSharingVideoToUser,
+  (status: Status) => status.error
+);
 
 export {
   getCurrentPage,
@@ -60,4 +118,10 @@ export {
   getErrorRemovingVideo,
   getIsSuccessOfSharingVideoToUser,
   getErrorOfSharingVideoToUser,
+  getUser,
+  getVideos,
+  getStatusOfLoadingOwnVideos,
+  getStatusOfSharedVideos,
+  getStatusOfRemovingVideo,
+  getStatusSharingVideoToUser,
 };
