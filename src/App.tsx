@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Switch } from 'react-router-dom';
 
-import Header from './components/local/header';
-import VideoPage from './components/pages/video';
-import AuthenticationPage from './components/pages/authentication';
-import RegistrationPage from './components/pages/registration';
-import { PrivateRoute } from './hoc';
+import Header from './components/header';
+import VideoPage from './pages/video';
+import AuthenticationPage from './pages/authentication';
+import RegistrationPage from './pages/registration';
+import { PrivateRoute } from './components/private-route';
 import { Route } from 'react-router-dom';
 import { GlobalStyle, Wrapper } from './styles/global-styled-components';
 
