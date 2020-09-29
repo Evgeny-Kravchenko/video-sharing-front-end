@@ -1,6 +1,6 @@
 import { Action, UserActionTypes } from './types';
-import { Auth } from '../../components/pages/authentication/components/auth-form/types';
-import { Registration } from '../../components/pages/registration/components/registration-form/types';
+import { Auth } from '../../pages/authentication/components/auth-form/types';
+import { Registration } from '../../pages/registration/components/registration-form/types';
 import { UserSuccessActionProperty } from '../reducers/types';
 
 const registerUserRequest = (registerUserData: Registration): Action => {
