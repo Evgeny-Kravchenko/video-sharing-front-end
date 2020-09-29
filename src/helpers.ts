@@ -11,13 +11,23 @@ const getSetFromArray = (arr: Array<any>) => {
 };
 
 const getInitialState = () => {
-  const initialCurrentPage =
-    window.location.pathname.match(/\/(.+)\/*/) || PagesList.Authentication;
   const initialEmail = localStorage.getItem('email');
   const initialCollectionArray = localStorage.getItem('collection');
   const initialOwnVideosIdsStringify = localStorage.getItem('own-videos-ids');
   const initialSharedVideosIdsStringify = localStorage.getItem('shared-videos-ids');
   const initialUid = localStorage.getItem('uid');
+  const initialCurrentPageResultOfRegExp = window.location.pathname.match(/\/(.+)\/*/);
+  let initialCurrentPage = '';
+  if (initialCurrentPageResultOfRegExp) {
+    initialCurrentPage = initialCurrentPageResultOfRegExp[1];
+  } else {
+    if (initialUid) {
+      initialCurrentPage = PagesList.Videos;
+    }
+    if (!initialUid) {
+      initialCurrentPage = PagesList.Authentication;
+    }
+  }
   let initialOwnVideosIds;
   let initialSharedVideosIds;
   let initialCollection;

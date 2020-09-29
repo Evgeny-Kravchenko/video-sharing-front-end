@@ -16,7 +16,7 @@ const {
 } = getInitialState();
 
 const initialState: State = {
-  currentPage: initialCurrentPage[1],
+  currentPage: initialCurrentPage,
   user: {
     uid: initialUid || '',
     email: initialEmail || '',
