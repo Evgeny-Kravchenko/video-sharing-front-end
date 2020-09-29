@@ -6,10 +6,12 @@ import AuthSuccessed from '../../pages/authentication/components/auth-successed'
 import MessageFailure from '../../local/message-failure';
 import Spinner from '../../local/spinner';
 
-import { State, Status } from '../../../reducers/types';
+import { Status } from '../../../reducers/types';
+
+import { getAuthUser } from '../../../selectors';
 
 const AuthenticationPage: FC = (): ReactElement => {
-  const authUser: Status = useSelector((state: State) => state.user.statusOfAuthorizeUser);
+  const authUser: Status = useSelector(getAuthUser);
   const { isSuccess, error, loading } = authUser;
   return (
     <div className="p-lg-5 p-md-3 p-2">

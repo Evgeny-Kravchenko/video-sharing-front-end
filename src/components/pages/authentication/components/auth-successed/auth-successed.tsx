@@ -5,10 +5,10 @@ import { Wrapper } from '../../../../../styles/global-styled-components';
 
 import { unauthorize } from '../../../../../actions';
 
-import { State } from '../../../../../reducers/types';
+import { getEmail } from '../../../../../selectors';
 
 const AuthSuccessed: FC = () => {
-  const email: string = useSelector((state: State) => state.user.email);
+  const email: string = useSelector(getEmail);
   const dispatch = useDispatch();
   const handleOnClick: () => void = () => dispatch(unauthorize());
   return (

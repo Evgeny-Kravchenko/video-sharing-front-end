@@ -12,6 +12,8 @@ import { deleteVideoRequest, editVideoRequest } from '../../../../../actions';
 import ShareVideoForm from '../share-video-form';
 import ModalWindow from '../modal-window';
 
+import { getOwnVideosIds } from '../../../../../selectors';
+
 const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const {
     video: { title, description, id },
@@ -19,7 +21,8 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const dispatch = useDispatch();
   const onDeleteVideo = () => dispatch(deleteVideoRequest(id));
 
-  const isOwner = useSelector((state: State) => state.videos.ownVideosIds).includes(id);
+  const ownVideosIds = useSelector(getOwnVideosIds);
+  const isOwner = ownVideosIds.includes(id);
 
   const [isShareWindowShown, setIsShareWindowShown] = useState(false);
   const [isEditingWindowShown, setIsEditingVideoShown] = useState(false);

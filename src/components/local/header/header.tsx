@@ -8,16 +8,15 @@ import { HeaderStyled, Logo, LogoIcon, NavUl } from './styled-components';
 
 import logoIcon from './images/video.png';
 
-import { State } from '../../../reducers/types';
+import { getCurrentPage, getIsAuth } from '../../../selectors';
 
 const Header: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const handleOnClickItemMenu = (path: PagesList) => () => dispatch(changeCurrentPage(path));
 
-  const { currentPage, isAuth } = useSelector((state: State) => ({
-    currentPage: state.currentPage,
-    isAuth: state.user.statusOfAuthorizeUser.isSuccess,
-  }));
+  const currentPage = useSelector(getCurrentPage);
+  const isAuth = useSelector(getIsAuth);
+
   const pathForLogo = isAuth ? PagesList.Videos : PagesList.Authentication;
 
   return (

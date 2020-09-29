@@ -6,17 +6,19 @@ import { shareVideoRequest } from '../../../../../actions';
 
 import { Label } from '../../../../../styles/global-styled-components';
 
-import { State } from '../../../../../reducers/types';
 import ShareViedoFormProps from './types';
+import {
+  getEmail,
+  getErrorOfSharingVideoToUser,
+  getIsSuccessOfSharingVideoToUser,
+} from '../../../../../selectors';
 
 const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => {
   const { onSetIsShareWindowShown, title, id } = props;
 
-  const { isSuccess, error, userEmailWhoShareVideo } = useSelector((state: State) => ({
-    isSuccess: state.videos.statusOfSharingVideoToUser.isSuccess,
-    error: state.videos.statusOfSharingVideoToUser.error,
-    userEmailWhoShareVideo: state.user.email,
-  }));
+  const isSuccess = useSelector(getIsSuccessOfSharingVideoToUser);
+  const error = useSelector(getErrorOfSharingVideoToUser);
+  const userEmailWhoShareVideo = useSelector(getEmail);
 
   const dispatch = useDispatch();
   const onSubmit = (data: { email: string }) => {

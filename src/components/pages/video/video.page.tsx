@@ -17,41 +17,39 @@ import ErrorIndicator from '../../local/error-indicator';
 import { State } from '../../../reducers/types';
 import { Video } from '../../../types';
 
-import { getArrayFromSet } from '../../../helpers';
 import {
   SpinnerWrapper,
   StatusMessage,
 } from './components/modal-window/styled-components/modal-header';
 
+import {
+  getCollection,
+  getErrorLoadingOwnVideos,
+  getErrorLoadingSharedVideos,
+  getErrorRemovingVideo,
+  getIsSuccessDelete,
+  getLoadingRemovingVideo,
+  getOwnVideosIds,
+  getOwnVideosLoading,
+  getSharedVideosIds,
+  getSharedVideosLoading,
+  getUid,
+} from '../../../selectors';
+
 const VideoPage: FC = (): ReactElement => {
   const dispatch = useDispatch();
-  const {
-    collection,
-    ownVideosIds,
-    ownVideosLoading,
-    sharedVideosIds,
-    sharedVideosLoading,
-    uid,
-    isSuccessDelete,
-    loadingRemovingVideo,
-    errorLoadingOwnVideos,
-    errorLoadingSharedVideos,
-    errorRemovingVideo,
-  } = useSelector((state: State) => {
-    return {
-      collection: getArrayFromSet(state.videos.collection),
-      ownVideosIds: state.videos.ownVideosIds,
-      ownVideosLoading: state.videos.statusOfLoadingOwnVideos.loading,
-      sharedVideosIds: state.videos.sharedVideosIds,
-      sharedVideosLoading: state.videos.statusOfLoadingSharedVideos.loading,
-      uid: state.user.uid,
-      isSuccessDelete: state.videos.statusOfRemovingVideo.isSuccess,
-      loadingRemovingVideo: state.videos.statusOfRemovingVideo.loading,
-      errorLoadingOwnVideos: state.videos.statusOfLoadingOwnVideos.error,
-      errorLoadingSharedVideos: state.videos.statusOfLoadingSharedVideos.error,
-      errorRemovingVideo: state.videos.statusOfRemovingVideo.error,
-    };
-  });
+
+  const collection = useSelector(getCollection);
+  const ownVideosIds = useSelector(getOwnVideosIds);
+  const ownVideosLoading = useSelector(getOwnVideosLoading);
+  const sharedVideosIds = useSelector(getSharedVideosIds);
+  const sharedVideosLoading = useSelector(getSharedVideosLoading);
+  const uid = useSelector(getUid);
+  const isSuccessDelete = useSelector(getIsSuccessDelete);
+  const loadingRemovingVideo = useSelector(getLoadingRemovingVideo);
+  const errorLoadingOwnVideos = useSelector(getErrorLoadingOwnVideos);
+  const errorLoadingSharedVideos = useSelector(getErrorLoadingSharedVideos);
+  const errorRemovingVideo = useSelector(getErrorRemovingVideo);
 
   const [activeVideoPage, setActiveVideoPage] = useState('own');
   const [isModal, setIsModal] = useState(false);
