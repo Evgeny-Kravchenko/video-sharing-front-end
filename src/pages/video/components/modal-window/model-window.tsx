@@ -20,6 +20,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
     title,
     descr,
     id: videoId,
+    videoUrl,
   } = props;
 
   const uid: string = useSelector((state: State) => state.user.uid);
@@ -121,6 +122,7 @@ const ModalWindow: FC<ModalWindowProps> = (props: ModalWindowProps): ReactElemen
                     id="videoUrl"
                     name="videoUrl"
                     ref={register({ required: 'You must enter video url' })}
+                    defaultValue={videoUrl}
                   />
                   <small id="videoUrlHelp" className="form-text text-muted">
                     Input a video url.

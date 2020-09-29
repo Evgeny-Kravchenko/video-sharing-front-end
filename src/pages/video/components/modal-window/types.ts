@@ -10,4 +10,5 @@ export interface ModalWindowProps {
   descr?: string;
   whoSharedWith?: Array<string>;
   id?: string;
+  videoUrl?: string;
 }

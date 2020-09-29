@@ -75,6 +75,7 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
           title={title}
           descr={description}
           id={id}
+          videoUrl={videoUrl}
         />
       )}
     </Wrapper>

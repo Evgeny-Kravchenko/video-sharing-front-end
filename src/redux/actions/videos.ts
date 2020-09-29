@@ -140,10 +140,14 @@ const clearStatusSharingVideo = (): Action => {
   };
 };
 
-const editVideoRequest = (data: { data: Video; userEmail: string; videoId: string }): Action => {
+const editVideoRequest = (data: {
+  newVideo: Video;
+  userEmail: string;
+  videoId: string;
+}): Action => {
   return {
     type: ActionVideosTypes.EDIT_VIDEO_REQUEST,
-    payload: { data: data.data, videoId: data.videoId },
+    payload: { data: data.newVideo, videoId: data.videoId },
   };
 };
 
