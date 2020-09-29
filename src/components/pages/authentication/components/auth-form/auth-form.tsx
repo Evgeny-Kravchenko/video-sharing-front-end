@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { Form, Label } from '../../../../../styles/global-styled-components';
 import RegistrationLink from './styled-components';
 
-import { authorizeUserRequest, changeCurrentPage, PagesList } from '../../../../../actions';
+import { authorizeUserRequest, changeCurrentPage, PagesList } from '../../../../../redux/actions';
 
 import { Auth } from './types';
 

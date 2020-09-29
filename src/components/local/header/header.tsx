@@ -2,13 +2,13 @@ import React, { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeCurrentPage, PagesList } from '../../../actions';
+import { changeCurrentPage, PagesList } from '../../../redux/actions';
 
 import { HeaderStyled, Logo, LogoIcon, NavUl } from './styled-components';
 
 import logoIcon from './images/video.png';
 
-import { getCurrentPage, getIsAuth } from '../../../selectors';
+import { getCurrentPage, getIsAuth } from '../../../redux/selectors';
 
 const Header: FC = (): ReactElement => {
   const dispatch = useDispatch();

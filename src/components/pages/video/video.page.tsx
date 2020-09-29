@@ -5,7 +5,7 @@ import {
   addNewVideoRequest,
   userOwnVideosRequest,
   userSharedVideosRequest,
-} from '../../../actions';
+} from '../../../redux/actions';
 
 import TabItem from './styled-components';
 
@@ -14,7 +14,7 @@ import ModalWindow from './components/modal-window';
 import VideoList from '../video/components/video-list';
 import ErrorIndicator from '../../local/error-indicator';
 
-import { State } from '../../../reducers/types';
+import { State } from '../../../redux/reducers/types';
 import { Video } from '../../../types';
 
 import {
@@ -34,7 +34,7 @@ import {
   getSharedVideosIds,
   getSharedVideosLoading,
   getUid,
-} from '../../../selectors';
+} from '../../../redux/selectors';
 
 const VideoPage: FC = (): ReactElement => {
   const dispatch = useDispatch();

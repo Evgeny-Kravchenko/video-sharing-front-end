@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { State } from '../reducers/types';
+import { State } from '../redux/reducers/types';
 import PrivateRouteProps from './types';
 
 const PrivateRoute = (props: PrivateRouteProps) => {

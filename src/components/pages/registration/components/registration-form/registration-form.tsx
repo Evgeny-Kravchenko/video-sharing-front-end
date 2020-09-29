@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { Form, Label } from '../../../../../styles/global-styled-components';
 
-import { registerUserRequest } from '../../../../../actions';
+import { registerUserRequest } from '../../../../../redux/actions';
 
 import ValidationError from './styled-components';
 import { Registration } from './types';

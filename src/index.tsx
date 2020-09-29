@@ -10,7 +10,7 @@ import ErrorBoundry from './components/local/error-boundry';
 
 import './styles/index.scss';
 
-import store from './store';
+import store from './redux/store';
 import UserService from './services/user-service';
 import VideoService from './services/video-service';
 

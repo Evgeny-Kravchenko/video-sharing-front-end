@@ -5,14 +5,14 @@ import { VideoStyled, ButtonsWrapper } from './styled-components';
 import { Wrapper } from '../../../../../styles/global-styled-components';
 
 import { VideoItemProps } from './types';
-import { State } from '../../../../../reducers/types';
+import { State } from '../../../../../redux/reducers/types';
 
-import { deleteVideoRequest, editVideoRequest } from '../../../../../actions';
+import { deleteVideoRequest, editVideoRequest } from '../../../../../redux/actions';
 
 import ShareVideoForm from '../share-video-form';
 import ModalWindow from '../modal-window';
 
-import { getOwnVideosIds } from '../../../../../selectors';
+import { getOwnVideosIds } from '../../../../../redux/selectors';
 
 const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const {

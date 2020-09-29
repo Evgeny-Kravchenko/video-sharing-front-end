@@ -6,9 +6,9 @@ import AuthSuccessed from '../../pages/authentication/components/auth-successed'
 import MessageFailure from '../../local/message-failure';
 import Spinner from '../../local/spinner';
 
-import { Status } from '../../../reducers/types';
+import { Status } from '../../../redux/reducers/types';
 
-import { getAuthUser } from '../../../selectors';
+import { getAuthUser } from '../../../redux/selectors';
 
 const AuthenticationPage: FC = (): ReactElement => {
   const authUser: Status = useSelector(getAuthUser);

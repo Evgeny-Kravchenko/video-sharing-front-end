@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { ModalWindowProps } from './types';
 import { Video } from '../../../../../types';
-import { State } from '../../../../../reducers/types';
+import { State } from '../../../../../redux/reducers/types';
 
 import ValidationError from '../../../registration/components/registration-form/styled-components';
 import Spinner from '../../../../local/spinner';

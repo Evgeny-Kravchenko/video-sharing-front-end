@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { shareVideoRequest } from '../../../../../actions';
+import { shareVideoRequest } from '../../../../../redux/actions';
 
 import { Label } from '../../../../../styles/global-styled-components';
 
@@ -11,7 +11,7 @@ import {
   getEmail,
   getErrorOfSharingVideoToUser,
   getIsSuccessOfSharingVideoToUser,
-} from '../../../../../selectors';
+} from '../../../../../redux/selectors';
 
 const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => {
   const { onSetIsShareWindowShown, title, id } = props;

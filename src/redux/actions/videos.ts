@@ -1,5 +1,5 @@
 import { Action, ActionVideosTypes } from './types';
-import { Video } from '../types';
+import { Video } from '../../types';
 
 const userOwnVideosRequest = (id: string): Action => {
   return {

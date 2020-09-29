@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Wrapper } from '../../../../../styles/global-styled-components';
 
-import { unauthorize } from '../../../../../actions';
+import { unauthorize } from '../../../../../redux/actions';
 
-import { getEmail } from '../../../../../selectors';
+import { getEmail } from '../../../../../redux/selectors';
 
 const AuthSuccessed: FC = () => {
   const email: string = useSelector(getEmail);

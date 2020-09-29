@@ -1,5 +1,5 @@
-import { State } from '../../../../../reducers/types';
-import { Action } from '../../../../../actions';
+import { State } from '../../../../../redux/reducers/types';
+import { Action } from '../../../../../redux/actions';
 
 export interface ModalWindowProps {
   onSetModalWindow: (isShow: boolean) => void;

@@ -5,9 +5,9 @@ import RegistrationForm from '../../pages/registration/components/registration-f
 import MessageFailure from '../../local/message-failure';
 import Spinner from '../../local/spinner';
 
-import { Status } from '../../../reducers/types';
+import { Status } from '../../../redux/reducers/types';
 
-import { getStatusOfRegisterUser } from '../../../selectors';
+import { getStatusOfRegisterUser } from '../../../redux/selectors';
 
 const RegistrationPage: FC = (): ReactElement => {
   const registerUserStatus: Status = useSelector(getStatusOfRegisterUser);
