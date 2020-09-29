@@ -1,12 +1,13 @@
 import { Video } from '../types';
 export default class VideoService {
-    getOwnVideos(id: string): Promise<Array<Video> | Error>;
-    getSharedVideos(email: string): Promise<Array<Video> | Error>;
+    getOwnVideos(uid: string): Promise<Array<Video> | Error>;
+    getSharedVideos(uid: string): Promise<Array<Video> | Error>;
     addNewVideo(data: {
-        data: Video;
-        userEmail: string;
-    }): Promise<string | Error>;
-    deleteVideo(id: string): Promise<boolean | Error>;
+        newVideo: Video;
+        uid: string;
+        videoId: string | undefined;
+    }): Promise<string>;
+    deleteVideo(id: string): Promise<any>;
     shareVideo({ email, videoId, userEmailWhoShareVideo, }: {
         email: string;
         videoId: string;
@@ -16,4 +17,6 @@ export default class VideoService {
         data: Video;
         videoId: string;
     }): Promise<boolean | Error>;
+    getOwnVideosIds(uid: string): Promise<string[] | undefined>;
+    getSharedVideosIds(uid: string): Promise<string[] | undefined>;
 }

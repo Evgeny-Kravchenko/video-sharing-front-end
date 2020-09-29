@@ -32,10 +32,10 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
       <div className="card my-2">
         <div className="card-body">
           <h4 className="card-title">{title}</h4>
-          <VideoStyled src="#" controls>
-            <source src={videoUrl} />
-            Your browser does not support the video tag.
-          </VideoStyled>
+          <VideoStyled
+            src={videoUrl}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          />
           <p className="card-text">{description}</p>
           <ButtonsWrapper>
             <button className="btn btn-outline-success">Watch video</button>

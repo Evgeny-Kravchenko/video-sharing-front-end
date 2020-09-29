@@ -1,5 +1,5 @@
 import { Action, ActionVideosTypes } from './types';
-import { Video } from '../types';
+import { Video } from '../../types';
 declare const userOwnVideosRequest: (id: string) => Action;
 declare const userOwnVideosSuccess: (videos: Array<Video>) => Action;
 declare const userOwnVideosFailure: (error: Error) => Action;
@@ -7,8 +7,9 @@ declare const userSharedVideosRequest: (email: string) => Action;
 declare const userSharedVideosSuccess: (videos: Array<Video>) => Action;
 declare const userSharedVideosFailure: (error: Error) => Action;
 declare const addNewVideoRequest: (data: {
-    data: Video;
-    userEmail: string;
+    newVideo: Video;
+    uid: string;
+    videoId: string | undefined;
 }) => Action;
 declare const addNewVideoSuccess: (data: {
     video: Video;

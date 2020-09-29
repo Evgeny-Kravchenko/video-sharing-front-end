@@ -1,7 +1,11 @@
 import { User } from '../types';
-import UserResponse from '../types/get-user-response';
+import UserCredential = firebase.auth.UserCredential;
 export default class UserService {
-    getUser(email: string, password: string): Promise<UserResponse | Error>;
-    registerUser(user: User): Promise<boolean | Error>;
-    checkUser(email: string): Promise<boolean | Error>;
+    private static transformSignIn;
+    signIn(email: string, password: string): Promise<{
+        email: string;
+        uid: string;
+    }>;
+    signOut(): Promise<any>;
+    registerUser(user: User): Promise<UserCredential | Error>;
 }
