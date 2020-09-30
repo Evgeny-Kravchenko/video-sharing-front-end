@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/header';
 import VideoPage from './pages/video';
 import AuthenticationPage from './pages/authentication';
 import RegistrationPage from './pages/registration';
 import { PrivateRoute } from './components/private-route';
-import { Route } from 'react-router-dom';
+import NotFound from './components/not-found';
 import { GlobalStyle, Wrapper } from './styles/global-styled-components';
 
 const App: FC = () => (
@@ -20,6 +20,7 @@ const App: FC = () => (
           <Route path="/auth" component={AuthenticationPage} exact />
           <PrivateRoute path="/videos" component={VideoPage} exact />
           <Route path="/registration" component={RegistrationPage} exact />
+          <Route path="*" exact component={NotFound} />
         </Switch>
       </main>
     </Wrapper>
