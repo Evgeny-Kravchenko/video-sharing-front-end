@@ -4,7 +4,6 @@ import UserCredential = firebase.auth.UserCredential;
 
 export default class UserService {
   private static transformSignIn(response: any): { email: string; uid: string } {
-    console.log(response);
     return {
       email: response.user.email,
       uid: response.user.uid,
