@@ -15,9 +15,14 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+interface WrapperProperty {
+  width: string;
+  margin: string;
+}
+
 const Wrapper = styled.div`
-  max-width: ${(props: { width: string; margin: string }) => props.width};
-  margin: ${(props: { width: string; margin: string }) => (props.margin ? props.margin : '0 auto')};
+  max-width: ${(props: WrapperProperty) => props.width};
+  margin: ${(props: WrapperProperty) => (props.margin ? props.margin : '0 auto')};
 `;
 
 export { Form, Label, GlobalStyle, Wrapper };

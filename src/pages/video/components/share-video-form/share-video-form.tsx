@@ -7,17 +7,14 @@ import { shareVideoRequest } from '../../../../redux/actions';
 import { Label } from '../../../../styles/global-styled-components';
 
 import ShareViedoFormProps from './types';
-import {
-  getEmail,
-  getErrorOfSharingVideoToUser,
-  getIsSuccessOfSharingVideoToUser,
-} from '../../../../redux/selectors';
+import { getStatusSharingVideoToUser, getEmail } from '../../../../redux/selectors';
+import Spinner from '../../../../components/spinner';
 
 const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => {
   const { onSetIsShareWindowShown, title, id } = props;
 
-  const isSuccess = useSelector(getIsSuccessOfSharingVideoToUser);
-  const error = useSelector(getErrorOfSharingVideoToUser);
+  const { error, isSuccess, loading } = useSelector(getStatusSharingVideoToUser);
+
   const userEmailWhoShareVideo = useSelector(getEmail);
 
   const dispatch = useDispatch();
@@ -27,6 +24,7 @@ const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => 
 
   const { register, errors, handleSubmit } = useForm<{ email: string }>();
 
+  const loader = loading ? <Spinner /> : null;
   const errorMessage = errors.email && <p className="text-danger">{errors.email.message}</p>;
   const statusSharingVideo = isSuccess ? (
     <p className="text-success m-0 mr-2">The video shared successfully.</p>
@@ -61,6 +59,7 @@ const ShareVideoForm: FC<ShareViedoFormProps> = (props: ShareViedoFormProps) => 
               <div className="modal-footer d-flex align-items-center">
                 {statusSharingVideo}
                 {errorMessageOfSharing}
+                {loader}
                 <button type="submit" className="btn btn-primary">
                   Share
                 </button>
