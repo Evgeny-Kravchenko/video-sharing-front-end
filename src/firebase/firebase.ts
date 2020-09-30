@@ -18,7 +18,7 @@ const config = {
 };
 
 export default class Firebase {
-  private auth: any;
+  private auth: app.auth.Auth;
   private usersVideosRef: app.database.Reference;
   private usersSharedVideosRef: app.database.Reference;
   private videosRef: app.database.Reference;
@@ -50,19 +50,19 @@ export default class Firebase {
     password: string
   ): Promise<app.auth.UserCredential> => this.auth.signInWithEmailAndPassword(email, password);
 
-  public doSignOut = () => {
+  public doSignOut = (): Promise<void> => {
     return this.auth.signOut();
   };
 
-  public getUsersVideos = () => {
+  public getUsersVideos = (): Promise<app.database.DataSnapshot> => {
     return this.usersVideosRef.once('value');
   };
 
-  public getUsersSharedVideos = () => {
+  public getUsersSharedVideos = (): Promise<app.database.DataSnapshot> => {
     return this.usersSharedVideosRef.once('value');
   };
 
-  public getVideos = () => {
+  public getVideos = (): Promise<app.database.DataSnapshot> => {
     return this.videosRef.once('value');
   };
 
@@ -70,7 +70,7 @@ export default class Firebase {
     newVideo: Video;
     uid: string;
     videoId: string | undefined;
-  }) => {
+  }): Promise<unknown> => {
     const allVideosSnapshot = await this.getVideos();
     const allVideosVal = allVideosSnapshot.val() || [];
     allVideosVal.push(data.newVideo);
@@ -85,7 +85,7 @@ export default class Firebase {
     return await this.videosRef.set(allVideosVal);
   };
 
-  public deleteVideo = async (id: string) => {
+  public deleteVideo = async (id: string): Promise<unknown> => {
     const allVideosSnapshot = await this.getVideos();
     let allVideosVal = allVideosSnapshot.val() || [];
     const usersVideosSnapShot: DataSnapshot = await this.getUsersVideos();
@@ -110,7 +110,7 @@ export default class Firebase {
     email: string;
     videoId: string;
     userEmailWhoShareVideo: string;
-  }) => {
+  }): Promise<unknown> => {
     if (email === userEmailWhoShareVideo) {
       return Promise.reject(new Error("You can't share the video to yourself."));
     }
@@ -123,7 +123,7 @@ export default class Firebase {
     return await this.usersSharedVideosRef.set(usersSharedVideosVal);
   };
 
-  public editVideo = async (data: { data: Video; videoId: string }) => {
+  public editVideo = async (data: { data: Video; videoId: string }): Promise<unknown> => {
     const videosSnapShot = await this.videosRef.once('value');
     let videosVal = videosSnapShot.val() || [];
     videosVal = videosVal.map((video: Video) => {

@@ -37,3 +37,12 @@ export interface State {
   user: UserState;
   videos: VideoState;
 }
+
+export interface InitialPartOfState {
+  initialCurrentPage: string;
+  initialEmail: string | null;
+  initialOwnVideosIds: Array<string>;
+  initialSharedVideosIds: Array<string>;
+  initialCollection: Set<string> | undefined;
+  initialUid: string | null;
+}

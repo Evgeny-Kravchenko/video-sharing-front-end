@@ -27,14 +27,18 @@ export default class VideoService {
     return allVideosVal.filter((video: Video) => sharedVideosIds.includes(video.id));
   }
 
-  public async addNewVideo(data: { newVideo: Video; uid: string; videoId: string | undefined }) {
+  public async addNewVideo(data: {
+    newVideo: Video;
+    uid: string;
+    videoId: string | undefined;
+  }): Promise<string> {
     const videoId = String(Math.floor(Math.random() * 10000));
     data.newVideo.id = videoId;
     await firebase.addNewVideo(data);
     return videoId;
   }
 
-  public async deleteVideo(id: string) {
+  public async deleteVideo(id: string): Promise<unknown> {
     return await firebase.deleteVideo(id);
   }
 
@@ -46,31 +50,27 @@ export default class VideoService {
     email: string;
     videoId: string;
     userEmailWhoShareVideo: string;
-  }): Promise<boolean | Error> {
+  }): Promise<unknown> {
     return await firebase.shareVideo({ email, videoId, userEmailWhoShareVideo });
   }
 
-  public async editVideo(data: { data: Video; videoId: string }): Promise<boolean | Error> {
+  public async editVideo(data: { data: Video; videoId: string }): Promise<unknown> {
     return firebase.editVideo(data);
   }
 
-  public async getOwnVideosIds(uid: string) {
-    try {
-      const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
-      const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
-      return usersVideosVal
-        .filter((item: VideoAffilation) => item.userId === uid)
-        .map((item: VideoAffilation) => item.videoId);
-    } catch (err: unknown) {}
+  public async getOwnVideosIds(uid: string): Promise<Array<string>> {
+    const usersVideosSnapShot: DataSnapshot = await firebase.getUsersVideos();
+    const usersVideosVal: Array<VideoAffilation> = usersVideosSnapShot.val() || [];
+    return usersVideosVal
+      .filter((item: VideoAffilation) => item.userId === uid)
+      .map((item: VideoAffilation) => item.videoId);
   }
 
-  public async getSharedVideosIds(uid: string) {
-    try {
-      const usersSharedVideosSnapShot: DataSnapshot = await firebase.getUsersSharedVideos();
-      const usersSharedVideosVal: Array<VideoAffilation> = usersSharedVideosSnapShot.val() || [];
-      return usersSharedVideosVal
-        .filter((item: VideoAffilation) => item.userId === uid)
-        .map((item: VideoAffilation) => item.videoId);
-    } catch (err: unknown) {}
+  public async getSharedVideosIds(uid: string): Promise<Array<string>> {
+    const usersSharedVideosSnapShot: DataSnapshot = await firebase.getUsersSharedVideos();
+    const usersSharedVideosVal: Array<VideoAffilation> = usersSharedVideosSnapShot.val() || [];
+    return usersSharedVideosVal
+      .filter((item: VideoAffilation) => item.userId === uid)
+      .map((item: VideoAffilation) => item.videoId);
   }
 }

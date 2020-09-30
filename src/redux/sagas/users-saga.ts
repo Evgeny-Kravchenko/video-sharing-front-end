@@ -14,6 +14,7 @@ import { userService, videoService } from '../../index';
 
 import { UserActionTypes } from '../actions';
 import { Action } from '../actions';
+import { ForkEffect } from '@redux-saga/core/effects';
 
 function* fetchAuthUserHandler(action: Action) {
   try {
@@ -51,7 +52,7 @@ function* fetchSignOut() {
   }
 }
 
-function* usersSaga() {
+function* usersSaga(): Generator<unknown, void, ForkEffect<never>> {
   yield takeLatest(UserActionTypes.AUTH_USER_REQUEST, fetchAuthUserHandler);
   yield takeLatest(UserActionTypes.REGISTER_USER_REQUEST, fetchRegisterUserHandler);
   yield takeLatest(UserActionTypes.UNAUTHORIZE_REQUEST, fetchSignOut);

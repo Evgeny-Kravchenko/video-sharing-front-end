@@ -22,6 +22,7 @@ import { videoService } from '../../index';
 
 import { ActionVideosTypes } from '../actions';
 import { Action } from '../actions';
+import { ForkEffect } from '@redux-saga/core/effects';
 
 function* fetchUserOwnVideo(action: Action) {
   try {
@@ -94,7 +95,7 @@ function* fetchAddNewVideo(action: Action) {
   yield put(clearStatusOfAddingVideo());
 }
 
-function* videosSaga() {
+function* videosSaga(): Generator<unknown, void, ForkEffect<never>> {
   yield takeLatest(ActionVideosTypes.USER_OWN_VIDEOS_REQUEST, fetchUserOwnVideo);
   yield takeLatest(ActionVideosTypes.USER_SHARED_VIDEOS_REQUEST, fetchUserSharedVideo);
   yield takeLatest(ActionVideosTypes.SHARE_VIDEO_REQUEST, fetchShareVideo);

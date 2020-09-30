@@ -4,9 +4,9 @@ import { State, Status, UserState, VideoState } from '../reducers/types';
 
 import { getArrayFromSet } from '../../utils/helpers';
 
-const getCurrentPage = (state: State) => state.currentPage;
+const getCurrentPage = (state: State): string => state.currentPage;
 
-const getUser = (state: State) => state.user;
+const getUser = (state: State): UserState => state.user;
 
 const getAuthUser = createSelector(getUser, (user: UserState) => user.statusOfAuthorizeUser);
 
@@ -26,7 +26,7 @@ const getStatusOfUnauthorizeUser = createSelector(
 
 const getUid = createSelector(getUser, (user: UserState) => user.uid);
 
-const getVideos = (state: State) => state.videos;
+const getVideos = (state: State): VideoState => state.videos;
 
 const getCollection = createSelector(getVideos, (videos: VideoState) =>
   getArrayFromSet(videos.collection)

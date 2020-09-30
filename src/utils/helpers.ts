@@ -1,16 +1,18 @@
 import { PagesList } from '../redux/actions';
+import { Video } from '../types';
+import { InitialPartOfState } from '../redux/reducers/types';
 
-const getArrayFromSet = (set: Set<string>) => {
+const getArrayFromSet = (set: Set<string>): Array<Video> => {
   return Array.from(set, (item: string) => JSON.parse(item));
 };
 
-const getSetFromArray = (arr: Array<any>) => {
+const getSetFromArray = (arr: Array<unknown>): Set<string> => {
   const collection = new Set<string>();
   arr.forEach((item) => collection.add(JSON.stringify(item)));
   return collection;
 };
 
-const getInitialState = () => {
+const getInitialState = (): InitialPartOfState => {
   const initialEmail = localStorage.getItem('email');
   const initialCollectionArray = localStorage.getItem('collection');
   const initialOwnVideosIdsStringify = localStorage.getItem('own-videos-ids');
