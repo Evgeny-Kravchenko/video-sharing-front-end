@@ -17,10 +17,6 @@ const AuthSuccessed: FC = () => {
         <div className="card-header">You are authorized</div>
         <div className="card-body">
           <h4 className="card-title">You are authorized as a {email}</h4>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the bulk of the
-            card`&apos;s content.
-          </p>
         </div>
         <button type="submit" className="btn btn-primary align-self-center" onClick={handleOnClick}>
           Log Out
