@@ -94,16 +94,6 @@ const getStatusSharingVideoToUser = createSelector(
   (videos: VideoState) => videos.statusOfSharingVideoToUser
 );
 
-const getIsSuccessOfSharingVideoToUser = createSelector(
-  getStatusSharingVideoToUser,
-  (status: Status) => status.isSuccess
-);
-
-const getErrorOfSharingVideoToUser = createSelector(
-  getStatusSharingVideoToUser,
-  (status: Status) => status.error
-);
-
 const getStatusOfAddingNewVideo = createSelector(
   getVideos,
   (videos: VideoState) => videos.statusOfAddingNewVideo
@@ -131,8 +121,6 @@ export {
   getErrorLoadingOwnVideos,
   getErrorLoadingSharedVideos,
   getErrorRemovingVideo,
-  getIsSuccessOfSharingVideoToUser,
-  getErrorOfSharingVideoToUser,
   getUser,
   getVideos,
   getStatusOfLoadingOwnVideos,

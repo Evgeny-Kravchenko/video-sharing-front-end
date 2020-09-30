@@ -10,6 +10,7 @@ import { deleteVideoRequest, editVideoRequest } from '../../../../redux/actions'
 
 import ShareVideoForm from '../share-video-form';
 import ModalWindow from '../modal-window';
+import VideoPlayer from '../video-player';
 
 import { getOwnVideosIds, getStatusOfEditingVideo } from '../../../../redux/selectors';
 
@@ -26,6 +27,7 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
 
   const [isShareWindowShown, setIsShareWindowShown] = useState(false);
   const [isEditingWindowShown, setIsEditingVideoShown] = useState(false);
+  const [isShownVideoPlayer, setShownVideoPlayer] = useState(false);
 
   return (
     <Wrapper width="300px" margin="10px">
@@ -38,7 +40,9 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
           />
           <p className="card-text">{description}</p>
           <ButtonsWrapper>
-            <button className="btn btn-outline-success">Watch video</button>
+            <button className="btn btn-outline-success" onClick={() => setShownVideoPlayer(true)}>
+              Watch video
+            </button>
             {isOwner && (
               <>
                 <button
@@ -78,6 +82,9 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
           videoUrl={videoUrl}
         />
       )}
+      {isShownVideoPlayer ? (
+        <VideoPlayer src={videoUrl} onSetShownVideoPlayer={setShownVideoPlayer} />
+      ) : null}
     </Wrapper>
   );
 };
