@@ -28,9 +28,9 @@ const VideoItem: FC<VideoItemProps> = (props: VideoItemProps) => {
   const [isEditingWindowShown, setIsEditingVideoShown] = useState(false);
 
   return (
-    <Wrapper width="300px" margin="0">
-      <div className="card my-2">
-        <div className="card-body">
+    <Wrapper width="300px" margin="10px">
+      <div className="card my-2 h-100">
+        <div className="card-body d-flex flex-column justify-content-between">
           <h4 className="card-title">{title}</h4>
           <VideoStyled
             src={videoUrl}
