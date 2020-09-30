@@ -69,16 +69,16 @@ const VideoPage: FC = (): ReactElement => {
     }
   };
 
-  const isLoading = !ownVideosLoading && !sharedVideosLoading;
+  const isNotLoading = !ownVideosLoading && !sharedVideosLoading;
 
   const downloadVideoButton =
-    isLoading && activeVideoPage === 'own' ? (
+    isNotLoading && activeVideoPage === 'own' ? (
       <button className="btn btn-primary" onClick={() => setIsModal(true)}>
         Add new video
       </button>
     ) : null;
   const spinner = ownVideosLoading || sharedVideosLoading ? <Spinner /> : null;
-  const videoList = isLoading ? <VideoList videos={videos} /> : null;
+  const videoList = isNotLoading ? <VideoList videos={videos} /> : null;
   const successMessage =
     isSuccessDelete && activeVideoPage === 'own' ? (
       <StatusMessage className="text-success pt-2 my-0 mx-auto">
@@ -88,6 +88,10 @@ const VideoPage: FC = (): ReactElement => {
   const errorMeassage =
     errorRemovingVideo && activeVideoPage === 'own' ? (
       <p className="text-danger pt-2 my-0 mx-auto">{errorRemovingVideo.message}</p>
+    ) : null;
+  const noVideosMessage =
+    !videos.length && isNotLoading ? (
+      <p className="text-secondary text-center p-4">There aren&apos;t any videos.</p>
     ) : null;
 
   const { isSuccess, loading, error } = useSelector(getStatusOfAddingNewVideo);
@@ -122,7 +126,7 @@ const VideoPage: FC = (): ReactElement => {
           </TabItem>
         </li>
       </ul>
-      {activeVideoPage === 'own' && isLoading && (
+      {activeVideoPage === 'own' && isNotLoading && (
         <div className="border d-flex flex-wrap p-2">
           {!errorLoadingOwnVideos && downloadVideoButton}
           {loadingRemovingVideo && activeVideoPage === 'own' && (
@@ -139,6 +143,7 @@ const VideoPage: FC = (): ReactElement => {
       {spinner}
       {videoList}
       {modal}
+      {noVideosMessage}
     </div>
   );
 };
