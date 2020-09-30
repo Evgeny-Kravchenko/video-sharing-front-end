@@ -87,7 +87,10 @@ const updateUser = (state: State, action: Action): UserState => {
     case PagesTypesActions.MOVE_TO_ANOTHER_PAGE: {
       return {
         ...state.user,
-        statusOfAuthorizeUser: updateStatus(state, action),
+        statusOfAuthorizeUser: {
+          ...state.user.statusOfAuthorizeUser,
+          error: null,
+        },
       };
     }
     default: {

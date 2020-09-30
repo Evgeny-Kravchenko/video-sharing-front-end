@@ -1,5 +1,5 @@
 import { State, Status } from './types';
-import { Action, ActionVideosTypes, PagesTypesActions, UserActionTypes } from '../actions';
+import { Action, ActionVideosTypes, UserActionTypes } from '../actions';
 
 const updateStatus = (state: State, action: Action): Status => {
   switch (action.type) {
@@ -53,8 +53,7 @@ const updateStatus = (state: State, action: Action): Status => {
     case ActionVideosTypes.CLEAR_STATUS_OF_EDITING_VIDEO:
     case ActionVideosTypes.CLEAR_STATUS_OF_SHARING_VIDEO:
     case UserActionTypes.CLEAR_STATUS_OF_UNAUTHORIZE_USER:
-    case UserActionTypes.REGISTER_CLEAR_STATUS:
-    case PagesTypesActions.MOVE_TO_ANOTHER_PAGE: {
+    case UserActionTypes.REGISTER_CLEAR_STATUS: {
       return {
         isSuccess: null,
         loading: false,
