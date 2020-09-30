@@ -1,7 +1,7 @@
 import { State, UserState } from './types';
 
 import { Action } from '../actions';
-import { UserActionTypes } from '../actions';
+import { UserActionTypes, PagesTypesActions } from '../actions';
 
 import updateStatus from './update-status';
 
@@ -82,6 +82,12 @@ const updateUser = (state: State, action: Action): UserState => {
       return {
         ...state.user,
         statusOfRegisterUser: updateStatus(state, action),
+      };
+    }
+    case PagesTypesActions.MOVE_TO_ANOTHER_PAGE: {
+      return {
+        ...state.user,
+        statusOfAuthorizeUser: updateStatus(state, action),
       };
     }
     default: {
